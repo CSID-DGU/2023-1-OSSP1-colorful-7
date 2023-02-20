@@ -5,7 +5,11 @@ import { generateQueryKey } from 'utils/generateQueryKey'
 
 export type GetDashboardListRequestType = {}
 
-export type GetDashboardListResponseType = {}
+export type GetDashboardListResponseType = {
+  title: string
+  contents: string
+  image?: string
+}[]
 
 // eslint-disable-next-line no-empty-pattern
 const getDashboardListQueryPath = ({}: GetDashboardListRequestType) => `/api/v1/dashboard/list`
