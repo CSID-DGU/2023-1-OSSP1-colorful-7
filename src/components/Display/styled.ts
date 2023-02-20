@@ -1,4 +1,4 @@
-import { MOBILE_MAX_WIDTH } from 'constants/system/default'
+import { MOBILE_MAX_WIDTH } from 'constants/system/layout'
 import styled from 'styled-components'
 
 type RootProps = {

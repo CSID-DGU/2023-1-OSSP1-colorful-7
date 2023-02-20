@@ -30,9 +30,14 @@
       ""
     ]
   },
-  "react-styled-components": {
+  "react-styled-components-skeleton": {
     "scope": "typescript",
     "prefix": "rsc",
+    "body": ["import styled from 'styled-components'", "", "export const Root = styled.div``"]
+  },
+  "react-api-skeleton": {
+    "scope": "typescript",
+    "prefix": "api-get",
     "body": ["import styled from 'styled-components'", "", "export const Root = styled.div``"]
   }
 }
