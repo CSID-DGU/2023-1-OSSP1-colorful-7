@@ -1,32 +1,16 @@
 {
-  "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:react-hooks/recommended"],
-  "plugins": ["react", "unused-imports"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["react", "@typescript-eslint"],
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
   "rules": {
-    "no-unused-vars": "off",
-    "no-alert": "off",
-    "no-console": "warn",
-    "no-undef": "warn",
-    "unused-imports/no-unused-imports": "off",
-    "unused-imports/no-unused-vars": [
-      "off",
-      {
-        "argsIgnorePattern": "^_",
-        "varsIgnorePattern": "^_|^[A-Z]"
-      }
-    ],
-
-    // react
-    "react/jsx-key": "error",
-    "react/prop-types": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
     "react/react-in-jsx-scope": "off",
-    "react/self-closing-comp": ["error"],
-    "react/display-name": ["off"],
-
-    // react-hook
-    "react-hooks/exhaustive-deps": "error",
-    "react-hooks/rules-of-hooks": "error"
+    "react/jsx-uses-react": "off",
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }]
   },
-  "globals": {
-    "JSX": true
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }

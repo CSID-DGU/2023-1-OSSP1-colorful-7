@@ -1,10 +1,10 @@
-import { FC } from 'react';
-import { Root } from './styled';
+import { FC } from 'react'
+import { Root } from './styled'
 
 type MainPageProps = {
-  className?: string;
-};
+  className?: string
+}
 
 export const MainPage: FC<MainPageProps> = ({ className }) => {
-  return <Root className={className}>MainPage</Root>;
-};
+  return <Root className={className}>MainPage</Root>
+}
