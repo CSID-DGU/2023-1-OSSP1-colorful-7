@@ -6,5 +6,5 @@ type MainPageProps = {
 }
 
 export const MainPage: FC<MainPageProps> = ({ className }) => {
-  return <Root className={className}>MainPage</Root>
+  return <Root className={className}>test to deploy</Root>
 }
