@@ -1,0 +1,38 @@
+{
+  "react-function-component-skeleton": {
+    "scope": "typescriptreact",
+    "prefix": "rfc",
+    "body": [
+      "import { FC } from 'react'",
+      "import { Root } from './styled'",
+      "",
+      "type ${TM_FILENAME_BASE}$1Props = {",
+      "  className?: string",
+      "}",
+      "",
+      "export const ${TM_FILENAME_BASE}$1: FC<${TM_FILENAME_BASE}$1Props> = ({ className }) => {",
+      "  return <Root className={className}>${TM_FILENAME_BASE}$1</Root>",
+      "}",
+      ""
+    ]
+  },
+  "react-hook-skeleton": {
+    "scope": "typescript",
+    "prefix": "hook",
+    "body": [
+      "type ${TM_FILENAME_BASE}$1Props = {",
+      "",
+      "}",
+      "",
+      "export const ${TM_FILENAME_BASE}$1 = ({}: ${TM_FILENAME_BASE}$1Props) => {",
+      "  return {}",
+      "}",
+      ""
+    ]
+  },
+  "react-styled-components": {
+    "scope": "typescript",
+    "prefix": "rsc",
+    "body": ["import styled from 'styled-components'", "", "export const Root = styled.div``"]
+  }
+}

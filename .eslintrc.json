@@ -1,0 +1,32 @@
+{
+  "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:react-hooks/recommended"],
+  "plugins": ["react", "unused-imports"],
+  "rules": {
+    "no-unused-vars": "off",
+    "no-alert": "off",
+    "no-console": "warn",
+    "no-undef": "warn",
+    "unused-imports/no-unused-imports": "off",
+    "unused-imports/no-unused-vars": [
+      "off",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_|^[A-Z]"
+      }
+    ],
+
+    // react
+    "react/jsx-key": "error",
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/self-closing-comp": ["error"],
+    "react/display-name": ["off"],
+
+    // react-hook
+    "react-hooks/exhaustive-deps": "error",
+    "react-hooks/rules-of-hooks": "error"
+  },
+  "globals": {
+    "JSX": true
+  }
+}
