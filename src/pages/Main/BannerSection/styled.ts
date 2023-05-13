@@ -1,4 +1,3 @@
-import { CONTAINER_WIDTH } from 'constants/system/layout'
 import styled from 'styled-components'
 
 export const Root = styled.div`
@@ -9,12 +8,8 @@ export const Root = styled.div`
   position: relative;
 `
 
-export const Container = styled.div`
-  width: ${CONTAINER_WIDTH}px;
-  display: flex;
-  flex-direction: column;
-`
-
 export const BannerImg = styled.img`
   width: 100%;
+  height: 300px;
+  object-fit: cover;
 `
