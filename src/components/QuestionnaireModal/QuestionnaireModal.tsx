@@ -11,6 +11,7 @@ import {
   QuestionType,
 } from 'types/questionnaire'
 import { camelizeKey } from 'utils/camelizeKey'
+import { gradeQuestionnaire } from 'utils/gradeQuestionnaire'
 import { QuestionContainer, Root, SubmitButton } from './styled'
 
 type QuestionnaireModalProps = {
@@ -65,6 +66,13 @@ export const QuestionnaireModal: FC<QuestionnaireModalProps> = ({
       })
     }
 
+  const onClickSubmitButton = () => {
+    if (questionAnswerSheetListData) {
+      // eslint-disable-next-line no-undef
+      alert(`점수 : ${gradeQuestionnaire(questionnaireData, questionAnswerSheetListData)}`)
+    }
+  }
+
   useEffect(() => {
     setQuestionAnswerSheetListData(
       questionnaireData.questionListData.map((questionItemData) => ({ questionKey: questionItemData.key, answer: [] }))
@@ -77,7 +85,11 @@ export const QuestionnaireModal: FC<QuestionnaireModalProps> = ({
       title={`퀴즈 질문지(${questionnaireData.title} version: ${questionnaireData.version})`}
       open={open}
       onCancel={onCloseModal}
-      footer={<SubmitButton type="primary">제출하기</SubmitButton>}
+      footer={
+        <SubmitButton type="primary" onClick={onClickSubmitButton}>
+          제출하기
+        </SubmitButton>
+      }
     >
       <QuestionContainer>
         {questionAnswerSheetListData &&
