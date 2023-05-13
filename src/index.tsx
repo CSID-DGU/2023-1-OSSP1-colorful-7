@@ -1,5 +1,6 @@
 import 'antd/dist/reset.css'
 import { AdminQuestionnairePage } from 'pages/Admin/Questionnaire'
+import { AdminQuestionnaireListPage } from 'pages/Admin/QuestionnaireList'
 import { MainPage } from 'pages/Main'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
@@ -16,7 +17,8 @@ root.render(
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Routes>
-          <Route path="/admin/questionnaire" element={<AdminQuestionnairePage />} />
+          <Route path="/admin/questionnaire/list" element={<AdminQuestionnaireListPage />} />
+          <Route path="/admin/questionnaire/:questionnaireId" element={<AdminQuestionnairePage />} />
           <Route path="/" element={<MainPage />} />
         </Routes>
       </BrowserRouter>

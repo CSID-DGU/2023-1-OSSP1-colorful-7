@@ -13,8 +13,13 @@ export type QuestionDataType = {
 }
 
 export type QuestionnaireDataType = {
+  key: number
   title: string
-  version: string
+  version: number
   questionnaireType: string
   questionListData: QuestionDataType[]
+}
+
+export type QuestionnaireListDataType = {
+  questionnaireListData: QuestionnaireDataType[]
 }

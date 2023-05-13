@@ -1,26 +1,28 @@
+import questionnaireListSampleJson from 'constants/json/questionnaire_list_sample.json'
 import questionnaireSampleJson from 'constants/json/questionnaire_sample.json'
 import { FC, useState } from 'react'
-import { QuestionnaireDataType, QuestionType } from 'types/questionnaire'
+import { useParams } from 'react-router-dom'
+import { QuestionnaireDataType, QuestionnaireListDataType, QuestionType } from 'types/questionnaire'
 import { camelizeKey } from 'utils/camelizeKey'
 import { EditableQuestionCard } from './components/EditableQuestionCard'
-import {
-  ContentContainer,
-  HeaderContainer,
-  HeaderRoot,
-  HeaderTypo,
-  QuestionCreateButton,
-  Root,
-  TitleContainer,
-  TitleTypo,
-} from './styled'
+import { ContentContainer, HeaderContainer, HeaderRoot, HeaderTypo, QuestionCreateButton, Root } from './styled'
 
 type AdminQuestionnairePageProps = {
   className?: string
 }
 
 export const AdminQuestionnairePage: FC<AdminQuestionnairePageProps> = ({ className }) => {
+  const { questionnaireId = 0 } = useParams()
+  // eslint-disable-next-line no-undef
+  const localStorageQuestionnaireListData = localStorage.getItem('questionnaire_list_sample')
+  const questionnaireListData: QuestionnaireListDataType = localStorageQuestionnaireListData
+    ? (camelizeKey(JSON.parse(localStorageQuestionnaireListData)) as QuestionnaireListDataType)
+    : (camelizeKey(questionnaireListSampleJson) as QuestionnaireListDataType)
+
   const [questionnaireData, setQuestionnaireData] = useState<QuestionnaireDataType>(
-    camelizeKey(questionnaireSampleJson) as QuestionnaireDataType
+    (questionnaireListData.questionnaireListData.filter(
+      (questionnaireItemData) => questionnaireItemData.key === +questionnaireId
+    )[0] as QuestionnaireDataType) ?? (camelizeKey(questionnaireSampleJson) as QuestionnaireDataType)
   )
 
   const onChangeQuestionType = (questionKey: number) => (questionType: QuestionType) => () => {
@@ -180,15 +182,12 @@ export const AdminQuestionnairePage: FC<AdminQuestionnairePageProps> = ({ classN
     <Root className={className}>
       <HeaderRoot>
         <HeaderContainer>
-          <HeaderTypo>질문지 어드민</HeaderTypo>
+          <HeaderTypo>
+            질문지 어드민_{questionnaireData.title} 질문지 수정 (current version : {questionnaireData.version})
+          </HeaderTypo>
         </HeaderContainer>
       </HeaderRoot>
       <ContentContainer>
-        <TitleContainer>
-          <TitleTypo>
-            {questionnaireData.title} 질문지 수정 (current version : {questionnaireData.version})
-          </TitleTypo>
-        </TitleContainer>
         {questionnaireData.questionListData.map((questionData) => (
           <EditableQuestionCard
             questionData={questionData}
