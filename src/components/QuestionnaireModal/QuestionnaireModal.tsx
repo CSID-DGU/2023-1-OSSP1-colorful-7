@@ -19,6 +19,8 @@ type QuestionnaireModalProps = {
   open: boolean
   developmentStack: DevelopmentStackType
   onCloseModal: () => void
+  // eslint-disable-next-line no-unused-vars
+  onSubmitQuestionnaireAnswerSheet: (score: number) => void
 }
 
 export const QuestionnaireModal: FC<QuestionnaireModalProps> = ({
@@ -26,6 +28,7 @@ export const QuestionnaireModal: FC<QuestionnaireModalProps> = ({
   open,
   developmentStack,
   onCloseModal,
+  onSubmitQuestionnaireAnswerSheet,
 }) => {
   // eslint-disable-next-line no-undef
   const localStorageQuestionnaireListData = localStorage.getItem('questionnaire_list_sample')
@@ -69,7 +72,9 @@ export const QuestionnaireModal: FC<QuestionnaireModalProps> = ({
   const onClickSubmitButton = () => {
     if (questionAnswerSheetListData) {
       // eslint-disable-next-line no-undef
-      alert(`점수 : ${gradeQuestionnaire(questionnaireData, questionAnswerSheetListData)}`)
+      const grade = gradeQuestionnaire(questionnaireData, questionAnswerSheetListData)
+      onSubmitQuestionnaireAnswerSheet(grade)
+      onCloseModal()
     }
   }
 

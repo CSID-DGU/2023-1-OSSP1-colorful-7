@@ -16,6 +16,7 @@ import {
   LogoImg,
   LogoTypo,
   QuestionnaireButton,
+  QuestionnaireScoreTypo,
   Root,
 } from './styled'
 
@@ -26,6 +27,7 @@ type JoinPageProps = {
 export const JoinPage: FC<JoinPageProps> = ({ className }) => {
   const [developmentStack, setDevelopmentStack] = useState<DevelopmentStackType>()
   const { open: questionnaireModalOpen, handleModal: handleQuestionnaireModal } = useModal({})
+  const [questionnaireScore, setQuestionnaireScore] = useState<number>()
 
   const onChangeDevelopmentStack = (value: string | any) => {
     setDevelopmentStack(value as DevelopmentStackType)
@@ -41,6 +43,10 @@ export const JoinPage: FC<JoinPageProps> = ({ className }) => {
       handleQuestionnaireModal('OPEN')()
       return
     }
+  }
+
+  const onSubmitQuestionnaireAnswerSheet = (score: number) => {
+    setQuestionnaireScore(score)
   }
 
   return (
@@ -60,10 +66,14 @@ export const JoinPage: FC<JoinPageProps> = ({ className }) => {
             onChange={onChangeDevelopmentStack}
             placeholder="기술 스택을 선택해주세요."
             options={developmentStackOptionList}
+            disabled={!!questionnaireScore}
           />
           {developmentStack && (
-            <QuestionnaireButton onClick={onClickQuestionnaireButton}>퀴즈 풀기</QuestionnaireButton>
+            <QuestionnaireButton onClick={onClickQuestionnaireButton} disabled={!!questionnaireScore}>
+              퀴즈 풀기
+            </QuestionnaireButton>
           )}
+          {questionnaireScore && <QuestionnaireScoreTypo>퀴즈 점수 : {questionnaireScore}점</QuestionnaireScoreTypo>}
         </InputContainer>
         <JoinButton type={'primary'}>회원가입</JoinButton>
       </Container>
@@ -72,6 +82,7 @@ export const JoinPage: FC<JoinPageProps> = ({ className }) => {
           open={questionnaireModalOpen}
           developmentStack={developmentStack}
           onCloseModal={handleQuestionnaireModal('CLOSE')}
+          onSubmitQuestionnaireAnswerSheet={onSubmitQuestionnaireAnswerSheet}
         />
       )}
     </Root>

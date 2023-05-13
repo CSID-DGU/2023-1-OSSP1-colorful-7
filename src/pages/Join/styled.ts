@@ -48,6 +48,8 @@ export const ContentSelect = styled(Select)``
 
 export const QuestionnaireButton = styled(Button)``
 
+export const QuestionnaireScoreTypo = styled(Typography)``
+
 export const JoinButton = styled(Button)`
   width: 100%;
   margin-top: 20px;
