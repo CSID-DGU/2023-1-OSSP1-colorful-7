@@ -27,6 +27,7 @@ export const Container = styled.div`
 
 export const LogoImg = styled.img`
   width: 120px;
+  cursor: pointer;
 `
 
 export const MenuContainer = styled.div`
