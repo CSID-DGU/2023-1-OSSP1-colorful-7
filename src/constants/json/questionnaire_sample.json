@@ -7,9 +7,9 @@
       "key": 0,
       "type": "RADIO",
       "title": "테스트1_5점",
-      "answer_key_list": [0],
+      "answer": "0",
       "score": 5,
-      "question": [
+      "option_list_data": [
         {
           "key": 0,
           "title": "테스트 1_질문 1"
@@ -32,9 +32,9 @@
       "key": 1,
       "type": "SELECT",
       "title": "테스트2_10점",
-      "answer_key_list": [1, 2],
+      "answer": "1, 2",
       "score": 10,
-      "question": [
+      "option_list_data": [
         {
           "key": 0,
           "title": "테스트 2_질문 1"
@@ -61,9 +61,9 @@
       "key": 2,
       "type": "RADIO",
       "title": "테스트3_15점",
-      "answer_key_list": [0],
+      "answer": "0",
       "score": 15,
-      "question": [
+      "option_list_data": [
         {
           "key": 0,
           "title": "테스트 3_질문 1_정답"

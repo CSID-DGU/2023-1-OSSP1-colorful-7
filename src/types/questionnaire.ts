@@ -4,9 +4,9 @@ export type QuestionDataType = {
   key: number
   type: QuestionType
   title: string
-  answerKeyList: number[]
+  answer: string
   score: number
-  question: {
+  optionListData: {
     key: number
     title: string
   }[]

@@ -1,4 +1,4 @@
-import { Typography } from 'antd'
+import { Button, Typography } from 'antd'
 import { CONTAINER_WIDTH, HEADER_HEIGHT } from 'constants/system/layout'
 import styled from 'styled-components'
 
@@ -48,9 +48,11 @@ export const TitleTypo = styled(Typography)`
 `
 
 export const ContentContainer = styled.div`
-  width: ${CONTAINER_WIDTH}px;
+  width: 800px;
   display: flex;
   flex-direction: column;
   gap: 20px;
   padding-top: 20px;
 `
+
+export const QuestionCreateButton = styled(Button)``

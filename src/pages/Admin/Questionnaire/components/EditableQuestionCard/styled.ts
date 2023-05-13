@@ -8,8 +8,22 @@ export const Root = styled.div`
   gap: 20px;
   padding: 20px;
   box-sizing: border-box;
-  border: 1px #eee solid;
+  border: 1px #c9c9c9 solid;
   border-radius: 8px;
+`
+
+export const MenuContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+
+export const RadioContainer = styled.div`
+  width: 100%;
+  display: flex;
+  gap: 15px;
+  cursor: pointer;
 `
 
 export const ContentRadioContainer = styled.div`
@@ -18,17 +32,13 @@ export const ContentRadioContainer = styled.div`
   gap: 6px;
 `
 
+export const QuestionDeleteButton = styled(Button)``
+
 export const ContentRadioTypo = styled(Typography)``
 
 export const ContentRadio = styled(Radio)``
 
 export const ContentInput = styled(Input)``
-
-export const TypeSelectContainer = styled.div`
-  width: 100%;
-  display: flex;
-  gap: 15px;
-`
 
 export const TitleContainer = styled.div``
 

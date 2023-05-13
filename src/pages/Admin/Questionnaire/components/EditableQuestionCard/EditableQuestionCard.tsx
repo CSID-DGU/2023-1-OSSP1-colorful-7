@@ -1,53 +1,88 @@
+/* eslint-disable no-unused-vars */
 import { FC } from 'react'
-import { QuestionDataType } from 'types/questionnaire'
+import { QuestionDataType, QuestionType } from 'types/questionnaire'
 import {
   AnswerContainer,
   ContentInput,
   ContentRadio,
   ContentRadioContainer,
   ContentRadioTypo,
+  MenuContainer,
   QuestionContainer,
+  QuestionDeleteButton,
   QuestionItemAddButton,
   QuestionItemContainer,
   QuestionItemDeleteButton,
+  RadioContainer,
   Root,
   TitleContainer,
-  TypeSelectContainer,
 } from './styled'
 
 type EditableQuestionCardProps = {
   className?: string
   questionData: QuestionDataType
+  onChangeQuestionType: (type: QuestionType) => () => void
+  onDeleteQuestion: (e: any) => void
+  onChangeQuestionTitle: (e: any) => void
+  onChangeQuestionScore: (e: any) => void
+  onChangeQuestionAnswer: (e: any) => void
+  onChangeOption: (optionKey: number) => (e: any) => void
+  onCreateOption: () => void
+  onDeleteOption: (optionKey: number) => () => void
 }
 
-export const EditableQuestionCard: FC<EditableQuestionCardProps> = ({ className, questionData }) => {
+export const EditableQuestionCard: FC<EditableQuestionCardProps> = ({
+  className,
+  questionData,
+  onChangeQuestionType,
+  onChangeQuestionTitle,
+  onChangeQuestionAnswer,
+  onChangeOption,
+  onChangeQuestionScore,
+  onCreateOption,
+  onDeleteOption,
+  onDeleteQuestion,
+}) => {
   return (
     <Root className={className}>
-      <TypeSelectContainer>
-        <ContentRadioContainer>
-          <ContentRadio name={'question_type'} checked={questionData.type === 'SELECT'} />
-          <ContentRadioTypo>다중 선택</ContentRadioTypo>
-        </ContentRadioContainer>
-        <ContentRadioContainer>
-          <ContentRadio name={'question_type'} checked={questionData.type === 'RADIO'} />
-          <ContentRadioTypo>단일 선택</ContentRadioTypo>
-        </ContentRadioContainer>
-      </TypeSelectContainer>
+      <MenuContainer>
+        <RadioContainer>
+          <ContentRadioContainer onClick={onChangeQuestionType('SELECT')}>
+            <ContentRadio name={'question_type'} checked={questionData.type === 'SELECT'} />
+            <ContentRadioTypo>다중 선택</ContentRadioTypo>
+          </ContentRadioContainer>
+          <ContentRadioContainer onClick={onChangeQuestionType('RADIO')}>
+            <ContentRadio name={'question_type'} checked={questionData.type === 'RADIO'} />
+            <ContentRadioTypo>단일 선택</ContentRadioTypo>
+          </ContentRadioContainer>
+        </RadioContainer>
+        <QuestionDeleteButton onClick={onDeleteQuestion}>질문 삭제</QuestionDeleteButton>
+      </MenuContainer>
       <TitleContainer>
-        <ContentInput addonBefore={'제목'} value={questionData.title} />
+        <ContentInput onChange={onChangeQuestionTitle} addonBefore={'제목'} value={questionData.title} />
       </TitleContainer>
       <AnswerContainer>
-        <ContentInput addonBefore={'정답'} value={JSON.stringify(questionData.answerKeyList)} />
-        <ContentInput type={'number'} addonBefore={'배점'} addonAfter={'점'} value={questionData.score} />
+        <ContentInput onChange={onChangeQuestionAnswer} addonBefore={'정답'} value={questionData.answer} />
+        <ContentInput
+          onChange={onChangeQuestionScore}
+          type={'number'}
+          addonBefore={'배점'}
+          addonAfter={'점'}
+          value={questionData.score}
+        />
       </AnswerContainer>
       <QuestionContainer>
-        {questionData.question.map((questionData) => (
-          <QuestionItemContainer key={`question_${questionData.key}`}>
-            <ContentInput addonBefore={'질문 1'} value={questionData.title} />
-            <QuestionItemDeleteButton>질문 삭제</QuestionItemDeleteButton>
+        {questionData.optionListData.map((optionData) => (
+          <QuestionItemContainer key={`question_${optionData.key}`}>
+            <ContentInput
+              onChange={onChangeOption(optionData.key)}
+              addonBefore={`선택지 ${optionData.key}`}
+              value={optionData.title}
+            />
+            <QuestionItemDeleteButton onClick={onDeleteOption(optionData.key)}>선택지 삭제</QuestionItemDeleteButton>
           </QuestionItemContainer>
         ))}
-        <QuestionItemAddButton>질문 추가</QuestionItemAddButton>
+        <QuestionItemAddButton onClick={onCreateOption}>선택지 추가</QuestionItemAddButton>
       </QuestionContainer>
     </Root>
   )
