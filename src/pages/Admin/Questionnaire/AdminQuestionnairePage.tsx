@@ -1,5 +1,8 @@
+import questionnaireSampleJson from 'constants/json/questionnaire_sample.json'
 import { FC } from 'react'
-import { EditableQuestionnaireCard } from './components/EditableQuestionnaireCard'
+import { QuestionnaireDataType } from 'types/questionnaire'
+import { camelizeKey } from 'utils/camelizeKey'
+import { EditableQuestionCard } from './components/EditableQuestionCard'
 import { ContentContainer, HeaderContainer, HeaderRoot, HeaderTypo, Root } from './styled'
 
 type AdminQuestionnairePageProps = {
@@ -7,6 +10,8 @@ type AdminQuestionnairePageProps = {
 }
 
 export const AdminQuestionnairePage: FC<AdminQuestionnairePageProps> = ({ className }) => {
+  const questionnaireSample: QuestionnaireDataType = camelizeKey(questionnaireSampleJson) as QuestionnaireDataType
+
   return (
     <Root className={className}>
       <HeaderRoot>
@@ -15,9 +20,9 @@ export const AdminQuestionnairePage: FC<AdminQuestionnairePageProps> = ({ classN
         </HeaderContainer>
       </HeaderRoot>
       <ContentContainer>
-        <EditableQuestionnaireCard type={'SELECT'} />
-        <EditableQuestionnaireCard type={'RADIO'} />
-        <EditableQuestionnaireCard type={'SHORT_ANSWER'} />
+        {questionnaireSample.questionListData.map((questionData) => (
+          <EditableQuestionCard questionData={questionData} key={`question_${questionData.key}`} />
+        ))}
       </ContentContainer>
     </Root>
   )
