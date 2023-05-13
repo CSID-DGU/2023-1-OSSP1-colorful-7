@@ -20,7 +20,7 @@ export const PopularProjectListSection: FC<PopularProjectListSectionProps> = ({ 
           <TitleTypo>요즘 뜨는 프로젝트</TitleTypo>
         </TitleContainer>
         <ProjectCardContainer>
-          {projectListData.map((projectItemData) => (
+          {projectListData.slice(0, 4).map((projectItemData) => (
             <ProjectCard projectData={projectItemData} key={`project_card_${projectItemData.key}`} />
           ))}
         </ProjectCardContainer>

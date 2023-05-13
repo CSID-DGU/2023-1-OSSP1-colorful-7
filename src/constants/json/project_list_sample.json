@@ -75,6 +75,158 @@
         }
       ],
       "visitedNumber": 12
+    },
+    {
+      "key": 4,
+      "title": "교육 데이터 플랫폼",
+      "project_type": "WEB",
+      "popular_score": 15,
+      "require_member_list": [
+        {
+          "development_stack": "WEB_FRONTEND",
+          "recommendScore": 20,
+          "number": 1
+        },
+        {
+          "development_stack": "SERVER_BACKEND",
+          "recommendScore": 20,
+          "number": 1
+        }
+      ],
+      "visitedNumber": 20
+    },
+    {
+      "key": 5,
+      "title": "MBTI 성향 분석 플랫폼",
+      "project_type": "WEB",
+      "popular_score": 20,
+      "require_member_list": [
+        {
+          "development_stack": "WEB_FRONTEND",
+          "recommendScore": 30,
+          "number": 2
+        },
+        {
+          "development_stack": "SERVER_BACKEND",
+          "recommendScore": 10,
+          "number": 1
+        }
+      ],
+      "visitedNumber": 8
+    },
+    {
+      "key": 6,
+      "title": "노래 추천 앱 개발",
+      "project_type": "APP",
+      "popular_score": 20,
+      "require_member_list": [
+        {
+          "development_stack": "WEB_FRONTEND",
+          "recommendScore": 30,
+          "number": 2
+        },
+        {
+          "development_stack": "SERVER_BACKEND",
+          "recommendScore": 10,
+          "number": 1
+        }
+      ],
+      "visitedNumber": 7
+    },
+    {
+      "key": 7,
+      "title": "얼굴형 인식 헤어스타일 추천 프로그램",
+      "project_type": "ETC",
+      "popular_score": 10,
+      "require_member_list": [
+        {
+          "development_stack": "ETC",
+          "recommendScore": 30,
+          "number": 2
+        },
+        {
+          "development_stack": "SERVER_BACKEND",
+          "recommendScore": 10,
+          "number": 4
+        }
+      ],
+      "visitedNumber": 12
+    },
+    {
+      "key": 8,
+      "title": "교육 데이터 플랫폼",
+      "project_type": "WEB",
+      "popular_score": 15,
+      "require_member_list": [
+        {
+          "development_stack": "WEB_FRONTEND",
+          "recommendScore": 20,
+          "number": 1
+        },
+        {
+          "development_stack": "SERVER_BACKEND",
+          "recommendScore": 20,
+          "number": 1
+        }
+      ],
+      "visitedNumber": 20
+    },
+    {
+      "key": 9,
+      "title": "MBTI 성향 분석 플랫폼",
+      "project_type": "WEB",
+      "popular_score": 20,
+      "require_member_list": [
+        {
+          "development_stack": "WEB_FRONTEND",
+          "recommendScore": 30,
+          "number": 2
+        },
+        {
+          "development_stack": "SERVER_BACKEND",
+          "recommendScore": 10,
+          "number": 1
+        }
+      ],
+      "visitedNumber": 8
+    },
+    {
+      "key": 10,
+      "title": "노래 추천 앱 개발",
+      "project_type": "APP",
+      "popular_score": 20,
+      "require_member_list": [
+        {
+          "development_stack": "WEB_FRONTEND",
+          "recommendScore": 30,
+          "number": 2
+        },
+        {
+          "development_stack": "SERVER_BACKEND",
+          "recommendScore": 10,
+          "number": 1
+        }
+      ],
+      "visitedNumber": 7
+    },
+    {
+      "key": 11,
+      "title": "얼굴형 인식 헤어스타일 추천 프로그램",
+      "project_type": "ETC",
+      "popular_score": 10,
+      "require_member_list": [
+        {
+          "development_stack": "ETC",
+          "recommendScore": 30,
+          "number": 2
+        },
+        {
+          "development_stack": "SERVER_BACKEND",
+          "recommendScore": 10,
+          "number": 4
+        }
+      ],
+      "visitedNumber": 12
     }
   ]
 }

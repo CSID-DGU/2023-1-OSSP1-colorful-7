@@ -23,7 +23,7 @@ export const ProjectCard: FC<ProjectCardProps> = ({ className, projectData }) =>
     >
       <CardMeta title={projectData.title} description={`조회수 : ${projectData.visitedNumber}회`} />
       <DevelopmentStackTagContainer size={[0, 3]} wrap>
-        {Object.values(projectData.requireMemberList).map((requireMemberItemData, index) => (
+        {Object.values(projectData.requireMemberList.slice(0, 2)).map((requireMemberItemData, index) => (
           <DevelopmentStackTag
             color={getDevelopmentStackColor(requireMemberItemData.developmentStack)}
             key={`development_stack_tag_${index}`}
