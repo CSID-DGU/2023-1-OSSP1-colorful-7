@@ -23,3 +23,15 @@ export type QuestionnaireDataType = {
 export type QuestionnaireListDataType = {
   questionnaireListData: QuestionnaireDataType[]
 }
+
+export type QuestionAnswerSheetType = {
+  questionKey: number
+  answer: number[]
+}
+
+export type QuestionAnswerSheetListType = QuestionAnswerSheetType[]
+
+export type QuestionnaireAnswerSheetType = {
+  questionnaireKey: number
+  questionAnswerSheetList: QuestionAnswerSheetType[]
+}
