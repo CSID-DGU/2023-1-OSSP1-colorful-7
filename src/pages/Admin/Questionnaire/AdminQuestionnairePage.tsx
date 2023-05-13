@@ -3,7 +3,7 @@ import { FC } from 'react'
 import { QuestionnaireDataType } from 'types/questionnaire'
 import { camelizeKey } from 'utils/camelizeKey'
 import { EditableQuestionCard } from './components/EditableQuestionCard'
-import { ContentContainer, HeaderContainer, HeaderRoot, HeaderTypo, Root } from './styled'
+import { ContentContainer, HeaderContainer, HeaderRoot, HeaderTypo, Root, TitleContainer, TitleTypo } from './styled'
 
 type AdminQuestionnairePageProps = {
   className?: string
@@ -20,6 +20,9 @@ export const AdminQuestionnairePage: FC<AdminQuestionnairePageProps> = ({ classN
         </HeaderContainer>
       </HeaderRoot>
       <ContentContainer>
+        <TitleContainer>
+          <TitleTypo>{questionnaireSample.title} 질문지 수정</TitleTypo>
+        </TitleContainer>
         {questionnaireSample.questionListData.map((questionData) => (
           <EditableQuestionCard questionData={questionData} key={`question_${questionData.key}`} />
         ))}

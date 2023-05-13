@@ -14,6 +14,7 @@ export type QuestionDataType = {
 
 export type QuestionnaireDataType = {
   title: string
+  version: string
   questionnaireType: string
   questionListData: QuestionDataType[]
 }

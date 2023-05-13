@@ -37,6 +37,16 @@ export const HeaderTypo = styled(Typography)`
   }
 `
 
+export const TitleContainer = styled.div`
+  display: flex;
+  gap: 10px;
+`
+
+export const TitleTypo = styled(Typography)`
+  font-size: 24px;
+  font-weight: 500;
+`
+
 export const ContentContainer = styled.div`
   width: ${CONTAINER_WIDTH}px;
   display: flex;
