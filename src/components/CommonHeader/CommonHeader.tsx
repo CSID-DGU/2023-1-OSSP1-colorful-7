@@ -1,5 +1,6 @@
 import logoImg from 'assets/images/logo.png'
 import { FC } from 'react'
+import { useNavigate } from 'react-router-dom'
 import {
   Container,
   JoinButton,
@@ -18,6 +19,15 @@ type CommonHeaderProps = {
 }
 
 export const CommonHeader: FC<CommonHeaderProps> = ({ className }) => {
+  const navigate = useNavigate()
+
+  const onClickLoginButton = () => {
+    navigate('/login')
+  }
+  const onClickJoinButton = () => {
+    navigate('/join')
+  }
+
   return (
     <Root className={className}>
       <Container>
@@ -30,8 +40,8 @@ export const CommonHeader: FC<CommonHeaderProps> = ({ className }) => {
           </MenuButtonContainer>
         </MenuContainer>
         <UserContainer>
-          <LoginButton>로그인</LoginButton>
-          <JoinButton>회원가입</JoinButton>
+          <LoginButton onClick={onClickLoginButton}>로그인</LoginButton>
+          <JoinButton onClick={onClickJoinButton}>회원가입</JoinButton>
         </UserContainer>
       </Container>
     </Root>

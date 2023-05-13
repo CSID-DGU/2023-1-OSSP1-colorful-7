@@ -1,6 +1,8 @@
 import 'antd/dist/reset.css'
 import { AdminQuestionnairePage } from 'pages/Admin/Questionnaire'
 import { AdminQuestionnaireListPage } from 'pages/Admin/QuestionnaireList'
+import { JoinPage } from 'pages/Join'
+import { LoginPage } from 'pages/Login'
 import { MainPage } from 'pages/Main'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
@@ -19,6 +21,8 @@ root.render(
         <Routes>
           <Route path="/admin/questionnaire/list" element={<AdminQuestionnaireListPage />} />
           <Route path="/admin/questionnaire/:questionnaireId" element={<AdminQuestionnairePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/Join" element={<JoinPage />} />
           <Route path="/" element={<MainPage />} />
         </Routes>
       </BrowserRouter>
