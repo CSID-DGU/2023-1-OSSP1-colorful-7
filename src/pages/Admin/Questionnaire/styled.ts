@@ -56,3 +56,7 @@ export const ContentContainer = styled.div`
 `
 
 export const QuestionCreateButton = styled(Button)``
+
+export const QuestionnaireSubmitButton = styled(Button)``
+
+export const QuestionnaireListButton = styled(Button)``

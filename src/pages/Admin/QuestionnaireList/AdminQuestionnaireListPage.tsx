@@ -30,7 +30,7 @@ export const AdminQuestionnaireListPage: FC<AdminQuestionnaireListPageProps> = (
     // eslint-disable-next-line no-undef
     const localStorageQuestionnaireListData = localStorage.getItem('questionnaire_list_sample')
     if (localStorageQuestionnaireListData) {
-      setQuestionnaireListData(JSON.parse(localStorageQuestionnaireListData))
+      setQuestionnaireListData(camelizeKey(JSON.parse(localStorageQuestionnaireListData)) as QuestionnaireListDataType)
       return
     }
     setQuestionnaireListData(camelizeKey(questionnaireListSampleJson) as QuestionnaireListDataType)

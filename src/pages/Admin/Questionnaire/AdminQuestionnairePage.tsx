@@ -1,17 +1,28 @@
 import questionnaireListSampleJson from 'constants/json/questionnaire_list_sample.json'
 import questionnaireSampleJson from 'constants/json/questionnaire_sample.json'
 import { FC, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { QuestionnaireDataType, QuestionnaireListDataType, QuestionType } from 'types/questionnaire'
 import { camelizeKey } from 'utils/camelizeKey'
+import { decamelizeKey } from 'utils/decamelizeKey'
 import { EditableQuestionCard } from './components/EditableQuestionCard'
-import { ContentContainer, HeaderContainer, HeaderRoot, HeaderTypo, QuestionCreateButton, Root } from './styled'
+import {
+  ContentContainer,
+  HeaderContainer,
+  HeaderRoot,
+  HeaderTypo,
+  QuestionCreateButton,
+  QuestionnaireListButton,
+  QuestionnaireSubmitButton,
+  Root,
+} from './styled'
 
 type AdminQuestionnairePageProps = {
   className?: string
 }
 
 export const AdminQuestionnairePage: FC<AdminQuestionnairePageProps> = ({ className }) => {
+  const navigate = useNavigate()
   const { questionnaireId = 0 } = useParams()
   // eslint-disable-next-line no-undef
   const localStorageQuestionnaireListData = localStorage.getItem('questionnaire_list_sample')
@@ -25,13 +36,16 @@ export const AdminQuestionnairePage: FC<AdminQuestionnairePageProps> = ({ classN
     )[0] as QuestionnaireDataType) ?? (camelizeKey(questionnaireSampleJson) as QuestionnaireDataType)
   )
 
+  const onClickQuestionnaireListButton = () => {
+    navigate('/admin/questionnaire/list')
+  }
+
   const onChangeQuestionType = (questionKey: number) => (questionType: QuestionType) => () => {
     setQuestionnaireData((prevQuestionnaireData) => {
       let newQuestionnaireData = prevQuestionnaireData
       let newQuestionListData = newQuestionnaireData.questionListData.map((questionData) =>
         questionData.key === questionKey ? { ...questionData, type: questionType } : questionData
       )
-
       return { ...newQuestionnaireData, questionListData: newQuestionListData }
     })
   }
@@ -178,6 +192,24 @@ export const AdminQuestionnairePage: FC<AdminQuestionnairePageProps> = ({ classN
     })
   }
 
+  const onClickQuestionnaireEditButton = () => {
+    let newQuestionnaireListData = questionnaireListData
+    newQuestionnaireListData.questionnaireListData = newQuestionnaireListData.questionnaireListData.map(
+      (questionnaireItemData) =>
+        questionnaireItemData.key === +questionnaireId
+          ? { ...questionnaireData, version: questionnaireItemData.version + 1 }
+          : questionnaireItemData
+    )
+    // eslint-disable-next-line no-undef
+    localStorage.removeItem('questionnaire_list_sample')
+    // eslint-disable-next-line no-undef
+    localStorage.setItem('questionnaire_list_sample', JSON.stringify(decamelizeKey(newQuestionnaireListData)))
+    // eslint-disable-next-line no-undef
+    alert('질문지 수정이 완료되었습니다!')
+    // eslint-disable-next-line no-undef
+    window.location.reload()
+  }
+
   return (
     <Root className={className}>
       <HeaderRoot>
@@ -188,6 +220,7 @@ export const AdminQuestionnairePage: FC<AdminQuestionnairePageProps> = ({ classN
         </HeaderContainer>
       </HeaderRoot>
       <ContentContainer>
+        <QuestionnaireListButton onClick={onClickQuestionnaireListButton}>목록으로</QuestionnaireListButton>
         {questionnaireData.questionListData.map((questionData) => (
           <EditableQuestionCard
             questionData={questionData}
@@ -203,6 +236,7 @@ export const AdminQuestionnairePage: FC<AdminQuestionnairePageProps> = ({ classN
           />
         ))}
         <QuestionCreateButton onClick={onCreateQuestion}>질문 추가</QuestionCreateButton>
+        <QuestionnaireSubmitButton onClick={onClickQuestionnaireEditButton}>질문지 수정</QuestionnaireSubmitButton>
       </ContentContainer>
     </Root>
   )
