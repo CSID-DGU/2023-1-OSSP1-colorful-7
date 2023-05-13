@@ -7,4 +7,5 @@ export const Root = styled.div`
   flex-direction: column;
   padding-top: ${HEADER_HEIGHT}px;
   position: relative;
+  padding-bottom: 80px;
 `
