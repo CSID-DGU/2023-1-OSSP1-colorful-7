@@ -143,7 +143,7 @@ export const AdminQuestionnairePage: FC<AdminQuestionnairePageProps> = ({ classN
         questionItem.key === questionKey
           ? {
               ...questionItem,
-              optionListData: questionItem.optionList.concat({
+              optionList: questionItem.optionList.concat({
                 key: newOptionKey,
                 title: `선택지 ${newOptionKey}`,
               }),

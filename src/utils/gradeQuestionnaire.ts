@@ -23,7 +23,7 @@ export const gradeQuestionnaire = (
         questionItem.answer
       )
     ) {
-      grade += questionItem.score
+      grade += +questionItem.score
     }
   })
   return grade
