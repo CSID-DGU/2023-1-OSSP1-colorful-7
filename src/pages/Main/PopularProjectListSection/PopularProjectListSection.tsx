@@ -11,7 +11,7 @@ type PopularProjectListSectionProps = {
 }
 
 export const PopularProjectListSection: FC<PopularProjectListSectionProps> = ({ className }) => {
-  const projectListData = camelizeKey(projectListSampleJson.project_list) as ProjectListType
+  const projectList = camelizeKey(projectListSampleJson.project_list) as ProjectListType
   return (
     <Root className={className}>
       <Container>
@@ -20,8 +20,8 @@ export const PopularProjectListSection: FC<PopularProjectListSectionProps> = ({ 
           <TitleTypo>요즘 뜨는 프로젝트</TitleTypo>
         </TitleContainer>
         <ProjectCardContainer>
-          {projectListData.slice(0, 4).map((projectItemData) => (
-            <ProjectCard projectData={projectItemData} key={`project_card_${projectItemData.key}`} />
+          {projectList.slice(0, 4).map((projectItem) => (
+            <ProjectCard projectItem={projectItem} key={`project_card_${projectItem.key}`} />
           ))}
         </ProjectCardContainer>
       </Container>

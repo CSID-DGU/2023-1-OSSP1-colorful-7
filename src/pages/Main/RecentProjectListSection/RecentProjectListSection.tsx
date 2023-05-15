@@ -11,7 +11,7 @@ type RecentProjectListSectionProps = {
 }
 
 export const RecentProjectListSection: FC<RecentProjectListSectionProps> = ({ className }) => {
-  const projectListData = camelizeKey(projectListSampleJson.project_list) as ProjectListType
+  const projectList = camelizeKey(projectListSampleJson.project_list) as ProjectListType
   return (
     <Root className={className}>
       <Container>
@@ -20,8 +20,8 @@ export const RecentProjectListSection: FC<RecentProjectListSectionProps> = ({ cl
           <TitleTypo>최근 올라온 프로젝트</TitleTypo>
         </TitleContainer>
         <ProjectCardContainer>
-          {projectListData.slice(0, 4).map((projectItemData) => (
-            <ProjectCard projectData={projectItemData} key={`project_card_${projectItemData.key}`} />
+          {projectList.slice(0, 4).map((projectItem) => (
+            <ProjectCard projectItem={projectItem} key={`project_card_${projectItem.key}`} />
           ))}
         </ProjectCardContainer>
       </Container>

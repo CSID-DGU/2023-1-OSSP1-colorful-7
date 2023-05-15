@@ -18,8 +18,8 @@ export const ProjectListPage: FC<ProjectListPageProps> = ({ className }) => {
       <ProjectCardContainer>
         {projectListData
           .sort((a, b) => a.key - b.key)
-          .map((projectItemData) => (
-            <ProjectCard projectData={projectItemData} key={`project_card_${projectItemData.key}`} />
+          .map((projectItem) => (
+            <ProjectCard projectItem={projectItem} key={`project_card_${projectItem.key}`} />
           ))}
       </ProjectCardContainer>
     </Root>
