@@ -1,1 +1,0 @@
-export { AdminQuestionnairePage } from './AdminQuestionnairePage'

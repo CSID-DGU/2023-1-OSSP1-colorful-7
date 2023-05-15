@@ -1,5 +1,5 @@
 import 'antd/dist/reset.css'
-import { AdminQuestionnairePage } from 'pages/Admin/Questionnaire'
+import { AdminQuestionnaireDetailsPage } from 'pages/Admin/QuestionnaireDetails'
 import { AdminQuestionnaireListPage } from 'pages/Admin/QuestionnaireList'
 import { JoinPage } from 'pages/Join'
 import { LoginPage } from 'pages/Login'
@@ -21,9 +21,9 @@ root.render(
       <BrowserRouter>
         <Routes>
           <Route path="/admin/questionnaire/list" element={<AdminQuestionnaireListPage />} />
-          <Route path="/admin/questionnaire/:questionnaireId" element={<AdminQuestionnairePage />} />
+          <Route path="/admin/questionnaire/:questionnaireId" element={<AdminQuestionnaireDetailsPage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/Join" element={<JoinPage />} />
+          <Route path="/join" element={<JoinPage />} />
           <Route path="/project/list" element={<ProjectListPage />} />
           <Route path="/" element={<MainPage />} />
         </Routes>

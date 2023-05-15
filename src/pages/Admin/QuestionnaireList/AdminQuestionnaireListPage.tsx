@@ -3,8 +3,8 @@ import { FC, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { QuestionnaireItemType, QuestionnaireListType } from 'types/questionnaire'
 import { camelizeKey } from 'utils/camelizeKey'
-import { ContentContainer } from '../Questionnaire/styled'
 import {
+  ContentContainer,
   HeaderContainer,
   HeaderRoot,
   HeaderTypo,

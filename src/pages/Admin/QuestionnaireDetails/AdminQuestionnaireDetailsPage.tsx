@@ -17,11 +17,11 @@ import {
   Root,
 } from './styled'
 
-type AdminQuestionnairePageProps = {
+type AdminQuestionnaireDetailsPageProps = {
   className?: string
 }
 
-export const AdminQuestionnairePage: FC<AdminQuestionnairePageProps> = ({ className }) => {
+export const AdminQuestionnaireDetailsPage: FC<AdminQuestionnaireDetailsPageProps> = ({ className }) => {
   const navigate = useNavigate()
   const { questionnaireId = 0 } = useParams()
   // eslint-disable-next-line no-undef
