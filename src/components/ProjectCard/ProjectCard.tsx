@@ -1,16 +1,26 @@
 import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ProjectItemType } from 'types/project'
+import { ApplyProjectStatusType, ProjectItemType } from 'types/project'
 import { generateRandomProjectCardLogoImg } from 'utils/generateRandomProjectCardLogoImg'
 import { getDevelopmentStackColor, translateDevelopmentStack } from 'utils/translateDevelopmentStack'
-import { CardMeta, DevelopmentStackTag, DevelopmentStackTagContainer, RepresentativeImg, Root } from './styled'
+import { getApplyProjectStatusColor, translateApplyProjectStatus } from 'utils/translateStatus'
+import {
+  CardMeta,
+  DevelopmentStackTag,
+  DevelopmentStackTagContainer,
+  RepresentativeImg,
+  RepresentativeImgBadge,
+  RepresentativeImgContainer,
+  Root,
+} from './styled'
 
 type ProjectCardProps = {
   className?: string
   projectItem: ProjectItemType
+  status?: ApplyProjectStatusType
 }
 
-export const ProjectCard: FC<ProjectCardProps> = ({ className, projectItem }) => {
+export const ProjectCard: FC<ProjectCardProps> = ({ className, projectItem, status }) => {
   const navigate = useNavigate()
 
   const onClickRoot = () => {
@@ -23,10 +33,17 @@ export const ProjectCard: FC<ProjectCardProps> = ({ className, projectItem }) =>
       onClick={onClickRoot}
       hoverable
       cover={
-        <RepresentativeImg
-          src={projectItem.representativeImg ?? generateRandomProjectCardLogoImg()}
-          alt={'프로젝트 대표 이미지'}
-        />
+        <RepresentativeImgContainer>
+          <RepresentativeImg
+            src={projectItem.representativeImg ?? generateRandomProjectCardLogoImg()}
+            alt={'프로젝트 대표 이미지'}
+          />
+          {status && (
+            <RepresentativeImgBadge color={getApplyProjectStatusColor(status)}>
+              {translateApplyProjectStatus(status)}
+            </RepresentativeImgBadge>
+          )}
+        </RepresentativeImgContainer>
       }
     >
       <CardMeta title={projectItem.title} description={`조회수 : ${projectItem.visitedNumber}회`} />

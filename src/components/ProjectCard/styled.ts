@@ -12,10 +12,23 @@ export const Root = styled(Card)`
   border: 1px #c9c9c955 solid;
 `
 
-export const RepresentativeImg = styled.img`
+export const RepresentativeImgContainer = styled.div`
   width: 100%;
   height: 200px;
+  position: relative;
+`
+
+export const RepresentativeImg = styled.img`
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+`
+
+export const RepresentativeImgBadge = styled(Tag)`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
 `
 
 export const CardMeta = styled(Meta)``

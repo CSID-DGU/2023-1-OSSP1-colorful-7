@@ -23,8 +23,10 @@ export type ProjectItemType = {
 
 export type ProjectListType = ProjectItemType[]
 
-type ApplyProjectItemType = {
-  status: 'PENDING' | 'BELONG' | 'REJECT'
+export type ApplyProjectStatusType = 'PENDING' | 'BELONG' | 'REJECT'
+
+export type ApplyProjectItemType = {
+  status: ApplyProjectStatusType
 } & ProjectItemType
 
 export type ApplyProjectListType = ApplyProjectItemType[]
