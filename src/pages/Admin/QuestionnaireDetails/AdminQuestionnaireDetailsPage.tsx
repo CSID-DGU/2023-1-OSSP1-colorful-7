@@ -23,7 +23,7 @@ type AdminQuestionnaireDetailsPageProps = {
 
 export const AdminQuestionnaireDetailsPage: FC<AdminQuestionnaireDetailsPageProps> = ({ className }) => {
   const navigate = useNavigate()
-  const { questionnaireId = 0 } = useParams()
+  const { questionnaireKey = 0 } = useParams()
   // eslint-disable-next-line no-undef
   const localStorageQuestionnaireListData = localStorage.getItem('questionnaire_list_sample')
   const questionnaireList: QuestionnaireListType = localStorageQuestionnaireListData
@@ -32,7 +32,7 @@ export const AdminQuestionnaireDetailsPage: FC<AdminQuestionnaireDetailsPageProp
 
   const [questionnaireData, setQuestionnaireData] = useState<QuestionnaireItemType>(
     (questionnaireList.questionnaireList.filter(
-      (questionnaireItem) => questionnaireItem.key === +questionnaireId
+      (questionnaireItem) => questionnaireItem.key === +questionnaireKey
     )[0] as QuestionnaireItemType) ?? (camelizeKey(questionnaireSampleJson) as QuestionnaireItemType)
   )
 
@@ -192,7 +192,7 @@ export const AdminQuestionnaireDetailsPage: FC<AdminQuestionnaireDetailsPageProp
   const onClickQuestionnaireEditButton = () => {
     let newQuestionnaireListData = questionnaireList
     newQuestionnaireListData.questionnaireList = newQuestionnaireListData.questionnaireList.map((questionnaireItem) =>
-      questionnaireItem.key === +questionnaireId
+      questionnaireItem.key === +questionnaireKey
         ? { ...questionnaireData, version: questionnaireItem.version + 1 }
         : questionnaireItem
     )
