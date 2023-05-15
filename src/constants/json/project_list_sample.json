@@ -17,7 +17,8 @@
           "number": 1
         }
       ],
-      "visitedNumber": 20
+      "visited_number": 20,
+      "like_number": 10
     },
     {
       "key": 1,
@@ -36,7 +37,8 @@
           "number": 1
         }
       ],
-      "visitedNumber": 8
+      "visited_number": 8,
+      "like_number": 10
     },
     {
       "key": 2,
@@ -55,7 +57,8 @@
           "number": 1
         }
       ],
-      "visitedNumber": 7
+      "visited_number": 7,
+      "like_number": 10
     },
     {
       "key": 3,
@@ -74,7 +77,8 @@
           "number": 4
         }
       ],
-      "visitedNumber": 12
+      "visited_number": 12,
+      "like_number": 10
     },
     {
       "key": 4,
@@ -93,7 +97,8 @@
           "number": 1
         }
       ],
-      "visitedNumber": 20
+      "visited_number": 20,
+      "like_number": 10
     },
     {
       "key": 5,
@@ -112,7 +117,8 @@
           "number": 1
         }
       ],
-      "visitedNumber": 8
+      "visited_number": 8,
+      "like_number": 10
     },
     {
       "key": 6,
@@ -131,7 +137,8 @@
           "number": 1
         }
       ],
-      "visitedNumber": 7
+      "visited_number": 7,
+      "like_number": 10
     },
     {
       "key": 7,
@@ -150,7 +157,8 @@
           "number": 4
         }
       ],
-      "visitedNumber": 12
+      "visited_number": 12,
+      "like_number": 10
     },
     {
       "key": 8,
@@ -169,7 +177,8 @@
           "number": 1
         }
       ],
-      "visitedNumber": 20
+      "visited_number": 20,
+      "like_number": 10
     },
     {
       "key": 9,
@@ -188,7 +197,8 @@
           "number": 1
         }
       ],
-      "visitedNumber": 8
+      "visited_number": 8,
+      "like_number": 10
     },
     {
       "key": 10,
@@ -207,7 +217,8 @@
           "number": 1
         }
       ],
-      "visitedNumber": 7
+      "visited_number": 7,
+      "like_number": 10
     },
     {
       "key": 11,
@@ -226,7 +237,8 @@
           "number": 4
         }
       ],
-      "visitedNumber": 12
+      "visited_number": 12,
+      "like_number": 10
     }
   ]
 }

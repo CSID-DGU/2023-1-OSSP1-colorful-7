@@ -18,6 +18,7 @@ export type ProjectItemType = {
   popularScore: number
   requireMemberList: ProjectRequireMemberListType
   visitedNumber: number
+  likeNumber: number
 }
 
 export type ProjectListType = ProjectItemType[]
