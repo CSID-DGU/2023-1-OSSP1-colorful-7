@@ -6,8 +6,8 @@ import { FC, useEffect, useState } from 'react'
 import { DevelopmentStackType } from 'types/project'
 import {
   QuestionAnswerSheetListType,
-  QuestionnaireDataType,
-  QuestionnaireListDataType,
+  QuestionnaireItemType,
+  QuestionnaireListType,
   QuestionType,
 } from 'types/questionnaire'
 import { camelizeKey } from 'utils/camelizeKey'
@@ -32,16 +32,16 @@ export const QuestionnaireModal: FC<QuestionnaireModalProps> = ({
 }) => {
   // eslint-disable-next-line no-undef
   const localStorageQuestionnaireListData = localStorage.getItem('questionnaire_list_sample')
-  const questionnaireListData: QuestionnaireListDataType = localStorageQuestionnaireListData
-    ? (camelizeKey(JSON.parse(localStorageQuestionnaireListData)) as QuestionnaireListDataType)
-    : (camelizeKey(questionnaireListSampleJson) as QuestionnaireListDataType)
+  const questionnaireList: QuestionnaireListType = localStorageQuestionnaireListData
+    ? (camelizeKey(JSON.parse(localStorageQuestionnaireListData)) as QuestionnaireListType)
+    : (camelizeKey(questionnaireListSampleJson) as QuestionnaireListType)
 
   const questionnaireKey = getDevelopmentKeyByString(developmentStack)
 
-  const [questionnaireData] = useState<QuestionnaireDataType>(
-    (questionnaireListData.questionnaireListData.filter(
-      (questionnaireItemData) => questionnaireItemData.key === questionnaireKey
-    )[0] as QuestionnaireDataType) ?? (camelizeKey(questionnaireSampleJson) as QuestionnaireDataType)
+  const [questionnaireData] = useState<QuestionnaireItemType>(
+    (questionnaireList.questionnaireList.filter(
+      (questionnaireItem) => questionnaireItem.key === questionnaireKey
+    )[0] as QuestionnaireItemType) ?? (camelizeKey(questionnaireSampleJson) as QuestionnaireItemType)
   )
   const [questionAnswerSheetListData, setQuestionAnswerSheetListData] = useState<QuestionAnswerSheetListType>()
 
@@ -80,7 +80,7 @@ export const QuestionnaireModal: FC<QuestionnaireModalProps> = ({
 
   useEffect(() => {
     setQuestionAnswerSheetListData(
-      questionnaireData.questionListData.map((questionItemData) => ({ questionKey: questionItemData.key, answer: [] }))
+      questionnaireData.questionList.map((questionItem) => ({ questionKey: questionItem.key, answer: [] }))
     )
   }, [open])
 
@@ -98,12 +98,12 @@ export const QuestionnaireModal: FC<QuestionnaireModalProps> = ({
     >
       <QuestionContainer>
         {questionAnswerSheetListData &&
-          questionnaireData.questionListData.map((questionItemData, index) => (
+          questionnaireData.questionList.map((questionItem, index) => (
             <Question
-              questionData={questionItemData}
+              questionItem={questionItem}
               questionAnswerData={questionAnswerSheetListData[index].answer}
-              onChangeQuestionAnswerSheet={onChangeQuestionAnswerSheet(questionItemData.key, questionItemData.type)}
-              key={`question_${questionItemData.key}`}
+              onChangeQuestionAnswerSheet={onChangeQuestionAnswerSheet(questionItem.key, questionItem.type)}
+              key={`question_${questionItem.key}`}
             />
           ))}
       </QuestionContainer>

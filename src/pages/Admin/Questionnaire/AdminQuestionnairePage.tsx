@@ -2,7 +2,7 @@ import questionnaireListSampleJson from 'constants/json/questionnaire_list_sampl
 import questionnaireSampleJson from 'constants/json/questionnaire_sample.json'
 import { FC, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { QuestionnaireDataType, QuestionnaireListDataType, QuestionType } from 'types/questionnaire'
+import { QuestionListType, QuestionnaireItemType, QuestionnaireListType, QuestionType } from 'types/questionnaire'
 import { camelizeKey } from 'utils/camelizeKey'
 import { decamelizeKey } from 'utils/decamelizeKey'
 import { EditableQuestionCard } from './components/EditableQuestionCard'
@@ -26,14 +26,14 @@ export const AdminQuestionnairePage: FC<AdminQuestionnairePageProps> = ({ classN
   const { questionnaireId = 0 } = useParams()
   // eslint-disable-next-line no-undef
   const localStorageQuestionnaireListData = localStorage.getItem('questionnaire_list_sample')
-  const questionnaireListData: QuestionnaireListDataType = localStorageQuestionnaireListData
-    ? (camelizeKey(JSON.parse(localStorageQuestionnaireListData)) as QuestionnaireListDataType)
-    : (camelizeKey(questionnaireListSampleJson) as QuestionnaireListDataType)
+  const questionnaireList: QuestionnaireListType = localStorageQuestionnaireListData
+    ? (camelizeKey(JSON.parse(localStorageQuestionnaireListData)) as QuestionnaireListType)
+    : (camelizeKey(questionnaireListSampleJson) as QuestionnaireListType)
 
-  const [questionnaireData, setQuestionnaireData] = useState<QuestionnaireDataType>(
-    (questionnaireListData.questionnaireListData.filter(
-      (questionnaireItemData) => questionnaireItemData.key === +questionnaireId
-    )[0] as QuestionnaireDataType) ?? (camelizeKey(questionnaireSampleJson) as QuestionnaireDataType)
+  const [questionnaireData, setQuestionnaireData] = useState<QuestionnaireItemType>(
+    (questionnaireList.questionnaireList.filter(
+      (questionnaireItem) => questionnaireItem.key === +questionnaireId
+    )[0] as QuestionnaireItemType) ?? (camelizeKey(questionnaireSampleJson) as QuestionnaireItemType)
   )
 
   const onClickQuestionnaireListButton = () => {
@@ -43,8 +43,8 @@ export const AdminQuestionnairePage: FC<AdminQuestionnairePageProps> = ({ classN
   const onChangeQuestionType = (questionKey: number) => (questionType: QuestionType) => () => {
     setQuestionnaireData((prevQuestionnaireData) => {
       let newQuestionnaireData = prevQuestionnaireData
-      let newQuestionListData = newQuestionnaireData.questionListData.map((questionData) =>
-        questionData.key === questionKey ? { ...questionData, type: questionType } : questionData
+      let newQuestionListData = newQuestionnaireData.questionList.map((questionItem) =>
+        questionItem.key === questionKey ? { ...questionItem, type: questionType } : questionItem
       )
       return { ...newQuestionnaireData, questionListData: newQuestionListData }
     })
@@ -53,15 +53,14 @@ export const AdminQuestionnairePage: FC<AdminQuestionnairePageProps> = ({ classN
   const onCreateQuestion = () => {
     setQuestionnaireData((prevQuestionnaireData) => {
       let newQuestionnaireData = prevQuestionnaireData
-      let newQuestionKey =
-        newQuestionnaireData.questionListData[newQuestionnaireData.questionListData.length - 1].key + 1
-      let newQuestionListData = [
-        ...prevQuestionnaireData.questionListData,
+      let newQuestionKey = newQuestionnaireData.questionList[newQuestionnaireData.questionList.length - 1].key + 1
+      let newQuestionList: QuestionListType = [
+        ...prevQuestionnaireData.questionList,
         {
           key: newQuestionKey,
           title: '',
           answer: '0',
-          optionListData: [
+          optionList: [
             {
               key: 0,
               title: '질문 1',
@@ -71,7 +70,7 @@ export const AdminQuestionnairePage: FC<AdminQuestionnairePageProps> = ({ classN
           type: 'RADIO' as QuestionType,
         },
       ]
-      newQuestionnaireData = { ...newQuestionnaireData, questionListData: newQuestionListData }
+      newQuestionnaireData = { ...newQuestionnaireData, questionList: newQuestionList }
       return newQuestionnaireData
     })
   }
@@ -79,10 +78,8 @@ export const AdminQuestionnairePage: FC<AdminQuestionnairePageProps> = ({ classN
   const onDeleteQuestion = (questionKey: number) => () => {
     setQuestionnaireData((prevQuestionnaireData) => {
       let newQuestionnaireData = prevQuestionnaireData
-      let newQuestionListData = newQuestionnaireData.questionListData.filter(
-        (questionData) => questionData.key !== questionKey
-      )
-      newQuestionnaireData = { ...newQuestionnaireData, questionListData: newQuestionListData }
+      let newQuestionList = newQuestionnaireData.questionList.filter((questionItem) => questionItem.key !== questionKey)
+      newQuestionnaireData = { ...newQuestionnaireData, questionList: newQuestionList }
       return newQuestionnaireData
     })
   }
@@ -90,15 +87,15 @@ export const AdminQuestionnairePage: FC<AdminQuestionnairePageProps> = ({ classN
   const onChangeQuestionTitle = (questionKey: number) => (e: any) => {
     setQuestionnaireData((prevQuestionnaireData) => {
       let newQuestionnaireData = prevQuestionnaireData
-      let newQuestionListData = newQuestionnaireData.questionListData.map((questionData) =>
-        questionData.key === questionKey
+      let newQuestionListData = newQuestionnaireData.questionList.map((questionItem) =>
+        questionItem.key === questionKey
           ? {
-              ...questionData,
+              ...questionItem,
               title: e.target.value,
             }
-          : questionData
+          : questionItem
       )
-      newQuestionnaireData = { ...newQuestionnaireData, questionListData: newQuestionListData }
+      newQuestionnaireData = { ...newQuestionnaireData, questionList: newQuestionListData }
       return newQuestionnaireData
     })
   }
@@ -106,15 +103,15 @@ export const AdminQuestionnairePage: FC<AdminQuestionnairePageProps> = ({ classN
   const onChangeQuestionScore = (questionKey: number) => (e: any) => {
     setQuestionnaireData((prevQuestionnaireData) => {
       let newQuestionnaireData = prevQuestionnaireData
-      let newQuestionListData = newQuestionnaireData.questionListData.map((questionData) =>
-        questionData.key === questionKey
+      let newQuestionListData = newQuestionnaireData.questionList.map((questionItem) =>
+        questionItem.key === questionKey
           ? {
-              ...questionData,
+              ...questionItem,
               score: e.target.value,
             }
-          : questionData
+          : questionItem
       )
-      newQuestionnaireData = { ...newQuestionnaireData, questionListData: newQuestionListData }
+      newQuestionnaireData = { ...newQuestionnaireData, questionList: newQuestionListData }
       return newQuestionnaireData
     })
   }
@@ -122,15 +119,15 @@ export const AdminQuestionnairePage: FC<AdminQuestionnairePageProps> = ({ classN
   const onChangeQuestionAnswer = (questionKey: number) => (e: any) => {
     setQuestionnaireData((prevQuestionnaireData) => {
       let newQuestionnaireData = prevQuestionnaireData
-      let newQuestionListData = newQuestionnaireData.questionListData.map((questionData) =>
-        questionData.key === questionKey
+      let newQuestionListData = newQuestionnaireData.questionList.map((questionItem) =>
+        questionItem.key === questionKey
           ? {
-              ...questionData,
+              ...questionItem,
               answer: e.target.value,
             }
-          : questionData
+          : questionItem
       )
-      newQuestionnaireData = { ...newQuestionnaireData, questionListData: newQuestionListData }
+      newQuestionnaireData = { ...newQuestionnaireData, questionList: newQuestionListData }
       return newQuestionnaireData
     })
   }
@@ -139,21 +136,21 @@ export const AdminQuestionnairePage: FC<AdminQuestionnairePageProps> = ({ classN
     setQuestionnaireData((prevQuestionnaireData) => {
       let newQuestionnaireData = prevQuestionnaireData
       let newOptionKey =
-        newQuestionnaireData.questionListData[questionKey].optionListData[
-          newQuestionnaireData.questionListData[questionKey].optionListData.length - 1
+        newQuestionnaireData.questionList[questionKey].optionList[
+          newQuestionnaireData.questionList[questionKey].optionList.length - 1
         ].key + 1
-      let newQuestionListData = newQuestionnaireData.questionListData.map((questionData) =>
-        questionData.key === questionKey
+      let newQuestionListData = newQuestionnaireData.questionList.map((questionItem) =>
+        questionItem.key === questionKey
           ? {
-              ...questionData,
-              optionListData: questionData.optionListData.concat({
+              ...questionItem,
+              optionListData: questionItem.optionList.concat({
                 key: newOptionKey,
                 title: `선택지 ${newOptionKey}`,
               }),
             }
-          : questionData
+          : questionItem
       )
-      newQuestionnaireData = { ...newQuestionnaireData, questionListData: newQuestionListData }
+      newQuestionnaireData = { ...newQuestionnaireData, questionList: newQuestionListData }
       return newQuestionnaireData
     })
   }
@@ -161,15 +158,15 @@ export const AdminQuestionnairePage: FC<AdminQuestionnairePageProps> = ({ classN
   const onDeleteOption = (questionKey: number) => (optionKey: number) => () => {
     setQuestionnaireData((prevQuestionnaireData) => {
       let newQuestionnaireData = prevQuestionnaireData
-      let newQuestionListData = newQuestionnaireData.questionListData.map((questionData) =>
-        questionData.key === questionKey
+      let newQuestionListData = newQuestionnaireData.questionList.map((questionItem) =>
+        questionItem.key === questionKey
           ? {
-              ...questionData,
-              optionListData: questionData.optionListData.filter((optionData) => optionData.key !== optionKey),
+              ...questionItem,
+              optionListData: questionItem.optionList.filter((optionData) => optionData.key !== optionKey),
             }
-          : questionData
+          : questionItem
       )
-      newQuestionnaireData = { ...newQuestionnaireData, questionListData: newQuestionListData }
+      newQuestionnaireData = { ...newQuestionnaireData, questionList: newQuestionListData }
       return newQuestionnaireData
     })
   }
@@ -177,28 +174,27 @@ export const AdminQuestionnairePage: FC<AdminQuestionnairePageProps> = ({ classN
   const onChangeOption = (questionKey: number) => (optionKey: number) => (e: any) => {
     setQuestionnaireData((prevQuestionnaireData) => {
       let newQuestionnaireData = prevQuestionnaireData
-      let newQuestionListData = newQuestionnaireData.questionListData.map((questionData) =>
-        questionData.key === questionKey
+      let newQuestionListData = newQuestionnaireData.questionList.map((questionItem) =>
+        questionItem.key === questionKey
           ? {
-              ...questionData,
-              optionListData: questionData.optionListData.map((optionData) =>
+              ...questionItem,
+              optionListData: questionItem.optionList.map((optionData) =>
                 optionData.key === optionKey ? { ...optionData, title: e.target.value } : optionData
               ),
             }
-          : questionData
+          : questionItem
       )
-      newQuestionnaireData = { ...newQuestionnaireData, questionListData: newQuestionListData }
+      newQuestionnaireData = { ...newQuestionnaireData, questionList: newQuestionListData }
       return newQuestionnaireData
     })
   }
 
   const onClickQuestionnaireEditButton = () => {
-    let newQuestionnaireListData = questionnaireListData
-    newQuestionnaireListData.questionnaireListData = newQuestionnaireListData.questionnaireListData.map(
-      (questionnaireItemData) =>
-        questionnaireItemData.key === +questionnaireId
-          ? { ...questionnaireData, version: questionnaireItemData.version + 1 }
-          : questionnaireItemData
+    let newQuestionnaireListData = questionnaireList
+    newQuestionnaireListData.questionnaireList = newQuestionnaireListData.questionnaireList.map((questionnaireItem) =>
+      questionnaireItem.key === +questionnaireId
+        ? { ...questionnaireData, version: questionnaireItem.version + 1 }
+        : questionnaireItem
     )
     // eslint-disable-next-line no-undef
     localStorage.removeItem('questionnaire_list_sample')
@@ -221,18 +217,18 @@ export const AdminQuestionnairePage: FC<AdminQuestionnairePageProps> = ({ classN
       </HeaderRoot>
       <ContentContainer>
         <QuestionnaireListButton onClick={onClickQuestionnaireListButton}>목록으로</QuestionnaireListButton>
-        {questionnaireData.questionListData.map((questionData) => (
+        {questionnaireData.questionList.map((questionItem) => (
           <EditableQuestionCard
-            questionData={questionData}
-            onChangeQuestionType={onChangeQuestionType(questionData.key)}
-            onChangeQuestionTitle={onChangeQuestionTitle(questionData.key)}
-            onChangeQuestionScore={onChangeQuestionScore(questionData.key)}
-            onChangeQuestionAnswer={onChangeQuestionAnswer(questionData.key)}
-            onDeleteQuestion={onDeleteQuestion(questionData.key)}
-            onDeleteOption={onDeleteOption(questionData.key)}
-            onCreateOption={onCreateOption(questionData.key)}
-            onChangeOption={onChangeOption(questionData.key)}
-            key={`question_${questionData.key}`}
+            questionData={questionItem}
+            onChangeQuestionType={onChangeQuestionType(questionItem.key)}
+            onChangeQuestionTitle={onChangeQuestionTitle(questionItem.key)}
+            onChangeQuestionScore={onChangeQuestionScore(questionItem.key)}
+            onChangeQuestionAnswer={onChangeQuestionAnswer(questionItem.key)}
+            onDeleteQuestion={onDeleteQuestion(questionItem.key)}
+            onDeleteOption={onDeleteOption(questionItem.key)}
+            onCreateOption={onCreateOption(questionItem.key)}
+            onChangeOption={onChangeOption(questionItem.key)}
+            key={`question_${questionItem.key}`}
           />
         ))}
         <QuestionCreateButton onClick={onCreateQuestion}>질문 추가</QuestionCreateButton>

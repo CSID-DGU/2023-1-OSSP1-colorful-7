@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { FC } from 'react'
-import { QuestionDataType, QuestionType } from 'types/questionnaire'
+import { QuestionItemType, QuestionType } from 'types/questionnaire'
 import {
   AnswerContainer,
   ContentInput,
@@ -20,7 +20,7 @@ import {
 
 type EditableQuestionCardProps = {
   className?: string
-  questionData: QuestionDataType
+  questionData: QuestionItemType
   onChangeQuestionType: (type: QuestionType) => () => void
   onDeleteQuestion: (e: any) => void
   onChangeQuestionTitle: (e: any) => void
@@ -72,14 +72,14 @@ export const EditableQuestionCard: FC<EditableQuestionCardProps> = ({
         />
       </AnswerContainer>
       <QuestionContainer>
-        {questionData.optionListData.map((optionData) => (
-          <QuestionItemContainer key={`question_${optionData.key}`}>
+        {questionData.optionList.map((optionItem) => (
+          <QuestionItemContainer key={`option_${optionItem.key}`}>
             <ContentInput
-              onChange={onChangeOption(optionData.key)}
-              addonBefore={`선택지 ${optionData.key}`}
-              value={optionData.title}
+              onChange={onChangeOption(optionItem.key)}
+              addonBefore={`선택지 ${optionItem.key}`}
+              value={optionItem.title}
             />
-            <QuestionItemDeleteButton onClick={onDeleteOption(optionData.key)}>선택지 삭제</QuestionItemDeleteButton>
+            <QuestionItemDeleteButton onClick={onDeleteOption(optionItem.key)}>선택지 삭제</QuestionItemDeleteButton>
           </QuestionItemContainer>
         ))}
         <QuestionItemAddButton onClick={onCreateOption}>선택지 추가</QuestionItemAddButton>

@@ -1,4 +1,4 @@
-import { QuestionAnswerSheetListType, QuestionnaireDataType } from 'types/questionnaire'
+import { QuestionAnswerSheetListType, QuestionnaireItemType } from 'types/questionnaire'
 
 const compareNumberArrayAnswerAndStringAnswer = (numberArrayAnswer: number[], stringAnswer: string) => {
   let washedStringAnswer = stringAnswer.replaceAll(' ', '')
@@ -12,18 +12,18 @@ const compareNumberArrayAnswerAndStringAnswer = (numberArrayAnswer: number[], st
 }
 
 export const gradeQuestionnaire = (
-  questionnaireData: QuestionnaireDataType,
+  questionnaireItem: QuestionnaireItemType,
   answerSheetData: QuestionAnswerSheetListType
 ) => {
   let grade = 0
-  questionnaireData.questionListData.forEach((questionData) => {
+  questionnaireItem.questionList.forEach((questionItem) => {
     if (
       compareNumberArrayAnswerAndStringAnswer(
-        answerSheetData.filter((value) => value.questionKey === questionData.key)[0].answer,
-        questionData.answer
+        answerSheetData.filter((value) => value.questionKey === questionItem.key)[0].answer,
+        questionItem.answer
       )
     ) {
-      grade += questionData.score
+      grade += questionItem.score
     }
   })
   return grade

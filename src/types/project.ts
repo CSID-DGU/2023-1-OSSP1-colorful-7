@@ -21,3 +21,33 @@ export type ProjectItemType = {
 }
 
 export type ProjectListType = ProjectItemType[]
+
+type ApplyProjectItemType = {
+  status: 'PENDING' | 'BELONG' | 'REJECT'
+} & ProjectItemType
+
+export type ApplyProjectListType = ApplyProjectItemType[]
+
+type ApplyMemberItemType = {
+  userKey: number
+  nickname: string
+  developmentStack: DevelopmentStackType
+  questionnaireScore: number
+}
+
+type ApplyMemberListType = ApplyMemberItemType[]
+
+type ManageProjectItemType = {
+  applyMemberList: ApplyMemberListType
+} & ProjectItemType
+
+export type ManageProjectListType = ManageProjectItemType[]
+
+export type UserInfoType = {
+  nickname: string
+  introduce: string
+  developmentStack: DevelopmentStackType
+  questionnaireKey: number
+  questionnaireVersion: number
+  questionnaireScore: number
+}

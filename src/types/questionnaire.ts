@@ -1,27 +1,33 @@
+type OptionItemType = {
+  key: number
+  title: string
+}
+
+type OptionListType = OptionItemType[]
+
 export type QuestionType = 'RADIO' | 'SELECT'
 
-export type QuestionDataType = {
+export type QuestionItemType = {
   key: number
   type: QuestionType
   title: string
   answer: string
   score: number
-  optionListData: {
-    key: number
-    title: string
-  }[]
+  optionList: OptionListType
 }
 
-export type QuestionnaireDataType = {
+export type QuestionListType = QuestionItemType[]
+
+export type QuestionnaireItemType = {
   key: number
   title: string
   version: number
   questionnaireType: string
-  questionListData: QuestionDataType[]
+  questionList: QuestionListType
 }
 
-export type QuestionnaireListDataType = {
-  questionnaireListData: QuestionnaireDataType[]
+export type QuestionnaireListType = {
+  questionnaireList: QuestionnaireItemType[]
 }
 
 export type QuestionAnswerSheetType = {

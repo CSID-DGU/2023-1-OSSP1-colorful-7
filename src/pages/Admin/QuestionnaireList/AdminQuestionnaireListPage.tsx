@@ -1,7 +1,7 @@
 import questionnaireListSampleJson from 'constants/json/questionnaire_list_sample.json'
 import { FC, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { QuestionnaireListDataType } from 'types/questionnaire'
+import { QuestionnaireItemType, QuestionnaireListType } from 'types/questionnaire'
 import { camelizeKey } from 'utils/camelizeKey'
 import { ContentContainer } from '../Questionnaire/styled'
 import {
@@ -20,7 +20,7 @@ type AdminQuestionnaireListPageProps = {
 }
 
 export const AdminQuestionnaireListPage: FC<AdminQuestionnaireListPageProps> = ({ className }) => {
-  const [questionnaireListData, setQuestionnaireListData] = useState<QuestionnaireListDataType>()
+  const [questionnaireListData, setQuestionnaireListData] = useState<QuestionnaireListType>()
   const navigate = useNavigate()
   const onClickEditButton = (questionnaireKey: number) => () => {
     navigate(`/admin/questionnaire/${questionnaireKey}`)
@@ -30,10 +30,10 @@ export const AdminQuestionnaireListPage: FC<AdminQuestionnaireListPageProps> = (
     // eslint-disable-next-line no-undef
     const localStorageQuestionnaireListData = localStorage.getItem('questionnaire_list_sample')
     if (localStorageQuestionnaireListData) {
-      setQuestionnaireListData(camelizeKey(JSON.parse(localStorageQuestionnaireListData)) as QuestionnaireListDataType)
+      setQuestionnaireListData(camelizeKey(JSON.parse(localStorageQuestionnaireListData)) as QuestionnaireListType)
       return
     }
-    setQuestionnaireListData(camelizeKey(questionnaireListSampleJson) as QuestionnaireListDataType)
+    setQuestionnaireListData(camelizeKey(questionnaireListSampleJson) as QuestionnaireListType)
     // eslint-disable-next-line no-undef
     localStorage.setItem('questionnaire_list_sample', JSON.stringify(questionnaireListSampleJson))
   }, [])
@@ -47,12 +47,12 @@ export const AdminQuestionnaireListPage: FC<AdminQuestionnaireListPageProps> = (
       </HeaderRoot>
       <ContentContainer>
         <QuestionnaireCardContainer>
-          {questionnaireListData?.questionnaireListData.map((questionnaireItemData) => (
-            <QuestionnaireCard key={`question_card_${questionnaireItemData.key}`}>
+          {questionnaireListData?.questionnaireList.map((questionnaireItem: QuestionnaireItemType) => (
+            <QuestionnaireCard key={`question_card_${questionnaireItem.key}`}>
               <QuestionCardTitleTypo>
-                {questionnaireItemData.title} (version: {questionnaireItemData.version})
+                {questionnaireItem.title} (version: {questionnaireItem.version})
               </QuestionCardTitleTypo>
-              <QuestionCardEditButton onClick={onClickEditButton(questionnaireItemData.key)}>
+              <QuestionCardEditButton onClick={onClickEditButton(questionnaireItem.key)}>
                 수정하기
               </QuestionCardEditButton>
             </QuestionnaireCard>

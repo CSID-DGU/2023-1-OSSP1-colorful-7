@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { QuestionDataType } from 'types/questionnaire'
+import { QuestionItemType } from 'types/questionnaire'
 import {
   ContentCheckbox,
   ContentRadio,
@@ -14,7 +14,7 @@ import {
 
 type QuestionProps = {
   className?: string
-  questionData: QuestionDataType
+  questionItem: QuestionItemType
   questionAnswerData: number[]
   // eslint-disable-next-line no-unused-vars
   onChangeQuestionAnswerSheet: (optionKey: number) => () => void
@@ -22,32 +22,32 @@ type QuestionProps = {
 
 export const Question: FC<QuestionProps> = ({
   className,
-  questionData,
+  questionItem,
   questionAnswerData,
   onChangeQuestionAnswerSheet,
 }) => {
   return (
     <Root className={className}>
       <TitleContainer>
-        <TitleTypo>{questionData.title}</TitleTypo>
-        <ScoreTypo>({questionData.score}점)</ScoreTypo>
+        <TitleTypo>{questionItem.title}</TitleTypo>
+        <ScoreTypo>({questionItem.score}점)</ScoreTypo>
       </TitleContainer>
       <OptionListContainer>
-        {questionData.optionListData.map((optionItemData) => (
-          <OptionContainer key={`option_item_${optionItemData.key}`}>
-            {questionData.type === 'SELECT' && (
+        {questionItem.optionList.map((optionItem) => (
+          <OptionContainer key={`option_item_${optionItem.key}`}>
+            {questionItem.type === 'SELECT' && (
               <ContentCheckbox
-                onChange={onChangeQuestionAnswerSheet(optionItemData.key)}
-                checked={questionAnswerData.includes(optionItemData.key)}
+                onChange={onChangeQuestionAnswerSheet(optionItem.key)}
+                checked={questionAnswerData.includes(optionItem.key)}
               />
             )}
-            {questionData.type === 'RADIO' && (
+            {questionItem.type === 'RADIO' && (
               <ContentRadio
-                onChange={onChangeQuestionAnswerSheet(optionItemData.key)}
-                checked={questionAnswerData.includes(optionItemData.key)}
+                onChange={onChangeQuestionAnswerSheet(optionItem.key)}
+                checked={questionAnswerData.includes(optionItem.key)}
               />
             )}
-            <OptionTypo>{optionItemData.title}</OptionTypo>
+            <OptionTypo>{optionItem.title}</OptionTypo>
           </OptionContainer>
         ))}
       </OptionListContainer>
