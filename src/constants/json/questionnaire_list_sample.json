@@ -1,18 +1,18 @@
 {
-  "questionnaire_list_data": [
+  "questionnaire_list": [
     {
       "key": 0,
       "title": "웹 프론트엔드",
       "version": 1,
       "questionnaire_type": "web_frontend",
-      "question_list_data": [
+      "question_list": [
         {
           "key": 0,
           "type": "RADIO",
           "title": "테스트1_5점",
           "answer": "0",
           "score": 5,
-          "option_list_data": [
+          "option_list": [
             {
               "key": 0,
               "title": "테스트 1_질문 1"
@@ -37,7 +37,7 @@
           "title": "테스트2_10점",
           "answer": "1, 2",
           "score": 10,
-          "option_list_data": [
+          "option_list": [
             {
               "key": 0,
               "title": "테스트 2_질문 1"
@@ -66,7 +66,7 @@
           "title": "테스트3_15점",
           "answer": "0",
           "score": 15,
-          "option_list_data": [
+          "option_list": [
             {
               "key": 0,
               "title": "테스트 3_질문 1_정답"
@@ -88,14 +88,14 @@
       "title": "서버 백엔드",
       "version": 1,
       "questionnaire_type": "server_backend",
-      "question_list_data": [
+      "question_list": [
         {
           "key": 0,
           "type": "RADIO",
           "title": "테스트1_5점",
           "answer": "0",
           "score": 5,
-          "option_list_data": [
+          "option_list": [
             {
               "key": 0,
               "title": "테스트 1_질문 1"
@@ -120,7 +120,7 @@
           "title": "테스트2_10점",
           "answer": "1, 2",
           "score": 10,
-          "option_list_data": [
+          "option_list": [
             {
               "key": 0,
               "title": "테스트 2_질문 1"
@@ -149,7 +149,7 @@
           "title": "테스트3_15점",
           "answer": "0",
           "score": 15,
-          "option_list_data": [
+          "option_list": [
             {
               "key": 0,
               "title": "테스트 3_질문 1_정답"
@@ -171,14 +171,14 @@
       "title": "앱 클라이언트",
       "version": 1,
       "questionnaire_type": "web_frontend",
-      "question_list_data": [
+      "question_list": [
         {
           "key": 0,
           "type": "RADIO",
           "title": "테스트1_5점",
           "answer": "0",
           "score": 5,
-          "option_list_data": [
+          "option_list": [
             {
               "key": 0,
               "title": "테스트 1_질문 1"
@@ -203,7 +203,7 @@
           "title": "테스트2_10점",
           "answer": "1, 2",
           "score": 10,
-          "option_list_data": [
+          "option_list": [
             {
               "key": 0,
               "title": "테스트 2_질문 1"
@@ -232,7 +232,7 @@
           "title": "테스트3_15점",
           "answer": "0",
           "score": 15,
-          "option_list_data": [
+          "option_list": [
             {
               "key": 0,
               "title": "테스트 3_질문 1_정답"
@@ -254,14 +254,14 @@
       "title": "기타 공통 질문",
       "version": 1,
       "questionnaire_type": "web_frontend",
-      "question_list_data": [
+      "question_list": [
         {
           "key": 0,
           "type": "RADIO",
           "title": "테스트1_5점",
           "answer": "0",
           "score": 5,
-          "option_list_data": [
+          "option_list": [
             {
               "key": 0,
               "title": "테스트 1_질문 1"
@@ -286,7 +286,7 @@
           "title": "테스트2_10점",
           "answer": "1, 2",
           "score": 10,
-          "option_list_data": [
+          "option_list": [
             {
               "key": 0,
               "title": "테스트 2_질문 1"
@@ -315,7 +315,7 @@
           "title": "테스트3_15점",
           "answer": "0",
           "score": 15,
-          "option_list_data": [
+          "option_list": [
             {
               "key": 0,
               "title": "테스트 3_질문 1_정답"
