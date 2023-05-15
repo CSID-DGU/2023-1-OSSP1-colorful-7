@@ -55,3 +55,5 @@ export const UserContainer = styled.div`
 
 export const LoginButton = styled(Button)``
 export const JoinButton = styled(Button)``
+export const MyPageButton = styled(Button)``
+export const LogoutButton = styled(Button)``

@@ -6,10 +6,12 @@ import {
   JoinButton,
   LoginButton,
   LogoImg,
+  LogoutButton,
   MenuButtonContainer,
   MenuContainer,
   MenuProjectButton,
   MenuProjectButtonTypo,
+  MyPageButton,
   Root,
   UserContainer,
 } from './styled'
@@ -33,6 +35,34 @@ export const CommonHeader: FC<CommonHeaderProps> = ({ className }) => {
   const onClickJoinButton = () => {
     navigate('/join')
   }
+  const onClickMyPageButton = () => {
+    navigate('')
+  }
+  const onClickLogoutButton = () => {
+    // eslint-disable-next-line no-undef
+    localStorage.removeItem('test_login')
+    // eslint-disable-next-line no-undef
+    window.location.reload()
+  }
+
+  const renderUserContainer = () => {
+    // eslint-disable-next-line no-undef
+    if (localStorage.getItem('test_login') === 'true') {
+      return (
+        <UserContainer>
+          <MyPageButton onClick={onClickMyPageButton}>마이페이지</MyPageButton>
+          <LogoutButton onClick={onClickLogoutButton}>로그아웃</LogoutButton>
+        </UserContainer>
+      )
+    }
+
+    return (
+      <UserContainer>
+        <LoginButton onClick={onClickLoginButton}>로그인</LoginButton>
+        <JoinButton onClick={onClickJoinButton}>회원가입</JoinButton>
+      </UserContainer>
+    )
+  }
 
   return (
     <Root className={className}>
@@ -45,10 +75,7 @@ export const CommonHeader: FC<CommonHeaderProps> = ({ className }) => {
             </MenuProjectButton>
           </MenuButtonContainer>
         </MenuContainer>
-        <UserContainer>
-          <LoginButton onClick={onClickLoginButton}>로그인</LoginButton>
-          <JoinButton onClick={onClickJoinButton}>회원가입</JoinButton>
-        </UserContainer>
+        {renderUserContainer()}
       </Container>
     </Root>
   )

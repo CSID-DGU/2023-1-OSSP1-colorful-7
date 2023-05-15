@@ -26,6 +26,24 @@ export const LoginPage: FC<LoginPageProps> = ({ className }) => {
     navigate('/join')
   }
 
+  const onTestLogin = () => {
+    // eslint-disable-next-line no-undef
+    localStorage.removeItem('test_login')
+    // eslint-disable-next-line no-undef
+    localStorage.setItem('test_login', 'true')
+  }
+
+  const onKeyPressEnter = (e: any) => {
+    if (e.key === 'Enter') {
+      onTestLogin()
+      navigate('/')
+    }
+  }
+
+  const onClickLogin = () => {
+    onTestLogin()
+  }
+
   return (
     <Root className={className}>
       <CommonHeader />
@@ -34,9 +52,11 @@ export const LoginPage: FC<LoginPageProps> = ({ className }) => {
         <LogoTypo>당신의 능력, 티밍에서 펼쳐보세요!</LogoTypo>
         <InputContainer>
           <ContentInput placeholder="아이디" />
-          <ContentInput placeholder="비밀번호" type="password" />
+          <ContentInput placeholder="비밀번호" type="password" onKeyDown={onKeyPressEnter} />
         </InputContainer>
-        <LoginButton type="primary">로그인</LoginButton>
+        <LoginButton type="primary" onClick={onClickLogin}>
+          로그인
+        </LoginButton>
         <JoinContainer>
           <JoinInfoTypo>아직 회원이 아니세요?</JoinInfoTypo>
           <JoinButton type="text" onClick={onClickJoinButton}>

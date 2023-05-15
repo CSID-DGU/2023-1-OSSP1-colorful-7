@@ -6,6 +6,7 @@ import { LoginPage } from 'pages/Login'
 import { MainPage } from 'pages/Main'
 import { ProjectDetailsPage } from 'pages/Project/Details'
 import { ProjectListPage } from 'pages/Project/List'
+import { UserProfilePage } from 'pages/User/Profile'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { QueryClient, QueryClientProvider } from 'react-query'
@@ -25,6 +26,7 @@ root.render(
           <Route path="/admin/questionnaire/:questionnaireKey" element={<AdminQuestionnaireDetailsPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/join" element={<JoinPage />} />
+          <Route path="/user/profile" element={<UserProfilePage />} />
           <Route path="/project/list" element={<ProjectListPage />} />
           <Route path="/project/:projectKey" element={<ProjectDetailsPage />} />
           <Route path="/" element={<MainPage />} />
