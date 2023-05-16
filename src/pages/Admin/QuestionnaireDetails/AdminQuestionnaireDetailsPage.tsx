@@ -178,8 +178,8 @@ export const AdminQuestionnaireDetailsPage: FC<AdminQuestionnaireDetailsPageProp
         questionItem.key === questionKey
           ? {
               ...questionItem,
-              optionListData: questionItem.optionList.map((optionData) =>
-                optionData.key === optionKey ? { ...optionData, title: e.target.value } : optionData
+              optionList: questionItem.optionList.map((optionItem) =>
+                optionItem.key === optionKey ? { ...optionItem, title: e.target.value } : optionItem
               ),
             }
           : questionItem
