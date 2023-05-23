@@ -11,3 +11,4 @@ declare var process: {
 }
 declare var document: any
 declare var window: any
+declare var audio: any
