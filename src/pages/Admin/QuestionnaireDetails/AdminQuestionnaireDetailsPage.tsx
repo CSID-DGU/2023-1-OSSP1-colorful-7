@@ -162,7 +162,7 @@ export const AdminQuestionnaireDetailsPage: FC<AdminQuestionnaireDetailsPageProp
         questionItem.key === questionKey
           ? {
               ...questionItem,
-              optionListData: questionItem.optionList.filter((optionData) => optionData.key !== optionKey),
+              optionList: questionItem.optionList.filter((optionData) => optionData.key !== optionKey),
             }
           : questionItem
       )
