@@ -10,3 +10,4 @@ declare var process: {
   env: any
 }
 declare var document: any
+declare var window: any
