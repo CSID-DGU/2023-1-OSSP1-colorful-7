@@ -46,6 +46,12 @@ type ManageProjectItemType = {
 
 export type ManageProjectListType = ManageProjectItemType[]
 
+type ExpireProjectItemType = {
+  expireMemberList: ApplyMemberListType
+} & ProjectItemType
+
+export type ExpireProjectListType = ExpireProjectItemType[]
+
 export type UserInfoType = {
   nickname: string
   introduce: string

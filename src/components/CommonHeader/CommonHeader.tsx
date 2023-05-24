@@ -36,7 +36,7 @@ export const CommonHeader: FC<CommonHeaderProps> = ({ className }) => {
     navigate('/join')
   }
   const onClickMyPageButton = () => {
-    navigate('/user/profile')
+    navigate('/user/project')
   }
   const onClickLogoutButton = () => {
     // eslint-disable-next-line no-undef
