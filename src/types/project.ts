@@ -40,15 +40,17 @@ type ApplyMemberItemType = {
 
 type ApplyMemberListType = ApplyMemberItemType[]
 
-type ManageProjectItemType = {
-  applyMemberList: ApplyMemberListType
-} & ProjectItemType
+export type ManageProjectPositionType = 'LEADER' | 'MEMBER'
 
-export type ManageProjectListType = ManageProjectItemType[]
+type ManageProjectItemType = {
+  position: ManageProjectPositionType
+} & ProjectItemType
 
 type ExpireProjectItemType = {
   expireMemberList: ApplyMemberListType
 } & ProjectItemType
+
+export type ManageProjectListType = ManageProjectItemType[]
 
 export type ExpireProjectListType = ExpireProjectItemType[]
 

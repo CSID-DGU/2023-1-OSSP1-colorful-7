@@ -33,6 +33,7 @@ export const UserProjectManagePage: FC<UserProjectManagePageProps> = ({ classNam
             {manageProjectListData.map((projectItem) => (
               <ManageProjectCard
                 projectItem={projectItem}
+                position={projectItem.position}
                 key={`project_card_${projectItem.key}`}
               />
             ))}

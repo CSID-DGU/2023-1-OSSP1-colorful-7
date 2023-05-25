@@ -1,10 +1,13 @@
 import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ApplyProjectStatusType, ProjectItemType } from 'types/project'
+import { ManageProjectPositionType, ProjectItemType } from 'types/project'
 import { generateRandomProjectCardLogoImg } from 'utils/generateRandomProjectCardLogoImg'
-import { getApplyProjectStatusColor, translateApplyProjectStatus } from 'utils/translateStatus'
+import { getDevelopmentStackColor, translateDevelopmentStack } from 'utils/translateDevelopmentStack'
+import { getManageProjectPositionColor, translateManageProjectPosition } from 'utils/translateStatus'
 import {
   CardMeta,
+  DevelopmentStackTag,
+  DevelopmentStackTagContainer,
   RepresentativeImg,
   RepresentativeImgBadge,
   RepresentativeImgContainer,
@@ -14,10 +17,10 @@ import {
 type ManageProjectCardProps = {
   className?: string
   projectItem: ProjectItemType
-  status?: ApplyProjectStatusType
+  position?: ManageProjectPositionType
 }
 
-export const ManageProjectCard: FC<ManageProjectCardProps> = ({ className, projectItem, status }) => {
+export const ManageProjectCard: FC<ManageProjectCardProps> = ({ className, projectItem, position }) => {
   const navigate = useNavigate()
 
   const onClickRoot = () => {
@@ -35,16 +38,25 @@ export const ManageProjectCard: FC<ManageProjectCardProps> = ({ className, proje
             src={projectItem.representativeImg ?? generateRandomProjectCardLogoImg()}
             alt={'프로젝트 대표 이미지'}
           />
-          {status && (
-            <RepresentativeImgBadge color={getApplyProjectStatusColor(status)}>
-              {translateApplyProjectStatus(status)}
+          {position && (
+            <RepresentativeImgBadge color={getManageProjectPositionColor(position)}>
+              {translateManageProjectPosition(position)}
             </RepresentativeImgBadge>
           )}
         </RepresentativeImgContainer>
       }
     >
       <CardMeta title={projectItem.title} description={`조회수 : ${projectItem.visitedNumber}회`} />
-      
+      <DevelopmentStackTagContainer size={[0, 3]} wrap>
+        {Object.values(projectItem.requireMemberList.slice(0, 2)).map((requireMemberItemData, index) => (
+          <DevelopmentStackTag
+            color={getDevelopmentStackColor(requireMemberItemData.developmentStack)}
+            key={`development_stack_tag_${index}`}
+          >
+            {translateDevelopmentStack(requireMemberItemData.developmentStack)}
+          </DevelopmentStackTag>
+        ))}
+      </DevelopmentStackTagContainer>
     </Root>
   )
 }
