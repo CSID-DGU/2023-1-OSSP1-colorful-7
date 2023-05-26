@@ -52,7 +52,14 @@ export const UserContainer = styled.div`
   align-items: center;
   gap: 5px;
 `
-
+export const UserIcon = styled.img`
+width: 55px;
+height: 55px;
+border-radius: 50%;
+margin-left: 5px;
+margin-right: 20px;
+cursor: pointer;
+`
 export const LoginButton = styled(Button)``
 export const JoinButton = styled(Button)``
 export const MyPageButton = styled(Button)``

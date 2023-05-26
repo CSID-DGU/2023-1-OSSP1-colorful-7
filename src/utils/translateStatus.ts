@@ -38,6 +38,6 @@ export const getManageProjectPositionColor = (position: ManageProjectPositionTyp
     return '#FDD15A'
   }
   if (position === 'MEMBER') {
-    return '#3524B0'
+    return '#6979DB'
   }
 }
