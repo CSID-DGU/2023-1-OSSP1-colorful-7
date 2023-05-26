@@ -15,7 +15,7 @@ import {
   MyPageButton,
   Root,
   UserContainer,
-  UserIcon
+  UserIcon,
 } from './styled'
 
 type CommonHeaderProps = {
@@ -38,16 +38,13 @@ export const CommonHeader: FC<CommonHeaderProps> = ({ className }) => {
     navigate('/join')
   }
   const onClickMyPageButton = () => {
-    navigate('/user/project')
+    navigate('/user/profile')
   }
   const onClickLogoutButton = () => {
     // eslint-disable-next-line no-undef
     localStorage.removeItem('test_login')
     // eslint-disable-next-line no-undef
     window.location.reload()
-  }
-  const onClickProfileButton = () => {
-    navigate('/user/profile')
   }
 
   const renderUserContainer = () => {
@@ -57,7 +54,7 @@ export const CommonHeader: FC<CommonHeaderProps> = ({ className }) => {
         <UserContainer>
           <MyPageButton onClick={onClickMyPageButton}>마이페이지</MyPageButton>
           <LogoutButton onClick={onClickLogoutButton}>로그아웃</LogoutButton>
-          <UserIcon onClick={onClickProfileButton} src={Avatar} alt={'유저 아바타 이미지'} />
+          <UserIcon src={Avatar} alt={'유저 아바타 이미지'} />
         </UserContainer>
       )
     }
@@ -66,7 +63,6 @@ export const CommonHeader: FC<CommonHeaderProps> = ({ className }) => {
       <UserContainer>
         <LoginButton onClick={onClickLoginButton}>로그인</LoginButton>
         <JoinButton onClick={onClickJoinButton}>회원가입</JoinButton>
-        <UserIcon onClick={onClickProfileButton} src={Avatar} alt={'유저 아바타 이미지'} />
       </UserContainer>
     )
   }
