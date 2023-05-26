@@ -24,35 +24,27 @@ export const ManageContainer = styled.div`
   display: flex;
   flex-direction: column;
 `
+export const ManageTitleContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  gap: 10px;
+`
+
+export const ManageTitleLogoImg = styled.img`
+  width: 20px;
+`
 
 export const ManageTitleTypo = styled(Typography)`
   font-size: 18px;
   font-weight: bold;
 `
 
-export const ManageProjectContainer = styled.div`
+export const ManageExplainTypo = styled(Typography)`
   width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 20px;
-  `
-
-export const ExpireContainer = styled.div`
-width: 100%;
-display: flex;
-flex-direction: column;
-`
-
-export const ExpireTitleTypo = styled(Typography)`
-font-size: 18px;
-font-weight: bold;
-`
-
-export const ExpireProjectCardContainer = styled.div`
-width: 100%;
-display: flex;
-flex-wrap: wrap;
-gap: 10px;
-margin-top: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px #c9c9c9 solid;
+  font-size: 12px;
+  font-weight: 400;
+  color: #808080;
 `
