@@ -13,9 +13,6 @@ import {
   LikeCardContainer,
   LikeContainer,
   LikeTitleTypo,
-  RecommendCardContainer,
-  RecommendContainer,
-  RecommendTitleTypo,
   Root,
 } from './styled'
 
@@ -53,17 +50,6 @@ export const UserProfilePage: FC<UserProfilePageProps> = ({ className }) => {
               ))}
           </LikeCardContainer>
         </LikeContainer>
-        <RecommendContainer>
-          <RecommendTitleTypo>추천 프로젝트</RecommendTitleTypo>
-          <RecommendCardContainer>
-            {projectListData
-              .sort((a, b) => a.key - b.key)
-              .slice(0, 4)
-              .map((projectItem) => (
-                <ProjectCard projectItem={projectItem} key={`project_card_${projectItem.key}`} />
-              ))}
-          </RecommendCardContainer>
-        </RecommendContainer>
       </Container>
     </Root>
   )

@@ -53,8 +53,8 @@ export const UserContainer = styled.div`
   gap: 5px;
 `
 export const UserIcon = styled.img`
-width: 55px;
-height: 55px;
+width: 50px;
+height: 50px;
 border-radius: 50%;
 margin-left: 5px;
 margin-right: 20px;

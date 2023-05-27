@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 export const Root = styled.div`
   width: 100%;
+  background: #c9c9c933;
   display: flex;
   justify-content: center;
 `

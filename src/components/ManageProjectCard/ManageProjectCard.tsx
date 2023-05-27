@@ -2,12 +2,9 @@ import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ManageProjectPositionType, ProjectItemType } from 'types/project'
 import { generateRandomProjectCardLogoImg } from 'utils/generateRandomProjectCardLogoImg'
-import { getDevelopmentStackColor, translateDevelopmentStack } from 'utils/translateDevelopmentStack'
 import { getManageProjectPositionColor, translateManageProjectPosition } from 'utils/translateStatus'
 import {
   CardMeta,
-  DevelopmentStackTag,
-  DevelopmentStackTagContainer,
   RepresentativeImg,
   RepresentativeImgBadge,
   RepresentativeImgContainer,
@@ -47,16 +44,8 @@ export const ManageProjectCard: FC<ManageProjectCardProps> = ({ className, proje
       }
     >
       <CardMeta title={projectItem.title} description={`조회수 : ${projectItem.visitedNumber}회`} />
-      <DevelopmentStackTagContainer size={[0, 3]} wrap>
-        {Object.values(projectItem.requireMemberList.slice(0, 2)).map((requireMemberItemData, index) => (
-          <DevelopmentStackTag
-            color={getDevelopmentStackColor(requireMemberItemData.developmentStack)}
-            key={`development_stack_tag_${index}`}
-          >
-            {translateDevelopmentStack(requireMemberItemData.developmentStack)}
-          </DevelopmentStackTag>
-        ))}
-      </DevelopmentStackTagContainer>
+      
+      
     </Root>
   )
 }
