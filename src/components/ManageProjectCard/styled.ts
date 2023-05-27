@@ -1,4 +1,4 @@
-import { Card, Tag } from 'antd'
+import { Card, Space, Tag } from 'antd'
 import Meta from 'antd/es/card/Meta'
 import styled from 'styled-components'
 
@@ -30,6 +30,15 @@ export const RepresentativeImgBadge = styled(Tag)`
   right: 10px;
   z-index: 1;
 `
+export const DevelopmentStackTagContainer = styled(Space)`
+  height: 50px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+`
+
+export const DevelopmentStackTag = styled(Tag)``
 
 export const CardMeta = styled(Meta)``
 

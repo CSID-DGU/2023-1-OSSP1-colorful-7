@@ -19,25 +19,24 @@ export const Container = styled.div`
   gap: 20px;
   margin-top: 20px;
 `
-
-export const RecommendContainer = styled.div`
+export const ManageContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
 `
 
-export const RecommendTitleTypo = styled(Typography)`
+export const ManageTitleTypo = styled(Typography)`
   font-size: 18px;
   font-weight: bold;
 `
 
-export const RecommendCardContainer = styled.div`
+export const ManageProjectContainer = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 20px;
-`
+  `
 
 export const LikeContainer = styled.div`
   width: 100%;
@@ -75,4 +74,22 @@ export const ApplyCardContainer = styled.div`
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 20px;
+`
+export const ExpireContainer = styled.div`
+width: 100%;
+display: flex;
+flex-direction: column;
+`
+
+export const ExpireTitleTypo = styled(Typography)`
+font-size: 18px;
+font-weight: bold;
+`
+
+export const ExpireProjectCardContainer = styled.div`
+width: 100%;
+display: flex;
+flex-wrap: wrap;
+gap: 10px;
+margin-top: 20px;
 `
