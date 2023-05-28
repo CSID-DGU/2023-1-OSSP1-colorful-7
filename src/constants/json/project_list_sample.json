@@ -18,7 +18,8 @@
         }
       ],
       "visited_number": 20,
-      "like_number": 10
+      "like_number": 10,
+      "position": "LEADER"
     },
     {
       "key": 1,
@@ -38,7 +39,8 @@
         }
       ],
       "visited_number": 8,
-      "like_number": 10
+      "like_number": 10,
+      "position": "MEMBER"
     },
     {
       "key": 2,
@@ -58,7 +60,8 @@
         }
       ],
       "visited_number": 7,
-      "like_number": 10
+      "like_number": 10,
+      "position": "MEMBER"
     },
     {
       "key": 3,
@@ -78,7 +81,8 @@
         }
       ],
       "visited_number": 12,
-      "like_number": 10
+      "like_number": 10,
+      "position": "NORMAL"
     },
     {
       "key": 4,
@@ -98,7 +102,8 @@
         }
       ],
       "visited_number": 20,
-      "like_number": 10
+      "like_number": 10,
+      "position": "NORMAL"
     },
     {
       "key": 5,
@@ -118,7 +123,8 @@
         }
       ],
       "visited_number": 8,
-      "like_number": 10
+      "like_number": 10,
+      "position": "NORMAL"
     },
     {
       "key": 6,
@@ -138,7 +144,8 @@
         }
       ],
       "visited_number": 7,
-      "like_number": 10
+      "like_number": 10,
+      "position": "NORMAL"
     },
     {
       "key": 7,
@@ -158,7 +165,8 @@
         }
       ],
       "visited_number": 12,
-      "like_number": 10
+      "like_number": 10,
+      "position": "MEMBER"
     },
     {
       "key": 8,
@@ -178,7 +186,8 @@
         }
       ],
       "visited_number": 20,
-      "like_number": 10
+      "like_number": 10,
+      "position": "NORMAL"
     },
     {
       "key": 9,
@@ -198,7 +207,8 @@
         }
       ],
       "visited_number": 8,
-      "like_number": 10
+      "like_number": 10,
+      "position": "NORMAL"
     },
     {
       "key": 10,
@@ -218,7 +228,8 @@
         }
       ],
       "visited_number": 7,
-      "like_number": 10
+      "like_number": 10,
+      "position": "LEADER"
     },
     {
       "key": 11,
@@ -238,7 +249,8 @@
         }
       ],
       "visited_number": 12,
-      "like_number": 10
+      "like_number": 10,
+      "position": "MEMBER"
     }
   ]
 }

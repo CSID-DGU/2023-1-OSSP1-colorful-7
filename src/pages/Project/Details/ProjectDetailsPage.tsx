@@ -8,6 +8,7 @@ import { ProjectItemType, ProjectListType } from 'types/project'
 import { camelizeKey } from 'utils/camelizeKey'
 import { generateRandomProjectCardLogoImg } from 'utils/generateRandomProjectCardLogoImg'
 import { getDevelopmentStackColor, translateDevelopmentStack } from 'utils/translateDevelopmentStack'
+// import { translateProjectPosition } from 'utils/translatePosition'
 import {
   BannerImg,
   Container,
@@ -28,7 +29,9 @@ import {
   MenuLeaderUserInfoNameTypo,
   MenuLeaderUserInfoProfileImg,
   Root,
+  SideSectionManageProjectButton,
   SideSectionApplyProjectButton,
+  SideSectionQuitProjectButton,
   SideSectionContainer,
   SideSectionDateRangeContainer,
   SideSectionDateRangeTitleTypo,
@@ -54,6 +57,17 @@ export const ProjectDetailsPage: FC<ProjectDetailsPageProps> = ({ className }) =
   const { projectKey = 0 } = useParams()
   const projectListSampleData: ProjectListType = camelizeKey(projectListSampleJson.project_list) as ProjectListType
   const [projectItem, setProjectItem] = useState<ProjectItemType>()
+  const renderButton = (position: string) => {
+    if (position === 'LEADER') {
+      return <SideSectionManageProjectButton  type={'ghost'}>관리하기</SideSectionManageProjectButton>
+    } else if (position === 'MEMBER') {
+      return <SideSectionQuitProjectButton type={'ghost'}>나가기</SideSectionQuitProjectButton>
+    } else if (position === 'NORMAL') {
+      return <SideSectionApplyProjectButton type={'primary'}>지원하기</SideSectionApplyProjectButton>
+    }  else {
+      return null;
+    }
+  };
 
   useEffect(() => {
     setProjectItem(projectListSampleData[+projectKey])
@@ -145,8 +159,8 @@ export const ProjectDetailsPage: FC<ProjectDetailsPageProps> = ({ className }) =
             <SideSectionProjectTypeContainer>
               <SideSectionProjectTypeTitleTypo>분야</SideSectionProjectTypeTitleTypo>
               <SideSectionProjectTypeTypo>{projectItem.projectType}</SideSectionProjectTypeTypo>
-            </SideSectionProjectTypeContainer>
-            <SideSectionApplyProjectButton type={'primary'}>지원하기</SideSectionApplyProjectButton>
+            </SideSectionProjectTypeContainer>            
+            {renderButton(projectItem.position)}
           </SideSectionContainer>
         </Container>
       )}

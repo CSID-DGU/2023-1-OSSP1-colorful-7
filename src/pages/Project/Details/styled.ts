@@ -195,9 +195,21 @@ export const SideSectionProjectTypeTypo = styled(Typography)`
   font-weight: 700;
   color: #333;
 `
-
+export const SideSectionManageProjectButton = styled(Button)`
+  width: 100%;
+  color: white;
+  background: #3CB371;
+  margin-top: 20px;
+`
 export const SideSectionApplyProjectButton = styled(Button)`
   width: 100%;
   background: #00f8;
+  margin-top: 20px;
+`
+
+export const SideSectionQuitProjectButton = styled(Button)`
+  width: 100%;
+  color: white;
+  background: #FF6347;
   margin-top: 20px;
 `

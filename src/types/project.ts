@@ -10,6 +10,8 @@ export type ProjectRequireMemberListType = ProjectRequireMemberType[]
 
 export type ProjectType = 'WEB' | 'SERVER' | 'APP' | 'ETC'
 
+export type ProjectPositionType = 'LEADER' | 'MEMBER' | 'NORMAL'
+
 export type ProjectItemType = {
   key: number
   title: string
@@ -19,6 +21,7 @@ export type ProjectItemType = {
   requireMemberList: ProjectRequireMemberListType
   visitedNumber: number
   likeNumber: number
+  position: string
 }
 
 export type ProjectListType = ProjectItemType[]
