@@ -47,8 +47,10 @@ export const axiosGET = <RequestData, ResponseData>(
   params?: RequestData,
   options?: AxiosRequestConfig
 ) => {
+  const paramsValue = JSON.stringify(params).replaceAll("/", "")
+
   return axiosInstance
-    .get<ResponseData, AxiosResponse<ResponseData>, RequestData>(url, { params, ...options })
+    .get<ResponseData, AxiosResponse<ResponseData>, RequestData>(url, { params: paramsValue, ...options })
     .then((response) => response.data)
 }
 
