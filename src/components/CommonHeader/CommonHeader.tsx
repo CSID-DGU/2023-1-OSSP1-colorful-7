@@ -31,6 +31,9 @@ export const CommonHeader: FC<CommonHeaderProps> = ({ className }) => {
   const onClickProjectListButton = () => {
     navigate('/project/list')
   }
+  const onClickProjectCreateButton = () => {
+    navigate('user/project/create')
+  }
   const onClickLoginButton = () => {
     navigate('/login')
   }
@@ -75,6 +78,9 @@ export const CommonHeader: FC<CommonHeaderProps> = ({ className }) => {
           <MenuButtonContainer>
             <MenuProjectButton type={'text'} onClick={onClickProjectListButton}>
               <MenuProjectButtonTypo>프로젝트 둘러보기</MenuProjectButtonTypo>
+            </MenuProjectButton>
+            <MenuProjectButton type={'text'} onClick={onClickProjectCreateButton}>
+              <MenuProjectButtonTypo>프로젝트 생성하기</MenuProjectButtonTypo>
             </MenuProjectButton>
           </MenuButtonContainer>
         </MenuContainer>

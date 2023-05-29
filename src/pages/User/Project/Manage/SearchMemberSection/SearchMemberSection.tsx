@@ -16,10 +16,12 @@ export const SearchMemberSection: FC<SearchMemberSectionProps> = ({ className })
           {
             id: 1,
             name: 'Lily',
+            stack: '프론트엔드',
           },
           {
             id: 2,
             name: 'Lily',
+            stack: '백엔드',
           },
         ]}
         bordered
@@ -37,7 +39,7 @@ export const SearchMemberSection: FC<SearchMemberSectionProps> = ({ className })
               title={
                 <UserNameTypo>
                   {item.name}
-                  <UserTypeTypo>분야 적기</UserTypeTypo>
+                  <UserTypeTypo>{item.stack}</UserTypeTypo>
                 </UserNameTypo>
               }
               description={
