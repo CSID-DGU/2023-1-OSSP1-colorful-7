@@ -1,6 +1,6 @@
 import Avatar from 'assets/images/missing_avatar.png'
 import { FC } from 'react'
-import { ButtonWrapper, Root, StackTag, UserIcon, UserNameTypo, UserTypeTypo } from './styled'
+import { ButtonWrapper, Root, StackTag, UserIcon, UserNameTypo } from './styled'
 import { Button, List, Space } from 'antd'
 // import { camelizeKey } from 'utils/camelizeKey'
 
@@ -16,10 +16,12 @@ export const ApproveMemberSection: FC<ApproveMemberSectionProps> = ({ className 
           {
             id: 1,
             name: 'Lily',
+            stack: '프론트엔드',
           },
           {
             id: 2,
             name: 'Lily',
+            stack: '백엔드',
           },
         ]}
         bordered
@@ -35,17 +37,10 @@ export const ApproveMemberSection: FC<ApproveMemberSectionProps> = ({ className 
           >
             <List.Item.Meta
               avatar={<UserIcon src={Avatar} alt={'프로필 이미지'} />}
-              title={
-                <UserNameTypo>
-                  {item.name}
-                  <UserTypeTypo>분야 적기</UserTypeTypo>
-                </UserNameTypo>
-              }
+              title={<UserNameTypo>{item.name}</UserNameTypo>}
               description={
                 <Space size={[0, 'small']} wrap>
-                  <StackTag>CSS</StackTag>
-                  <StackTag>Javascript</StackTag>
-                  <StackTag>HTML</StackTag>
+                  <StackTag>{item.stack}</StackTag>
                 </Space>
               }
             />

@@ -18,41 +18,10 @@ import {
   SearchContainer,
 } from './styled'
 // antd 적용하기
-import { AutoComplete, Form, Input, Select, Checkbox, Col, Row, DatePicker } from 'antd'
+import { Form, Input, Select, DatePicker } from 'antd'
 import { CreateProjectSection } from './CreateProjectSection'
 
-const renderTitle = (title: string) => <span>{title}</span>
-
-const renderItem = (title: string) => ({
-  value: title,
-  label: (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-      }}
-    >
-      {title}
-    </div>
-  ),
-})
-
 const { Option } = Select
-
-const Stackoptions = [
-  {
-    label: renderTitle('프론트'),
-    options: [renderItem('Vue.js'), renderItem('React.js')],
-  },
-  {
-    label: renderTitle('백엔드'),
-    options: [renderItem('Node.js'), renderItem('SpringBoot')],
-  },
-  {
-    label: renderTitle('디자인'),
-    options: [renderItem('AntDesign design language')],
-  },
-]
 
 type UserProjectCreatePageProps = {
   className?: string
@@ -73,37 +42,57 @@ export const UserProjectCreatePage: FC<UserProjectCreatePageProps> = ({ classNam
             <Form layout="vertical" autoComplete="off">
               <Form.Item style={{ marginBottom: 0 }}>
                 <InputTitleRequired>모집인원</InputTitleRequired>
-                <Form.Item name="part" style={{ display: 'inline-block', width: 'calc(70% - 8px)' }}>
-                  <Select placeholder="포지션">
-                    <Option value="프론트">프론트</Option>
-                    <Option value="백엔드">백엔드</Option>
-                  </Select>
-                </Form.Item>
-                <Form.Item name="number" style={{ display: 'inline-block', width: 'calc(30% - 8px)', margin: '0 8px' }}>
-                  <Input placeholder="인원" />
-                </Form.Item>
-              </Form.Item>
-              <Form.Item>
-                <InputTitleRequired>목적</InputTitleRequired>
-                <Checkbox.Group>
-                  <Row style={{ flexFlow: 'row nowrap' }}>
-                    <Col span={8}>
-                      <Checkbox value="A" style={{ lineHeight: '32px' }}>
-                        공모전
-                      </Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox value="B" style={{ lineHeight: '32px' }}>
-                        토이프로젝트
-                      </Checkbox>
-                    </Col>
-                    <Col span={8}>
-                      <Checkbox value="C" style={{ lineHeight: '32px' }}>
-                        창업
-                      </Checkbox>
-                    </Col>
-                  </Row>
-                </Checkbox.Group>
+                <div>
+                  <Form.Item
+                    name="part"
+                    style={{ display: 'inline-block', width: 'calc(70% - 8px)', marginBottom: '5px' }}
+                  >
+                    <Select placeholder="포지션">
+                      <Option value="프론트">프론트</Option>
+                      <Option value="백엔드">백엔드</Option>
+                    </Select>
+                  </Form.Item>
+                  <Form.Item
+                    name="number"
+                    style={{ display: 'inline-block', width: 'calc(30% - 8px)', margin: '0 8px' }}
+                  >
+                    <Input placeholder="인원" />
+                  </Form.Item>
+                </div>
+                <div>
+                  <Form.Item
+                    name="part"
+                    style={{ display: 'inline-block', width: 'calc(70% - 8px)', marginBottom: '5px' }}
+                  >
+                    <Select placeholder="포지션">
+                      <Option value="프론트">프론트</Option>
+                      <Option value="백엔드">백엔드</Option>
+                    </Select>
+                  </Form.Item>
+                  <Form.Item
+                    name="number"
+                    style={{ display: 'inline-block', width: 'calc(30% - 8px)', margin: '0 8px' }}
+                  >
+                    <Input placeholder="인원" />
+                  </Form.Item>
+                </div>
+                <div>
+                  <Form.Item
+                    name="part"
+                    style={{ display: 'inline-block', width: 'calc(70% - 8px)', marginBottom: '5px' }}
+                  >
+                    <Select placeholder="포지션">
+                      <Option value="프론트">프론트</Option>
+                      <Option value="백엔드">백엔드</Option>
+                    </Select>
+                  </Form.Item>
+                  <Form.Item
+                    name="number"
+                    style={{ display: 'inline-block', width: 'calc(30% - 8px)', margin: '0 8px' }}
+                  >
+                    <Input placeholder="인원" />
+                  </Form.Item>
+                </div>
               </Form.Item>
             </Form>
           </ProjectOptionLeftContainer>
@@ -132,7 +121,7 @@ export const UserProjectCreatePage: FC<UserProjectCreatePageProps> = ({ classNam
                   </InputContainer>
                 </div>
               </InputContainer>
-              <Form.Item>
+              {/* <Form.Item>
                 <InputTitleRequired>분야</InputTitleRequired>
                 <Checkbox.Group>
                   <Row style={{ flexFlow: 'row nowrap' }}>
@@ -153,12 +142,12 @@ export const UserProjectCreatePage: FC<UserProjectCreatePageProps> = ({ classNam
                     </Col>
                   </Row>
                 </Checkbox.Group>
-              </Form.Item>
+              </Form.Item> */}
             </Form>
           </ProjectOptionRightContainer>
         </ProjectOptionContainer>
         <SearchContainer>
-          <div>
+          {/* <div>
             <InputTitle>기술스택 입력</InputTitle>
             <AutoComplete
               popupClassName="certain-category-search-dropdown"
@@ -168,7 +157,7 @@ export const UserProjectCreatePage: FC<UserProjectCreatePageProps> = ({ classNam
             >
               <Input.Search size="large" placeholder="기술스택 입력" />
             </AutoComplete>
-          </div>
+          </div> */}
           <div>
             <InputTitle>지역</InputTitle>
             <Select size="large" placeholder="지역 선택" style={{ width: 200 }}>

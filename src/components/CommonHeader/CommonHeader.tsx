@@ -32,7 +32,7 @@ export const CommonHeader: FC<CommonHeaderProps> = ({ className }) => {
     navigate('/project/list')
   }
   const onClickProjectCreateButton = () => {
-    navigate('user/project/create')
+    navigate('/user/project/create')
   }
   const onClickLoginButton = () => {
     navigate('/login')

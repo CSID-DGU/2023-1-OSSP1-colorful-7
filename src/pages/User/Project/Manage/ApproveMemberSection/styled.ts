@@ -41,12 +41,7 @@ export const UserNameTypo = styled(Typography)`
   font-size: 18px;
   font-weight: bold;
 `
-export const UserTypeTypo = styled.span`
-  margin: 0 10px;
-  color: #1677ff;
-  font-size: 13px;
-  font-weight: 400;
-`
+
 export const StackTag = styled(Tag)`
   background-color: #d9d9d9;
   border: none;

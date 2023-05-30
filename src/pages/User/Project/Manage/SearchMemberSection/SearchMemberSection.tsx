@@ -1,6 +1,6 @@
 import Avatar from 'assets/images/missing_avatar.png'
 import { FC } from 'react'
-import { Root, StackTag, UserIcon, UserNameTypo, UserTypeTypo } from './styled'
+import { Root, StackTag, UserIcon, UserNameTypo } from './styled'
 import { Button, List, Space } from 'antd'
 // import { camelizeKey } from 'utils/camelizeKey'
 
@@ -20,7 +20,7 @@ export const SearchMemberSection: FC<SearchMemberSectionProps> = ({ className })
           },
           {
             id: 2,
-            name: 'Lily',
+            name: 'Mily',
             stack: '백엔드',
           },
         ]}
@@ -36,17 +36,10 @@ export const SearchMemberSection: FC<SearchMemberSectionProps> = ({ className })
           >
             <List.Item.Meta
               avatar={<UserIcon src={Avatar} alt={'프로필 이미지'} />}
-              title={
-                <UserNameTypo>
-                  {item.name}
-                  <UserTypeTypo>{item.stack}</UserTypeTypo>
-                </UserNameTypo>
-              }
+              title={<UserNameTypo>{item.name}</UserNameTypo>}
               description={
                 <Space size={[0, 'small']} wrap>
-                  <StackTag>CSS</StackTag>
-                  <StackTag>Javascript</StackTag>
-                  <StackTag>HTML</StackTag>
+                  <StackTag>{item.stack}</StackTag>
                 </Space>
               }
             />
