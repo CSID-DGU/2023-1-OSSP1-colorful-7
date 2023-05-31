@@ -1,6 +1,7 @@
 import { Button, Typography } from 'antd'
 import { CONTAINER_WIDTH, HEADER_HEIGHT } from 'constants/system/layout'
 import styled from 'styled-components'
+import { BellFilled } from '@ant-design/icons'
 
 export const Root = styled.div`
   width: 100%;
@@ -53,12 +54,21 @@ export const UserContainer = styled.div`
   gap: 5px;
 `
 export const UserIcon = styled.img`
-width: 50px;
-height: 50px;
-border-radius: 50%;
-margin-left: 5px;
-margin-right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-left: 5px;
+  margin-right: 20px;
+  cursor: pointer;
 `
+// 알림이 생기면 twotone color로 봐야할 듯!
+export const BellIcon = styled(BellFilled)`
+  margin: 5px;
+  color: gray;
+  font-size: 20px;
+  cursor: pointer;
+`
+
 export const LoginButton = styled(Button)``
 export const JoinButton = styled(Button)``
 export const MyPageButton = styled(Button)``

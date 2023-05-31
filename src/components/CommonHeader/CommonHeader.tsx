@@ -3,6 +3,7 @@ import Avatar from 'assets/images/missing_avatar.png'
 import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
+  BellIcon,
   Container,
   JoinButton,
   LoginButton,
@@ -34,6 +35,9 @@ export const CommonHeader: FC<CommonHeaderProps> = ({ className }) => {
   const onClickProjectCreateButton = () => {
     navigate('/user/project/create')
   }
+  const onClickNoticeListButton = () => {
+    navigate('/user/notice/list')
+  }
   const onClickLoginButton = () => {
     navigate('/login')
   }
@@ -55,6 +59,7 @@ export const CommonHeader: FC<CommonHeaderProps> = ({ className }) => {
     if (localStorage.getItem('test_login') === 'true') {
       return (
         <UserContainer>
+          <BellIcon onClick={onClickNoticeListButton} />
           <MyPageButton onClick={onClickMyPageButton}>마이페이지</MyPageButton>
           <LogoutButton onClick={onClickLogoutButton}>로그아웃</LogoutButton>
           <UserIcon src={Avatar} alt={'유저 아바타 이미지'} />
