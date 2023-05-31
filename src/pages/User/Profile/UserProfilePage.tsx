@@ -24,6 +24,7 @@ import {
   ExpireTitleTypo,
   Root,
 } from './styled'
+import { ProfileHeader } from './profileHeader'
 
 type UserProfilePageProps = {
   className?: string
@@ -36,6 +37,7 @@ export const UserProfilePage: FC<UserProfilePageProps> = ({ className }) => {
   const expireProjectListData = camelizeKey(expireProjectListSampleJson.project_list) as ExpireProjectListType
   return (
     <Root className={className}>
+      <ProfileHeader />
       <CommonHeader />
       <Container>
         <ManageContainer>

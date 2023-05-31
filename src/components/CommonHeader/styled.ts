@@ -58,7 +58,6 @@ height: 50px;
 border-radius: 50%;
 margin-left: 5px;
 margin-right: 20px;
-cursor: pointer;
 `
 export const LoginButton = styled(Button)``
 export const JoinButton = styled(Button)``
