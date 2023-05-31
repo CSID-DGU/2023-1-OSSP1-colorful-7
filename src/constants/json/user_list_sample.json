@@ -1,0 +1,23 @@
+{
+  "user_list": [
+    {
+      "user_id": 0,
+      "nickname": "고구마멈멍",
+      "introduce": " 풀스택 개발자를 목표로 공부하고 있습니다. 노래 추천 앱 프로젝트의 팀장을 맡고 있습니다.",
+      "developmentStackList": [
+        {
+          "developmentStack": "WEB_FRONTEND",
+          "grade": 1,
+          "questionnaireKey": 1,
+          "questionnaireVersion": 1
+        },
+        {
+          "developmentStack": "APP_CLIENT",
+          "grade": 3,
+          "questionnaireKey": 1,
+          "questionnaireVersion": 1
+        }
+      ]
+    }
+  ]
+}

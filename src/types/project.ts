@@ -1,5 +1,12 @@
 export type DevelopmentStackType = 'WEB_FRONTEND' | 'SERVER_BACKEND' | 'APP_CLIENT' | 'ETC'
 
+export type DevelopmentStackItemType = {
+	developmentStack : DevelopmentStackType
+	grade : number
+}
+
+export type DevelopmentStackListType = DevelopmentStackItemType[]
+
 export type ProjectRequireMemberType = {
   developmentStack: DevelopmentStackType
   recommendScore: number
@@ -10,7 +17,7 @@ export type ProjectRequireMemberListType = ProjectRequireMemberType[]
 
 export type ProjectType = 'WEB' | 'SERVER' | 'APP' | 'ETC'
 
-export type ProjectPositionType = 'LEADER' | 'MEMBER' | 'NORMAL' //dummy
+export type ProjectPositionType = 'LEADER' | 'MEMBER' | 'NORMAL' 
 
 export type ProjectItemType = {
   key: number
@@ -58,10 +65,11 @@ export type ManageProjectListType = ManageProjectItemType[]
 export type ExpireProjectListType = ExpireProjectItemType[]
 
 export type UserInfoType = {
-  nickname: string
-  introduce: string
-  developmentStack: DevelopmentStackType
-  questionnaireKey: number
-  questionnaireVersion: number
-  questionnaireScore: number
+	nickname: string
+	introduce: string
+  profile? : any
+	developmentStackList : DevelopmentStackListType
+	questionnaireKey: number
+	questionnaireVersion: number
+	questionnaireScore: number
 }
