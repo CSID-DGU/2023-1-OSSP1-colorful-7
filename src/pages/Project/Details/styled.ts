@@ -198,7 +198,7 @@ export const SideSectionProjectTypeTypo = styled(Typography)`
 export const SideSectionManageProjectButton = styled(Button)`
   width: 100%;
   color: white;
-  background: #3CB371;
+  background: #3cb371;
   margin-top: 20px;
 `
 export const SideSectionApplyProjectButton = styled(Button)`
@@ -210,6 +210,17 @@ export const SideSectionApplyProjectButton = styled(Button)`
 export const SideSectionQuitProjectButton = styled(Button)`
   width: 100%;
   color: white;
-  background: #FF6347;
+  background: #ff6347;
   margin-top: 20px;
 `
+
+export const SideSectionInvitedProjectButtonContainer = styled(Button)`
+  display: flex;
+  gap: 10px;
+`
+/*
+export const SideSectionInvitedProjectApplyButton = styled(Button)`
+  display: flex;
+  gap: 10px;
+`
+*/

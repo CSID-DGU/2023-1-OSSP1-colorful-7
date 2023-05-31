@@ -37,8 +37,8 @@ export const TitleTypo = styled(Typography)`
 export const ProjectOptionContainer = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 10px; // 지울까?
+  align-items: flex-start;
+  gap: 10px;
   padding: 20px 10px;
   border: 1px #c9c9c9 solid;
   border-radius: 5px;
@@ -49,7 +49,6 @@ export const ProjectOptionLeftContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  // gap: 10px; // 지울까?
   margin: 10px;
   padding-right: 10px;
   border-right: 1px #c9c9c9 solid;

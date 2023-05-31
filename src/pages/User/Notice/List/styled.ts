@@ -20,6 +20,7 @@ export const Container = styled.div`
 `
 
 export const ProjectTitleTypo = styled(Typography)`
+  margin-left: 15px;
   font-size: 18px;
   font-weight: bold;
 `

@@ -47,6 +47,7 @@ import {
   SideSectionRequireMemberItemTypo,
   SideSectionRequireMemberTitleTypo,
   TitleTypo,
+  SideSectionInvitedProjectButtonContainer,
 } from './styled'
 
 type ProjectDetailsPageProps = {
@@ -59,15 +60,21 @@ export const ProjectDetailsPage: FC<ProjectDetailsPageProps> = ({ className }) =
   const [projectItem, setProjectItem] = useState<ProjectItemType>()
   const renderButton = (position: string) => {
     if (position === 'LEADER') {
-      return <SideSectionManageProjectButton  type={'ghost'}>관리하기</SideSectionManageProjectButton>
+      return <SideSectionManageProjectButton type={'ghost'}>관리하기</SideSectionManageProjectButton>
     } else if (position === 'MEMBER') {
       return <SideSectionQuitProjectButton type={'ghost'}>나가기</SideSectionQuitProjectButton>
     } else if (position === 'NORMAL') {
       return <SideSectionApplyProjectButton type={'primary'}>지원하기</SideSectionApplyProjectButton>
-    }  else {
-      return null;
+    } else if (position === 'INVITED') {
+      return (
+        <SideSectionInvitedProjectButtonContainer>
+          <SideSectionApplyProjectButton type={'primary'}>수락하기</SideSectionApplyProjectButton>
+          <SideSectionQuitProjectButton type={'ghost'}>거절하기</SideSectionQuitProjectButton>
+        </SideSectionInvitedProjectButtonContainer>
+      )
     }
-  };
+    return null
+  }
 
   useEffect(() => {
     setProjectItem(projectListSampleData[+projectKey])
@@ -159,7 +166,7 @@ export const ProjectDetailsPage: FC<ProjectDetailsPageProps> = ({ className }) =
             <SideSectionProjectTypeContainer>
               <SideSectionProjectTypeTitleTypo>분야</SideSectionProjectTypeTitleTypo>
               <SideSectionProjectTypeTypo>{projectItem.projectType}</SideSectionProjectTypeTypo>
-            </SideSectionProjectTypeContainer>            
+            </SideSectionProjectTypeContainer>
             {renderButton(projectItem.position)}
           </SideSectionContainer>
         </Container>
