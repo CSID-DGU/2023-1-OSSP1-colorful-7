@@ -10,7 +10,7 @@ export type ProjectRequireMemberListType = ProjectRequireMemberType[]
 
 export type ProjectType = 'WEB' | 'SERVER' | 'APP' | 'ETC'
 
-export type ProjectPositionType = 'LEADER' | 'MEMBER' | 'NORMAL'
+export type ProjectPositionType = 'LEADER' | 'MEMBER' | 'NORMAL' //dummy
 
 export type ProjectItemType = {
   key: number

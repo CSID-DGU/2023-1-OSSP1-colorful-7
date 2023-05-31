@@ -8,7 +8,9 @@ import {
   UserInfo,
   DevelopmentStackTagContainer,
   DevelopmentStackTag,
-  UserIntroductionTypo
+  UserIntroductionTypo,
+  ModifyButton,
+  UserContainer
  } from './styled'
 
 type ProfileHeaderProps = {
@@ -19,14 +21,19 @@ export const ProfileHeader: FC<ProfileHeaderProps> = ({ className }) => {
   return (
     <Root className={className}>
       <Container>
-        <UserIcon src={Avatar} alt={'유저 아바타 이미지'} />
+        <UserContainer>
+          <ModifyButton>수정</ModifyButton>
+          <UserIcon src={Avatar} alt={'유저 아바타 이미지'} />
+        </UserContainer>
         <UserInfo>
           <UserNicknameTypo>고구마멈멍</UserNicknameTypo>
           <DevelopmentStackTagContainer>
             <DevelopmentStackTag color={'volcano'}>웹 프론트엔드</DevelopmentStackTag>
             <DevelopmentStackTag color={'gold'}>앱 클라이언트</DevelopmentStackTag>
           </DevelopmentStackTagContainer>
-          <UserIntroductionTypo>풀스택 개발자를 목표로 공부하고 있습니다.<br></br>노래 추천 앱 프로젝트의 팀장을 맡고 있습니다.</UserIntroductionTypo>
+          <UserIntroductionTypo>
+            풀스택 개발자를 목표로 공부하고 있습니다.<br></br>노래 추천 앱 프로젝트의 팀장을 맡고 있습니다.
+          </UserIntroductionTypo>
         </UserInfo>
       </Container>
     </Root>

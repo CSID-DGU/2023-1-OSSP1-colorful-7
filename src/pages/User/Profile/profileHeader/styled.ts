@@ -6,10 +6,10 @@ export const Root = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 30px;
-  position: relative;
-  padding-bottom: 30px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   border: 1px #c9c9c955 solid;
+  background: #c9c9c933;
 `
 export const Container = styled.div`
   width: 1130px;
@@ -17,6 +17,11 @@ export const Container = styled.div`
   border: 1px #c9c9c955 solid;
   border-radius: 16px;
   margin-right: 15px;
+  background: white;
+  position: relative;
+`
+export const UserContainer = styled.div`
+  display: flex;
 `
 export const UserIcon = styled.img`
   width: 150px;
@@ -46,5 +51,10 @@ export const DevelopmentStackTagContainer = styled(Space)`
   align-items: center;
   flex-wrap: wrap;
 `
-
+export const ModifyButton = styled(Tag)`
+  position: absolute;
+  top: 15px;
+  right: 10px;
+  z-index: 1;
+`
 export const DevelopmentStackTag = styled(Tag)``
