@@ -6,6 +6,7 @@ import { LoginPage } from 'pages/Login'
 import { MainPage } from 'pages/Main'
 import { ProjectDetailsPage } from 'pages/Project/Details'
 import { ProjectListPage } from 'pages/Project/List'
+import { UserNoticeListPage } from 'pages/User/Notice/List'
 import { UserProfilePage } from 'pages/User/Profile'
 // import { UserProjectPage } from 'pages/User/Project'
 import { UserProjectCreatePage } from 'pages/User/Project/Create'
@@ -30,6 +31,7 @@ root.render(
           <Route path="/login" element={<LoginPage />} />
           <Route path="/join" element={<JoinPage />} />
           <Route path="/user/profile" element={<UserProfilePage />} />
+          <Route path="/user/notice/list" element={<UserNoticeListPage />} />
           {/* <Route path="/user/project" element={<UserProjectPage />} /> */}
           <Route path="/user/project/create" element={<UserProjectCreatePage />} />
           <Route path="/user/project/manage" element={<UserProjectManagePage />} />
