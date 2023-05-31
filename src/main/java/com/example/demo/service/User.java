@@ -1,4 +1,4 @@
 package com.example.demo.service;
 
-public class User {hello
+public class User {
 }
