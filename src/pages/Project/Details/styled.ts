@@ -214,8 +214,9 @@ export const SideSectionQuitProjectButton = styled(Button)`
   margin-top: 20px;
 `
 
-export const SideSectionInvitedProjectButtonContainer = styled(Button)`
+export const SideSectionInvitedProjectButtonContainer = styled.div`
   display: flex;
+  width: 100%;
   gap: 10px;
 `
 /*
