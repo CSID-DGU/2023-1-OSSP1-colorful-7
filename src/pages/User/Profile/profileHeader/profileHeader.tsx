@@ -1,8 +1,9 @@
 import Avatar from 'assets/images/missing_avatar.png'
 import UserListSampleJson from 'constants/json/user_list_sample.json'
 import { FC } from 'react'
-import { UserInfoType } from 'types/project'
+import { UserInfoListType } from 'types/project'
 import { camelizeKey } from 'utils/camelizeKey'
+import { translateDevelopmentStack, getDevelopmentStackColor } from 'utils/translateDevelopmentStack'
 import { 
   Root, 
   Container, 
@@ -21,7 +22,7 @@ type ProfileHeaderProps = {
 }
 
 export const ProfileHeader: FC<ProfileHeaderProps> = ({ className }) => {
-  const UserListData: UserInfoType = camelizeKey(UserListSampleJson.user_list) as UserInfoType
+  const UserListData: UserInfoListType = camelizeKey(UserListSampleJson.user_list) as UserInfoListType
   return (
     <Root className={className}>
       <Container>
@@ -30,14 +31,18 @@ export const ProfileHeader: FC<ProfileHeaderProps> = ({ className }) => {
           <UserIcon src={Avatar} alt={'유저 아바타 이미지'} />
         </UserContainer>
         <UserInfo>
-          <UserNicknameTypo>{UserListData.nickname}</UserNicknameTypo>
+          <UserNicknameTypo>{UserListData[0].nickname}</UserNicknameTypo>
           <DevelopmentStackTagContainer>
-            <DevelopmentStackTag color={'volcano'}>웹 프론트엔드</DevelopmentStackTag>
-            <DevelopmentStackTag color={'gold'}>앱 클라이언트</DevelopmentStackTag>
+            {UserListData[0].developmentStackList.map((UserListItem, index) => (
+              <DevelopmentStackTag
+                color={getDevelopmentStackColor(UserListItem.developmentStack)}
+                key={`development_stack_tag_${index}`}
+              >
+                {translateDevelopmentStack(UserListItem.developmentStack)}
+              </DevelopmentStackTag>
+            ))}
           </DevelopmentStackTagContainer>
-          <UserIntroductionTypo>
-            {UserListData.introduce}
-          </UserIntroductionTypo>
+          <UserIntroductionTypo>{UserListData[0].introduce}</UserIntroductionTypo>
         </UserInfo>
       </Container>
     </Root>

@@ -73,3 +73,7 @@ export type UserInfoType = {
 	questionnaireVersion: number
 	questionnaireScore: number
 }
+
+export type UserInfoListType = UserInfoType[]
+
+
