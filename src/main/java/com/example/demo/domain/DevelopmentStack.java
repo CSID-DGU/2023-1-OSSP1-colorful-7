@@ -8,13 +8,15 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-@Table(name="member")
-public class Member {
+@Table(name="developmentStack")
+public class DevelopmentStack {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long member_id;
+    private Long stack_id;
     @ManyToOne
-    private Project project;
-    @OneToOne
     private User user;
+    private String development_stack;
+    private int grade;
+    @ManyToOne
+    private Questionnaire questionnaire;
 }

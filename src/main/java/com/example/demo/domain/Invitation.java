@@ -8,13 +8,15 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-@Table(name="member")
-public class Member {
+@Table(name="invitation")
+public class Invitation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long member_id;
+    private Long invitation_id;
+    private String state;
+    private String content;
     @ManyToOne
     private Project project;
-    @OneToOne
+    @ManyToOne
     private User user;
 }

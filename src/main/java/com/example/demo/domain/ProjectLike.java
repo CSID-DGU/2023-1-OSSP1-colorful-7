@@ -8,13 +8,13 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-@Table(name="member")
-public class Member {
+@Table(name="projectLike")
+public class ProjectLike {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long member_id;
+    private Long project_like_id;
+    @ManyToOne
+    private User user;
     @ManyToOne
     private Project project;
-    @OneToOne
-    private User user;
 }

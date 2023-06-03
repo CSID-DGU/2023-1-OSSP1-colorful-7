@@ -1,0 +1,76 @@
+package com.example.demo;
+
+import com.example.demo.repository.*;
+import com.example.demo.service.DevelopmentStackService;
+import com.example.demo.service.ProjectService;
+import com.example.demo.service.QuestionnaireService;
+import com.example.demo.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import javax.persistence.*;
+
+@Configuration
+@EnableJpaRepositories("com.example.demo.repository")
+@EnableTransactionManagement
+public class SpringConfig {
+
+    @PersistenceContext
+    EntityManager em;
+
+    @PersistenceUnit
+    EntityManagerFactory emf;
+
+    public SpringConfig(EntityManager em){
+        this.em = em;
+    }
+
+    @Autowired
+    public UserRepository userRepository(){
+        return new UserRepositoryImpl(em);
+    }
+
+    @Autowired
+    public DevelopmentStackRepository developmentStackRepository(){
+        return new DevelopmentStackRepositoryImpl(em);
+    }
+
+    @Autowired
+    public QuestionnaireRepository questionnaireRepository(){
+        return new QuestionnaireRepositoryImpl(em);
+    }
+
+    @Autowired
+    public ProjectRepository projectRepository(){
+        return new ProjectRepositoryImpl(em);
+    }
+
+    @Autowired
+    public ProjectLikeRepository projectLikeRepository(){
+        return new ProjectLikeRepositoryImpl(em);
+    }
+
+    @Bean
+    public UserService userService(){
+        return new UserService(userRepository());
+    }
+
+    @Bean
+    public DevelopmentStackService developmentStackService(){
+        return new DevelopmentStackService(developmentStackRepository());
+    }
+    @Bean
+    public QuestionnaireService questionnaireService(){
+        return new QuestionnaireService(questionnaireRepository());
+    }
+
+    @Bean
+    public ProjectService projectService(){
+        return new ProjectService(projectRepository());
+    }
+
+
+}
