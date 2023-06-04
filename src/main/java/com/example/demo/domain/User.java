@@ -26,5 +26,7 @@ public class User {
     private List<ProjectLike> project_likes;
     @OneToMany(mappedBy = "user")
     private List<DevelopmentStack> developmentStacks;
+    @OneToMany(mappedBy = "user")
+    private List<Apply> applys;
 
 }

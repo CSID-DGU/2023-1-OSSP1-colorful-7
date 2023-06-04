@@ -28,7 +28,7 @@ public class QuestionnaireRepositoryImpl implements QuestionnaireRepository{
     }
     @Override
     public Questionnaire findQuestionnaire(String developmentStack){
-        String sql = "select * from Questionnaire where development_stack = :developmentStack";
+        String sql = "select q from Questionnaire q where q.development_stack = :developmentStack";
         TypedQuery<Questionnaire> query = em.createQuery(sql, Questionnaire.class);
         query.setParameter("developmentStack", developmentStack);
         List<Questionnaire> list = query.getResultList();

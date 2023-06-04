@@ -4,6 +4,7 @@ import com.example.demo.domain.DevelopmentStack;
 import com.example.demo.domain.Project;
 import com.example.demo.domain.Questionnaire;
 import com.example.demo.domain.User;
+import com.example.demo.service.DevelopmentStackService;
 import com.example.demo.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,14 +19,17 @@ import java.util.List;
 @RestController
 public class UserController {
     private UserService userService;
-
+    private DevelopmentStackService developmentStackService;
     public UserController(UserService userService){
         this.userService = userService;
     }
 
     @PostMapping("user/join")
     public User insert(User user, DevelopmentStack developmentStack){
-        User result_user = userService.join(user, developmentStack);
+        User result_user = userService.join(user);
+        if(result_user!=null){
+            developmentStackService.insert(developmentStack);
+        }
         return result_user;
     }
 
@@ -44,8 +48,7 @@ public class UserController {
 
     @GetMapping("/createSession")
     public ModelAndView createSession(HttpServletRequest request, String id){
-        HttpSession session = request.getSession();
-        session.setAttribute("id", id);
+        userService.SessionCreate(request,id);
         ModelAndView mav = new ModelAndView("main");
         return mav;
     }
@@ -60,10 +63,11 @@ public class UserController {
         return  userService.findUserInfo(id);
 
     }
-    //유저에게 추천되거나 좋아하는 에서 "추천되는" 에 해당하는 테이블이 없어 구현 중단
-    /*@GetMapping("user/project/list")
-    public List<Project> printProject(String projectType, int page){
-        return userService.printProject(projectType, page);
-    }*/
 
+
+    @GetMapping("/user/project/manage/list")
+    public List<Project> manageProjectList(HttpServletRequest request){
+        String user_id = userService.findSessionId(request);
+        return userService.findManageProjectList(user_id);
+    }
 }

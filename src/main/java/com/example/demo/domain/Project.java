@@ -23,6 +23,7 @@ public class Project {
     private int visited_number;
     private Timestamp created_at;
     private Timestamp updated_at;
+    private String project_type;
 
     // 이 테이블 db 다시 짜야됨. 필요 인원 테이블이 추가로 필요한지.
     @OneToMany(mappedBy = "project")
@@ -31,5 +32,10 @@ public class Project {
     private List<Invitation> invitations;
     @OneToMany(mappedBy = "project")
     private List<ProjectLike> project_likes;
+    @OneToMany(mappedBy = "project")
+    private List<ProjectStack> project_stacks;
+    @OneToMany(mappedBy = "project")
+    private List<Apply> applys;
+
 
 }

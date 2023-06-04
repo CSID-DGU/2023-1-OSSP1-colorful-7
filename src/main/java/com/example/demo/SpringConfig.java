@@ -1,10 +1,7 @@
 package com.example.demo;
 
 import com.example.demo.repository.*;
-import com.example.demo.service.DevelopmentStackService;
-import com.example.demo.service.ProjectService;
-import com.example.demo.service.QuestionnaireService;
-import com.example.demo.service.UserService;
+import com.example.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -53,6 +50,11 @@ public class SpringConfig {
         return new ProjectLikeRepositoryImpl(em);
     }
 
+    @Autowired
+    public ApplyRepository applyRepository(){
+        return new ApplyRepositoryImpl(em);
+    }
+
     @Bean
     public UserService userService(){
         return new UserService(userRepository());
@@ -70,6 +72,11 @@ public class SpringConfig {
     @Bean
     public ProjectService projectService(){
         return new ProjectService(projectRepository());
+    }
+
+    @Bean
+    public ApplyService aplyService(){
+        return new ApplyService(applyRepository());
     }
 
 

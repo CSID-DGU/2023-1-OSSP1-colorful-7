@@ -16,6 +16,7 @@ public class Questionnaire {
     private Long questionnaire_id;
     private String questionnaire_content;
     private int version;
-    @OneToMany(mappedBy = "questionnaire")
-    private List<DevelopmentStack> developmentStacks;
+    private int questionnaire_total;
+    private String development_stack;
+
 }

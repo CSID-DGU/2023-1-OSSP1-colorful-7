@@ -79,10 +79,15 @@ public class UserRepositoryImpl implements UserRepository{
         else return 0;
     }
 
-    /*@Override
-    public List<Project> printProject(String projectType, int page){
-        List<Project> list = em.createQuery()
-    }*/
+    @Override
+    public List<Project> findManageProjectList(String user_id){
+        String sql = "select member.project from Member member where member.user_id = :user_id and member.position = :position";
+        TypedQuery<Project> query = em.createQuery(sql, Project.class);
+        query.setParameter("user_id", user_id);
+        query.setParameter("position","팀장");
+        List<Project> list = query.getResultList();
+        return list;
+    }
 
     @Override
     public List<User> findAll() {

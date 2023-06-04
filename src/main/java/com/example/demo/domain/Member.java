@@ -17,4 +17,5 @@ public class Member {
     private Project project;
     @OneToOne
     private User user;
+    private String position;
 }

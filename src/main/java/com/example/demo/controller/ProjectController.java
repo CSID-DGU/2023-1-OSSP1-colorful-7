@@ -1,6 +1,9 @@
 package com.example.demo.controller;
 
+import com.example.demo.domain.Apply;
 import com.example.demo.domain.Project;
+import com.example.demo.domain.User;
+import com.example.demo.service.ApplyService;
 import com.example.demo.service.ProjectLikeService;
 import com.example.demo.service.ProjectService;
 import com.example.demo.service.UserService;
@@ -15,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 public class ProjectController {
     private ProjectService projectService;
     private ProjectLikeService projectLikeService;
+    private UserService userService;
+    private ApplyService applyService;
 
     public ProjectController(ProjectService projectService) {this.projectService = projectService;}
 
@@ -37,5 +42,15 @@ public class ProjectController {
     @GetMapping("/project/details")
     public Project findProject(Long project_id){
         return projectService.findByProjectId(project_id);
+    }
+
+    @PostMapping("/project/apply")
+    public String apply(HttpServletRequest request, Long project_id){
+        Project project = new Project();
+        project = projectService.findByProjectId(project_id);
+        String user_id = userService.findSessionId(request);
+        User user = userService.findUserInfo(user_id);
+        applyService.insert(project, user);
+        return null;
     }
 }

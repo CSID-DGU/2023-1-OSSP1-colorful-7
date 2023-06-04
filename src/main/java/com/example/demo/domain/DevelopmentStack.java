@@ -17,6 +17,5 @@ public class DevelopmentStack {
     private User user;
     private String development_stack;
     private int grade;
-    @ManyToOne
-    private Questionnaire questionnaire;
+    private int version;
 }

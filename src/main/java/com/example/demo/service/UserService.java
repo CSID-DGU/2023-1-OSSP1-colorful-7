@@ -4,7 +4,11 @@ import com.example.demo.domain.DevelopmentStack;
 import com.example.demo.domain.Project;
 import com.example.demo.domain.Questionnaire;
 import com.example.demo.domain.User;
+import com.example.demo.repository.DevelopmentStackRepository;
+import com.example.demo.repository.DevelopmentStackRepositoryImpl;
+import com.example.demo.repository.QuestionnaireRepository;
 import com.example.demo.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,16 +20,17 @@ import java.util.List;
 @Service
 public class UserService {
     UserRepository user_rp;
-    DevelopmentStackService develop_service;
+    DevelopmentStackRepositoryImpl develop_rp;
     QuestionnaireService question_service;
+    QuestionnaireRepository questionnaire_rp;
     public UserService(UserRepository userRepository){
         user_rp = userRepository;
     }
 
+
     //회원가입
-    public User join(User user, DevelopmentStack developmentStack){
+    public User join(User user){
         User result_user = user_rp.save(user);                                //회원가입 시에 회원 테이블에 저장 후
-        develop_service.insert(developmentStack);       //바로 스택 테이블에도 점수와 함께 정보 저장
         return result_user;
     }
     //id 중복체크
@@ -41,7 +46,13 @@ public class UserService {
 
     //회원 삭제
     public int deleteUser(String id){
-        return user_rp.deleteByid(id);
+        if(user_rp.findByid(id)!=null){
+            user_rp.deleteByid(id);
+            return 1;
+        }else {
+            System.out.println("존재하지 않는 유저입니다.");
+            return 0;
+        }
     }
 
     //로그인
@@ -49,7 +60,7 @@ public class UserService {
 
     //질문지 가져오기
     public Questionnaire findQuestionnaire(String developmentsStack){
-        return question_service.findQuestionnaire(developmentsStack);
+        return questionnaire_rp.findQuestionnaire(developmentsStack);
     }
 
     //유저에게 추천되거나 좋아하는 프로젝트 10개씩 가져오기
@@ -75,6 +86,11 @@ public class UserService {
     public void deleteSession(HttpServletRequest request){
         HttpSession session = request.getSession();
         session.invalidate();
+    }
+
+    public List<Project> findManageProjectList(String user_id){
+        List<Project> list = user_rp.findManageProjectList(user_id);
+        return list;
     }
 
 }
