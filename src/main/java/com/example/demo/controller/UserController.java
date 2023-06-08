@@ -1,11 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.domain.DevelopmentStack;
-import com.example.demo.domain.Project;
-import com.example.demo.domain.Questionnaire;
-import com.example.demo.domain.User;
-import com.example.demo.service.DevelopmentStackService;
-import com.example.demo.service.UserService;
+import com.example.demo.domain.*;
+import com.example.demo.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +16,9 @@ import java.util.List;
 public class UserController {
     private UserService userService;
     private DevelopmentStackService developmentStackService;
+    private ProjectService projectService;
+    private InvitationService invitationService;
+    private MemberService memberService;
     public UserController(UserService userService){
         this.userService = userService;
     }
@@ -69,5 +68,30 @@ public class UserController {
     public List<Project> manageProjectList(HttpServletRequest request){
         String user_id = userService.findSessionId(request);
         return userService.findManageProjectList(user_id);
+    }
+
+    @GetMapping("/user/project/manage/invite")
+    public String invite(Long project_id, Long user_id){
+        Project project = projectService.findByProjectId(project_id);
+        User user = userService.getById(user_id.intValue());
+        invitationService.insert(project, user);
+        return null;
+    }
+
+    @GetMapping("/user/project/accept")
+    public String accept(HttpServletRequest request, Long project_id){
+        String user_id = userService.findSessionId(request);
+        User user = userService.findUserInfo(user_id);
+        Project project = projectService.findByProjectId(project_id);
+        //멤버테이블에 저장
+        Member member = new Member();
+        member.setUser(user);
+        member.setProject(project);
+        member.setPosition("팀원");
+        memberService.insert(member);
+
+        //알림테이블의 초대상태를 "초대됨" 에서 "수락" 으로 변경
+        invitationService.updateState(user_id);
+       return null;
     }
 }

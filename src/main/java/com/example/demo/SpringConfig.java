@@ -55,6 +55,16 @@ public class SpringConfig {
         return new ApplyRepositoryImpl(em);
     }
 
+    @Autowired
+    public InvitationRepository invitationRepository(){
+        return new InvitationRepositoryImpl(em);
+    }
+
+    @Autowired
+    public MemberRepository memberRepository(){
+        return new MemberRepositoryImpl(em);
+    }
+
     @Bean
     public UserService userService(){
         return new UserService(userRepository());
@@ -75,8 +85,18 @@ public class SpringConfig {
     }
 
     @Bean
-    public ApplyService aplyService(){
+    public ApplyService applyService(){
         return new ApplyService(applyRepository());
+    }
+
+    @Bean
+    public InvitationService invitationService(){
+        return new InvitationService(invitationRepository());
+    }
+
+    @Bean
+    public MemberService memberService(){
+        return new MemberService(memberRepository());
     }
 
 

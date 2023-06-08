@@ -93,4 +93,10 @@ public class UserService {
         return list;
     }
 
+    public User getById(Integer user_id){
+        return user_rp.getReferenceById(user_id);
+    }
+
+
+
 }
