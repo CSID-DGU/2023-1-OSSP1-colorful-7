@@ -71,7 +71,7 @@ const modules = {
 export const CreateProjectSection: FC<CreateProjectSectionProps> = ({ className }) => {
   return (
     <Root className={className}>
-      <InputTitleRequired>모집인원</InputTitleRequired>
+      <InputTitleRequired>내용</InputTitleRequired>
       <ReactQuillStyled modules={modules} />
     </Root>
   )

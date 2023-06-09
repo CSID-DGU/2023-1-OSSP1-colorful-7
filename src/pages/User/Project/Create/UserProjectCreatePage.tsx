@@ -12,22 +12,90 @@ import {
   ProjectOptionLeftContainer,
   ProjectOptionRightContainer,
   InputContainer,
-  DateTermIcon,
   LeaderPositionContainer,
   InputTitleRequired,
   SearchContainer,
+  ProjectMemberInputTitleContainer,
+  ProjectMemberExplainIcon,
+  ProjectMemberExplainWrapper,
+  ProjectMemberExplainContentWrapper,
+  ProjectMemberExplainTitle,
+  ProjectMemberExplainText,
+  ProjectMemberInputContainer,
+  ProjectDateContainer,
 } from './styled'
 // antd 적용하기
-import { Form, Input, Select, DatePicker, Checkbox, Row, Col } from 'antd'
+import { Form, Input, Select, DatePicker, Checkbox, Row, Col, Slider } from 'antd'
 import { CreateProjectSection } from './CreateProjectSection'
+import type { SliderMarks } from 'antd/es/slider';
 
 const { Option } = Select
+
+// 일단 스택을 받기 위해..?
+interface StackType {
+  id: number;
+  label: string;
+  key: string;
+}
+
+const stackName: StackType[] = [
+  {id: 0, label: '프론트엔드', key: 'frontend'},
+  {id: 1, label: '백엔드', key: 'backend'},
+  {id: 2, label: '앱 클라이언트', key: 'appclient'},
+];
 
 type UserProjectCreatePageProps = {
   className?: string
 }
+
+const marks: SliderMarks = {
+  0: {
+    style: {
+      fontSize: '30px',
+    },
+    label: '🥚',
+  },
+  25: {
+    style: {
+      fontSize: '30px',
+    },
+    label: '🐣',
+  },
+  50: {
+    style: {
+      fontSize: '30px',
+    },
+    label: '🐥',
+  },
+  75: {
+    style: {
+      fontSize: '30px',
+    },
+    label: '🐔',
+  },
+  100: {
+    style: {
+      fontSize: '30px',
+    },
+    label: '🦢',
+  },
+};
+
+const content = (
+  <ProjectMemberExplainContentWrapper>
+    <ProjectMemberExplainTitle>원하는 팀원의 실력을 정해주세요.</ProjectMemberExplainTitle>
+    <ProjectMemberExplainText>다음은 회원가입 시 푸는 퀴즈에 따라 분류된 등급입니다.</ProjectMemberExplainText>
+    <ProjectMemberExplainText>E는 가장 낮은 등급, A는 가장 높은 등급입니다.</ProjectMemberExplainText>
+    <Slider marks={marks} defaultValue={100} disabled={true}/>
+  </ProjectMemberExplainContentWrapper>
+);
+
+const { RangePicker } = DatePicker;
+
+const dateFormat = 'YYYY/MM/DD';
+
 // 아니 근데 제목 입력 받는 부분 필요해...ㅠ
-// 목적이랑 분야는 중복 선택 가능한가??
+// 분야는 중복 선택 가능한가??
 export const UserProjectCreatePage: FC<UserProjectCreatePageProps> = ({ className }) => {
   return (
     <Root className={className}>
@@ -41,11 +109,46 @@ export const UserProjectCreatePage: FC<UserProjectCreatePageProps> = ({ classNam
           <ProjectOptionLeftContainer>
             <Form layout="vertical" autoComplete="off">
               <Form.Item style={{ marginBottom: 0 }}>
-                <InputTitleRequired>모집인원</InputTitleRequired>
-                <div>
+                <ProjectMemberInputTitleContainer>
+                  <InputTitleRequired>모집인원</InputTitleRequired>
+                  <ProjectMemberExplainWrapper content={content} title="등급 안내" placement="right">
+                    <ProjectMemberExplainIcon />
+                  </ProjectMemberExplainWrapper>
+                </ProjectMemberInputTitleContainer>
+                {stackName
+                  .map((stackItem) => (
+                    <ProjectMemberInputContainer key={stackItem.key}>
+                      <Form.Item
+                        name="memberStack"
+                        style={{ display: 'inline-block', width: 'calc(40% - 8px)', marginBottom: '5px'}}
+                      >
+                        <div>{stackItem.label}</div>
+                      </Form.Item>
+                      <Form.Item
+                        name={`number_${stackItem.key}`}
+                        style={{ display: 'inline-block', width: 'calc(30% - 8px)', marginLeft: '5px', marginBottom: 0 }}
+                      >
+                        <Input placeholder="인원" />
+                      </Form.Item>
+                      <Form.Item
+                        name={`grade_${stackItem.key}`}
+                        style={{ display: 'inline-block', width: 'calc(30% - 8px)', marginLeft: '5px', marginBottom: 0  }}
+                      >
+                        <Select placeholder="등급">
+                          <Option value="A">A</Option>
+                          <Option value="B">B</Option>
+                          <Option value="C">C</Option>
+                          <Option value="D">D</Option>
+                          <Option value="E">E</Option>
+                        </Select>
+                      </Form.Item>
+                  </ProjectMemberInputContainer>
+                  ))
+                }
+                {/* <ProjectMemberInputContainer>
                   <Form.Item
-                    name="member1"
-                    style={{ display: 'inline-block', width: 'calc(70% - 8px)', marginBottom: '5px' }}
+                    name="memberStack"
+                    style={{ display: 'inline-block', width: 'calc(50% - 8px)', marginBottom: '5px' }}
                   >
                     <Select placeholder="스택">
                       <Option value="WEB_FRONTEND">프론트</Option>
@@ -54,48 +157,24 @@ export const UserProjectCreatePage: FC<UserProjectCreatePageProps> = ({ classNam
                     </Select>
                   </Form.Item>
                   <Form.Item
-                    name="member2"
-                    style={{ display: 'inline-block', width: 'calc(30% - 8px)', margin: '0 8px' }}
+                    name="memberNumber"
+                    style={{ display: 'inline-block', width: 'calc(20% - 8px)', marginLeft: '5px' }}
                   >
                     <Input placeholder="인원" />
                   </Form.Item>
-                </div>
-                <div>
                   <Form.Item
-                    name="member3"
-                    style={{ display: 'inline-block', width: 'calc(70% - 8px)', marginBottom: '5px' }}
+                    name="memberGrade"
+                    style={{ display: 'inline-block', width: 'calc(30% - 8px)', marginLeft: '5px' }}
                   >
-                    <Select placeholder="스택">
-                      <Option value="WEB_FRONTEND">프론트</Option>
-                      <Option value="SERVER_BACKEND">백엔드</Option>
-                      <Option value="APP_CLIENT">앱 클라이언트</Option>
+                    <Select placeholder="등급">
+                      <Option value="A">A</Option>
+                      <Option value="B">B</Option>
+                      <Option value="C">C</Option>
+                      <Option value="D">D</Option>
+                      <Option value="E">E</Option>
                     </Select>
                   </Form.Item>
-                  <Form.Item
-                    name="number"
-                    style={{ display: 'inline-block', width: 'calc(30% - 8px)', margin: '0 8px' }}
-                  >
-                    <Input placeholder="인원" />
-                  </Form.Item>
-                </div>
-                <div>
-                  <Form.Item
-                    name="part"
-                    style={{ display: 'inline-block', width: 'calc(70% - 8px)', marginBottom: '5px' }}
-                  >
-                    <Select placeholder="스택">
-                      <Option value="WEB_FRONTEND">프론트</Option>
-                      <Option value="SERVER_BACKEND">백엔드</Option>
-                      <Option value="APP_CLIENT">앱 클라이언트</Option>
-                    </Select>
-                  </Form.Item>
-                  <Form.Item
-                    name="number"
-                    style={{ display: 'inline-block', width: 'calc(30% - 8px)', margin: '0 8px' }}
-                  >
-                    <Input placeholder="인원" />
-                  </Form.Item>
-                </div>
+                </ProjectMemberInputContainer> */}
               </Form.Item>
             </Form>
           </ProjectOptionLeftContainer>
@@ -112,18 +191,12 @@ export const UserProjectCreatePage: FC<UserProjectCreatePageProps> = ({ classNam
                     </Select>
                   </Form.Item>
                 </LeaderPositionContainer>
-                <div>
+                <ProjectDateContainer>
                   <InputTitleRequired>프로젝트 기간</InputTitleRequired>
                   <InputContainer>
-                    <Form.Item style={{ display: 'inline-block' }}>
-                      <DatePicker placeholder="시작 날짜" />
-                    </Form.Item>
-                    <DateTermIcon>~</DateTermIcon>
-                    <Form.Item style={{ display: 'inline-block' }}>
-                      <DatePicker placeholder="종료 날짜" />
-                    </Form.Item>
+                    <RangePicker format={dateFormat} />
                   </InputContainer>
-                </div>
+                </ProjectDateContainer>
               </InputContainer>
               <Form.Item>
                 <InputTitleRequired>분야</InputTitleRequired>
@@ -151,24 +224,11 @@ export const UserProjectCreatePage: FC<UserProjectCreatePageProps> = ({ classNam
           </ProjectOptionRightContainer>
         </ProjectOptionContainer>
         <SearchContainer>
-          {/* <div>
-            <InputTitle>기술스택 입력</InputTitle>
-            <AutoComplete
-              popupClassName="certain-category-search-dropdown"
-              dropdownMatchSelectWidth={300}
-              style={{ width: 250 }}
-              options={Stackoptions}
-            >
-              <Input.Search size="large" placeholder="기술스택 입력" />
-            </AutoComplete>
-          </div> */}
-          <div>
-            <InputTitle>지역</InputTitle>
-            <Select size="large" placeholder="지역 선택" style={{ width: 200 }}>
-              <Option value="서울특별시">서울특별시</Option>
-              <Option value="경기도">경기도</Option>
-            </Select>
-          </div>
+          <InputTitle>지역</InputTitle>
+          <Select size="large" placeholder="지역 선택" style={{ width: 200 }}>
+            <Option value="서울특별시">서울특별시</Option>
+            <Option value="경기도">경기도</Option>
+          </Select>
         </SearchContainer>
         <CreateProjectSection />
       </Container>

@@ -1,6 +1,7 @@
-import { Typography } from 'antd'
+import { Popover, Typography } from 'antd'
 import { CONTAINER_WIDTH, HEADER_HEIGHT } from 'constants/system/layout'
 import styled from 'styled-components'
+import { QuestionCircleOutlined } from '@ant-design/icons';
 
 export const Root = styled.div`
   width: 100%;
@@ -45,7 +46,7 @@ export const ProjectOptionContainer = styled.div`
 `
 
 export const ProjectOptionLeftContainer = styled.div`
-  width: 30%;
+  width: 40%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -55,7 +56,7 @@ export const ProjectOptionLeftContainer = styled.div`
 `
 
 export const ProjectOptionRightContainer = styled.div`
-  width: 70%;
+  width: 60%;
   display: flex;
   flex-direction: column;
   //align-items: center;
@@ -78,6 +79,33 @@ export const InputTitleRequired = styled(Typography)`
   }
 `
 
+export const ProjectMemberInputTitleContainer = styled.div`
+  display: flex;
+  gap: 10px;
+`
+export const ProjectMemberExplainWrapper = styled(Popover)`
+`
+
+export const ProjectMemberExplainContentWrapper = styled.div`
+  min-width: 500px;
+  padding: 20px 10px;
+`
+
+export const ProjectMemberExplainTitle = styled(Typography)`
+  padding-bottom: 10px;
+  font-size: 25px;
+  font-weight: bold;
+`
+
+export const ProjectMemberExplainText = styled(Typography)`
+  padding-bottom: 10px;
+  font-size: 15px;
+`
+
+export const ProjectMemberExplainIcon = styled(QuestionCircleOutlined)`
+  margin-top: 5px;
+`
+
 export const InputTitle = styled(Typography)`
   padding-bottom: 10px;
   font-size: 15px;
@@ -89,15 +117,10 @@ export const InputContainer = styled.div`
   display: flex;
   flex-flow: row wrap;
 `
-export const DateTermIcon = styled(Typography)`
-  padding: 0 20px;
-  font-size: 15px;
-  font-weight: bold;
-`
 
 export const SearchContainer = styled.div`
   width: 100%;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
 `
+
+export const ProjectMemberInputContainer = styled.div``
+export const ProjectDateContainer = styled.div``
