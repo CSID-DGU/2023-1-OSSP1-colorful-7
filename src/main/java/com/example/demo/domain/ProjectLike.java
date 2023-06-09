@@ -2,19 +2,25 @@ package com.example.demo.domain;
 
 import lombok.Getter;
 import lombok.Setter;
-
+//import lombok.toString;
 import javax.persistence.*;
 
 @Entity
+@Table(name="projectLike")
 @Getter
 @Setter
-@Table(name="projectLike")
+//@toString
+
 public class ProjectLike {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="project_like_id")
     private Long project_like_id;
     @ManyToOne
+    @JoinColumn(name="user_id")
     private User user;
     @ManyToOne
+    @JoinColumn(name="project_id")
     private Project project;
 }

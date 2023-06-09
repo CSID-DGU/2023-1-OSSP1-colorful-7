@@ -13,6 +13,7 @@ public class ProjectStack {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long projectStack_id;
+
     @ManyToOne
     private Project project;
     private String development_stack;
