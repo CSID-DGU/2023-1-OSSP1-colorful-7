@@ -23,7 +23,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("user/join")
+    @PostMapping("/user/join")
     public User insert(User user, DevelopmentStack developmentStack){
         User result_user = userService.join(user);
         if(result_user!=null){
@@ -32,7 +32,7 @@ public class UserController {
         return result_user;
     }
 
-    @PostMapping("user/login")
+    @PostMapping("/user/login")
     public ModelAndView login(String id, String pw){
         int login_result = userService.login(id, pw);
         ModelAndView mav;
@@ -52,12 +52,12 @@ public class UserController {
         return mav;
     }
 
-    @GetMapping("user/join/questionnaire")
+    @GetMapping("/user/join/questionnaire")
     public Questionnaire question(String developmentStack){
         return userService.findQuestionnaire(developmentStack);
     }
 
-    @GetMapping("user/info")
+    @GetMapping("/user/info")
     public User findUserInfo(String id){
         return  userService.findUserInfo(id);
 
