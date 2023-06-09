@@ -1,3 +1,4 @@
+import { Input } from 'antd'
 import { CONTAINER_WIDTH, HEADER_HEIGHT } from 'constants/system/layout'
 import styled from 'styled-components'
 
@@ -19,4 +20,17 @@ export const ProjectCardContainer = styled.div`
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 40px;
+`
+
+export const SearchContainer = styled.div`
+  width: ${CONTAINER_WIDTH}px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 40px;
+`
+
+export const SearchBox = styled(Input)`
 `
