@@ -8,27 +8,30 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Transactional
 @Service
 public class ProjectService {
     ProjectRepository project_rp;
     UserService userService;
-    public ProjectService(ProjectRepository projectRepository){
+
+    public ProjectService(ProjectRepository projectRepository) {
         project_rp = projectRepository;
     }
 
-    public Project findByProjectId(Long projectId){
+    public Project findByProjectId(Long projectId) {
         Project project = project_rp.findByProjectId(projectId);
         return project;
     }
 
-    public Project insert(Project project){
+    public Project insert(Project project) {
         return project_rp.insert(project);
     }
 
-    public int delete(Long project_id){
+    public int delete(Long project_id) {
         return project_rp.delete(project_id);
     }
-
 }
+
+
