@@ -5,7 +5,7 @@ import projectListSampleJson from 'constants/json/project_list_sample.json';
 import React, { FC, useState } from 'react';
 import { ProjectListType, ProjectType } from 'types/project';
 import { camelizeKey } from 'utils/camelizeKey';
-import { ProjectCardContainer, Root, Container, SelectContainer, SearchBox, SearchContainer, SelectBox } from './styled';
+import { ProjectCardContainer, Root, Container, SelectContainer, SearchBox, SearchContainer, SelectBox, TitleTypo } from './styled';
 
 type ProjectListPageProps = {
   className?: string;
@@ -50,7 +50,7 @@ export const ProjectListPage: FC<ProjectListPageProps> = ({ className }) => {
     setSearch(event.currentTarget.value)
   }
   
-  const handleSelectChange = (option: ValueType<OptionType>) => {
+  const handleSelectChange = (option: any) => {
     setSelect(option);
   }
 
@@ -59,6 +59,7 @@ export const ProjectListPage: FC<ProjectListPageProps> = ({ className }) => {
       <CommonHeader />
       <Container>
         <SelectContainer>
+          <TitleTypo>분야 검색</TitleTypo>
           <SelectBox
             onChange={(option) => handleSelectChange(option)}
             defaultValue="web"
@@ -69,7 +70,28 @@ export const ProjectListPage: FC<ProjectListPageProps> = ({ className }) => {
             ]}
           />
         </SelectContainer>
-        <SearchContainer>
+        <SelectContainer>
+          <TitleTypo>분야 검색</TitleTypo>
+          <SelectBox
+            onChange={(option) => handleSelectChange(option)}
+            defaultValue="web"
+            options={options}
+          />
+        </SelectContainer>
+        <SelectContainer>
+          <TitleTypo>포지션 검색</TitleTypo>
+          <SelectBox
+            onChange={(option) => handleSelectChange(option)}
+            defaultValue="web"
+            options={[
+              { value: 'web', label: 'WEB' },
+              { value: 'app', label: 'APP' },
+              { value: 'etc', label: 'ETC' },
+            ]}
+          />
+        </SelectContainer>
+      </Container>
+      <SearchContainer>
           <SearchBox
             type="search"
             id="psearch"
@@ -79,7 +101,6 @@ export const ProjectListPage: FC<ProjectListPageProps> = ({ className }) => {
             onChange={handleSearchChange}
           />
         </SearchContainer>
-      </Container>
       {renderProjectList()}
     </Root>
   )

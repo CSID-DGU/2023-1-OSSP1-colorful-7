@@ -1,4 +1,4 @@
-import { Input, Select } from 'antd'
+import { Input, Select, Typography } from 'antd'
 import { CONTAINER_WIDTH, HEADER_HEIGHT } from 'constants/system/layout'
 import styled from 'styled-components'
 
@@ -24,7 +24,6 @@ export const ProjectCardContainer = styled.div`
 export const Container = styled.div`
   width: ${CONTAINER_WIDTH}px;
   display: flex;
-  flex-direction: column;
   gap: 20px;
   margin-top: 20px;
 `
@@ -49,4 +48,8 @@ export const SearchContainer = styled.div`
 export const SearchBox = styled(Input)`
 `
 export const SelectBox = styled(Select)`
+`
+export const TitleTypo = styled(Typography)`
+  font-size: 15px;
+  font-weight: bold;
 `
