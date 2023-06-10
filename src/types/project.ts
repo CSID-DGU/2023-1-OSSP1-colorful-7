@@ -29,6 +29,9 @@ export type ProjectItemType = {
   visitedNumber: number
   likeNumber: number
   position: string
+  location: string
+	projectStartDate: string
+	projectEndDate: string
 }
 
 export type ProjectListType = ProjectItemType[]
@@ -44,34 +47,34 @@ export type ApplyProjectListType = ApplyProjectItemType[]
 type ApplyMemberItemType = {
   userKey: number
   nickname: string
-  developmentStack: DevelopmentStackType
-  questionnaireScore: number
+  developmentStackList : DevelopmentStackListType
 }
 
 type ApplyMemberListType = ApplyMemberItemType[]
 
+// 필요 없으니 지우고 바꾸자 =====
 export type ManageProjectPositionType = 'LEADER' | 'MEMBER'
 
 type ManageProjectItemType = {
   position: ManageProjectPositionType
 } & ProjectItemType
 
+export type ManageProjectListType = ManageProjectItemType[]
+
 type ExpireProjectItemType = {
   expireMemberList: ApplyMemberListType
 } & ProjectItemType
 
-export type ManageProjectListType = ManageProjectItemType[]
-
 export type ExpireProjectListType = ExpireProjectItemType[]
 
+// ====================
+
 export type UserInfoType = {
+  userId: number 
 	nickname: string
 	introduce: string
   profile? : any
 	developmentStackList : DevelopmentStackListType
-	questionnaireKey: number
-	questionnaireVersion: number
-	questionnaireScore: number
 }
 
 export type UserInfoListType = UserInfoType[]
