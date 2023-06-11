@@ -27,7 +27,6 @@ public class UserService {
         user_rp = userRepository;
     }
 
-
     //회원가입
     public User join(User user){
         User result_user = user_rp.save(user);                                //회원가입 시에 회원 테이블에 저장 후
@@ -88,6 +87,7 @@ public class UserService {
         session.invalidate();
     }
 
+    //본인이 팀장인 프로젝트 가져오기
     public List<Project> findManageProjectList(String user_id){
         List<Project> list = user_rp.findManageProjectList(user_id);
         return list;
@@ -97,6 +97,16 @@ public class UserService {
         return user_rp.getReferenceById(user_id);
     }
 
+//    public List<Project> findProjectList(String user_id) {
+//        List<Project> list = user_rp.findProjectList(user_id);
+//        return list;
+//    }
 
 
+    /* //지원한 프로젝트 리스트 가져오기
+    public List<Project> findApplyProjectList(String userId) {
+        List<Project> applyProjectList = user_rp.findApplyProjectList(user_id);
+        return applyProjectList;
+        */
 }
+

@@ -6,6 +6,7 @@ import com.example.demo.repository.UserRepository;
 import com.example.demo.service.DevelopmentStackService;
 import com.example.demo.service.UserService;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,14 +29,15 @@ public class UserServiceTest {
     @Autowired
     DevelopmentStackService developmentStackService;
 
+
     @Test
     public void join(){
         User user = new User();
-        user.setNickname("ST_nickname3");
-        user.setId("ST_id3");
-        user.setPassword("ST_pw3");
+        user.setNickname("ST_nickname4");
+        user.setId("ST_id4");
+        user.setPassword("ST_pw4");
         //user.setProfile("test file");
-        user.setIntroduce("ST_introduce3");
+        user.setIntroduce("ST_introduce4");
 
         DevelopmentStack developmentStack = new DevelopmentStack();
         developmentStack.setDevelopment_stack("웹 프론트엔드");

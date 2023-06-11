@@ -4,17 +4,20 @@ import com.example.demo.domain.Project;
 import com.example.demo.domain.User;
 import com.example.demo.repository.ProjectLikeRepository;
 import com.example.demo.repository.ProjectRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
-@Transactional
 @Service
+@Transactional
+@RequiredArgsConstructor
 public class ProjectLikeService {
     ProjectLikeRepository projectLike_rp;
     UserService userService;
     ProjectService projectService;
+
     public ProjectLikeService(ProjectLikeRepository projectLikeRepository){
         projectLike_rp = projectLikeRepository;
     }
