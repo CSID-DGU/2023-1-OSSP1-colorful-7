@@ -25,12 +25,12 @@ type JoinPageProps = {
 }
 
 export const JoinPage: FC<JoinPageProps> = ({ className }) => {
-  const [developmentStack, setDevelopmentStack] = useState<DevelopmentStackType>()
+  const [developmentStack, setDevelopmentStack] = useState<DevelopmentStackType[]>([])
   const { open: questionnaireModalOpen, handleModal: handleQuestionnaireModal } = useModal({})
   const [questionnaireScore, setQuestionnaireScore] = useState<number>()
 
-  const onChangeDevelopmentStack = (value: string | any) => {
-    setDevelopmentStack(value as DevelopmentStackType)
+  const onChangeDevelopmentStack = (num: number, value: string | any) => {
+    setDevelopmentStack(value as DevelopmentStackType[]) // map으로 수정해야할듯!
   }
 
   const developmentStackOptionList = defaultDevelopmentStack.map((developmentStackItem) => ({
@@ -59,16 +59,17 @@ export const JoinPage: FC<JoinPageProps> = ({ className }) => {
           <ContentInput placeholder="아이디" />
           <ContentInput placeholder="비밀번호" />
           <ContentInput placeholder="비밀번호 확인" />
+          <ContentInput placeholder="이메일" />
           <ContentInput placeholder="닉네임" />
           <ContentTextArea placeholder="자기소개"></ContentTextArea>
           <ContentSelect
-            value={developmentStack}
-            onChange={onChangeDevelopmentStack}
+            value={developmentStack[0]}
+            onChange={(value) => onChangeDevelopmentStack(0, value)}
             placeholder="기술 스택을 선택해주세요."
             options={developmentStackOptionList}
             disabled={!!questionnaireScore}
           />
-          {developmentStack && (
+          {developmentStack[0] && (
             <QuestionnaireButton onClick={onClickQuestionnaireButton} disabled={!!questionnaireScore}>
               퀴즈 풀기
             </QuestionnaireButton>
@@ -77,10 +78,10 @@ export const JoinPage: FC<JoinPageProps> = ({ className }) => {
         </InputContainer>
         <JoinButton type={'primary'}>회원가입</JoinButton>
       </Container>
-      {developmentStack && (
+      {developmentStack[0] && (
         <QuestionnaireModal
           open={questionnaireModalOpen}
-          developmentStack={developmentStack}
+          developmentStack={developmentStack[0]}
           onCloseModal={handleQuestionnaireModal('CLOSE')}
           onSubmitQuestionnaireAnswerSheet={onSubmitQuestionnaireAnswerSheet}
         />

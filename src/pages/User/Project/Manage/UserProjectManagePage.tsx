@@ -17,6 +17,7 @@ import { SearchMemberSection } from './SearchMemberSection'
 import { ApproveMemberSection } from './ApproveMemberSection'
 import { ChangeProjectSection } from './ChangeProjectSection'
 import { DeleteProjectSection } from './DeleteProjectSection'
+import { ManageMemberSection } from './ManageMemberSection'
 
 type UserProjectManagePageProps = {
   className?: string
@@ -25,21 +26,26 @@ type UserProjectManagePageProps = {
 const items: TabsProps['items'] = [
   {
     key: '1',
+    label: `참여멤버 관리`,
+    children: <ManageMemberSection />,
+  },
+  {
+    key: '2',
     label: `추천멤버 조회`,
     children: <SearchMemberSection />,
   },
   {
-    key: '2',
+    key: '3',
     label: `멤버 지원승인`,
     children: <ApproveMemberSection />,
   },
   {
-    key: '3',
+    key: '4',
     label: `글 수정`,
     children: <ChangeProjectSection />,
   },
   {
-    key: '4',
+    key: '5',
     label: `글 삭제`,
     children: <DeleteProjectSection />,
   },

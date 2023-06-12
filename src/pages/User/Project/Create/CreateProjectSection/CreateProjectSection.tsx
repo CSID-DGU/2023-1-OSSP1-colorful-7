@@ -72,7 +72,8 @@ export const CreateProjectSection: FC<CreateProjectSectionProps> = ({ className 
   return (
     <Root className={className}>
       <InputTitleRequired>내용</InputTitleRequired>
-      <ReactQuillStyled modules={modules} />
+      <ReactQuillStyled modules={modules}/>
     </Root>
   )
 }
+// onChange={(e) => console.log(e)}
