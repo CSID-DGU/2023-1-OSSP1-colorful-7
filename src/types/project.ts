@@ -72,7 +72,8 @@ export type ExpireProjectListType = ExpireProjectItemType[] */
 // ====================
 
 export type UserInfoType = {
-  userId: number 
+  userId: number
+  email: string
 	nickname: string
 	introduce: string
   profile? : any

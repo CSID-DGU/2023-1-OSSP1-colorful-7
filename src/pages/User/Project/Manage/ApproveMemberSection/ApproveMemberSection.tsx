@@ -5,7 +5,6 @@ import { ButtonWrapper, Root, StackTag, UserIcon, UserNameTypo } from './styled'
 import { Button, List, Space } from 'antd'
 import { camelizeKey } from 'utils/camelizeKey'
 import { UserInfoListType } from 'types/project';
-// import { camelizeKey } from 'utils/camelizeKey'
 
 type ApproveMemberSectionProps = {
   className?: string
@@ -24,9 +23,7 @@ export const ApproveMemberSection: FC<ApproveMemberSectionProps> = ({ className 
   return (
     <Root className={className}>
       <List
-        dataSource={
-          filteredUserListData
-        }
+        dataSource={filteredUserListData}
         // dataSource={[
         //   {
         //     id: 1,
