@@ -26,4 +26,5 @@ public class ProjectLike {
     @ManyToOne
     @JoinColumn(name="project_id")
     private Project project;
+
 }

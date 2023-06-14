@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Setter
 @Table(name="projectStack")
 public class ProjectStack {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long projectStack_id;

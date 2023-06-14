@@ -29,7 +29,6 @@ public class UserServiceTest {
     @Autowired
     DevelopmentStackService developmentStackService;
 
-
     @Test
     public void join(){
         User user = new User();

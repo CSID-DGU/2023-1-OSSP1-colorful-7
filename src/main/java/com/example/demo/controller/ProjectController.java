@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 //각각의 파라미터를 스트링 변수로 받아서 서비스 클래스로 넘겨주고 서비스는 레파지토리, 레파지토리는 데이터베이스로 넘겨줌
 import com.example.demo.domain.Apply;
+import com.example.demo.domain.Member;
 import com.example.demo.domain.Project;
 import com.example.demo.domain.User;
 import com.example.demo.service.ApplyService;
@@ -56,14 +57,15 @@ public class ProjectController {
         return projectService.findByProjectId(project_id);
     }
 
-    //팀장이 아닌 프로젝트에 지원한다
+    //SK. 팀장이 아닌 프로젝트에 지원한다
     @PostMapping("/project/apply")
     public String apply(HttpServletRequest request, Long project_id){
-        Project project = new Project();
-        project = projectService.findByProjectId(project_id);
         String user_id = userService.findSessionId(request);
         User user = userService.findUserInfo(user_id);
+        Project project = projectService.findByProjectId(project_id);
+
         applyService.insert(project, user);
         return null;
+
     }
 }
