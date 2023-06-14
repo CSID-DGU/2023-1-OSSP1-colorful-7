@@ -18,6 +18,11 @@ type OptionType = {
   label: string;
 };
 
+type OptionNumberType = {
+  value: number;
+  label: string;
+}
+
 const projectTypeOptions: OptionType[] = [
   { value: "web", label: "WEB" },
   { value: "app", label: "APP" },
@@ -31,20 +36,38 @@ const stackOptions: OptionType[] = [
   { value: "etc", label: "기타" },
 ];
 
-const loationOptions: OptionType[] = [
-  { value: "web", label: "WEB" },
-  { value: "app", label: "APP" },
-  { value: "etc", label: "ETC" },
+const loationOptions: OptionNumberType[] = [
+  { value: 0, label: "강원도" },
+  { value: 1, label: "경기도" },
+  { value: 2, label: "경상남도" },
+  { value: 3, label: "경상북도" },
+  { value: 4, label: "광주광역시" },
+  { value: 5, label: "대구광역시" },
+  { value: 6, label: "대전광역시" },
+  { value: 7, label: "부산광역시" },
+  { value: 8, label: "서울특별시" },
+  { value: 9, label: "울산광역시" },
+  { value: 10, label: "인천광역시" },
+  { value: 11, label: "전라남도" },
+  { value: 12, label: "전라북도" },
+  { value: 13, label: "제주도" },
+  { value: 14, label: "충청남도" },
+  { value: 15, label: "충청북도" }
 ];
 
 export const ProjectListPage: FC<ProjectListPageProps> = ({ className }) => {
   const [search, setSearch] = useState('')
-  const [projectTypeSelect, setSelect] = useState('')
+  const [projectTypeSelect, setProjectTypeSelect] = useState('')
+  const [stackTypeSelect, setStackTypeSelect] = useState('')
+  const [locationTypeSelect, setLocationTypeSelect] = useState('')
+
 
   const filteredProjectListData = projectListData.filter(
     (projectItem) =>
       projectItem.title.toLowerCase().includes(search.toLowerCase()) &&
-      projectItem.projectType.toLowerCase().includes(projectTypeSelect.toLowerCase())
+      projectItem.projectType.toLowerCase().includes(projectTypeSelect.toLowerCase()) &&
+      projectItem.requireMemberList.some((member) => member.developmentStack.toLowerCase().includes(stackTypeSelect)) /* &&
+      projectItem.location === parseInt(locationTypeSelect) */
   )
 
   const renderProjectList = () => {
@@ -63,8 +86,16 @@ export const ProjectListPage: FC<ProjectListPageProps> = ({ className }) => {
     setSearch(event.currentTarget.value)
   }
 
-  const handleSelectChange = (option: any) => {
-    setSelect(option)
+  const handleProjectTypeSelectChange = (option: any) => {
+    setProjectTypeSelect(option)
+  }
+
+  const handleStackTypeSelectChange = (option: any) => {
+    setStackTypeSelect(option)
+  }
+
+  const handleLocationTypeSelectChange = (option: any) => {
+    setLocationTypeSelect(option)
   }
 
   return (
@@ -73,15 +104,15 @@ export const ProjectListPage: FC<ProjectListPageProps> = ({ className }) => {
       <Container>
         <SelectContainer>
           <TitleTypo>분야 검색</TitleTypo>
-          <SelectBox onChange={(option) => handleSelectChange(option)} defaultValue="web" options={projectTypeOptions} />
+          <SelectBox onChange={(option) => handleProjectTypeSelectChange(option)} defaultValue="web" options={projectTypeOptions} />
         </SelectContainer>
         <SelectContainer>
           <TitleTypo>포지션 검색</TitleTypo>
-          <SelectBox onChange={(option) => handleSelectChange(option)} defaultValue="web_frontend" options={stackOptions} />
+          <SelectBox onChange={(option) => handleStackTypeSelectChange(option)} defaultValue="web_frontend" options={stackOptions} />
         </SelectContainer>
         <SelectContainer>
           <TitleTypo>지역 검색</TitleTypo>
-          <SelectBox onChange={(option) => handleSelectChange(option)} defaultValue="web" options={loationOptions} />
+          <SelectBox onChange={(option) => handleLocationTypeSelectChange(option)} defaultValue={0} options={loationOptions} />
         </SelectContainer>
       </Container>
       <Container>

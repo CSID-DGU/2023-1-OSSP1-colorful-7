@@ -33,8 +33,14 @@ type UserProfilePageProps = {
 export const UserProfilePage: FC<UserProfilePageProps> = ({ className }) => {
   const projectListData = camelizeKey(projectListSampleJson.project_list) as ProjectListType
   const applyProjectListData = camelizeKey(applyProjectListSampleJson.project_list) as ApplyProjectListType
-  //const manageProjectListData = camelizeKey(manageProjectListSampleJson.project_list) as ManageProjectListType
-  //const expireProjectListData = camelizeKey(expireProjectListSampleJson.project_list) as ExpireProjectListType
+  const MyProjectListData = projectListData.filter(
+    (projectItem) =>
+    projectItem.position === ('LEADER') || projectItem.position === ('MEMBER')
+  )
+  const ExpiredProjectListData = projectListData.filter(
+    (projectItem) =>
+    projectItem.valid === ('EXPIRED')
+  )
   return (
     <Root className={className}>
       <ProfileHeader />
@@ -43,7 +49,7 @@ export const UserProfilePage: FC<UserProfilePageProps> = ({ className }) => {
         <ManageContainer>
           <ManageTitleTypo>진행중인 프로젝트</ManageTitleTypo>
           <ManageProjectContainer>
-            {projectListData.map((projectItem) => (
+            {MyProjectListData.map((projectItem) => (
               <ManageProjectCard
                 projectItem={projectItem}
                 position={projectItem.position}
@@ -78,7 +84,7 @@ export const UserProfilePage: FC<UserProfilePageProps> = ({ className }) => {
         <ExpireContainer>
           <ExpireTitleTypo>마감된 프로젝트</ExpireTitleTypo>
           <ExpireProjectCardContainer>
-            {projectListData.map((projectItem) => (
+            {ExpiredProjectListData.map((projectItem) => (
               <ManageProjectCard
                 projectItem={projectItem}
                 key={`project_card_${projectItem.key}`}

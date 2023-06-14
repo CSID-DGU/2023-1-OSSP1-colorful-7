@@ -19,7 +19,9 @@
       ],
       "visited_number": 20,
       "like_number": 10,
-      "position": "LEADER"
+      "position": "LEADER",
+      "location": 0,
+      "valid": "VALID"
     },
     {
       "key": 1,
@@ -40,7 +42,9 @@
       ],
       "visited_number": 8,
       "like_number": 10,
-      "position": "MEMBER"
+      "position": "MEMBER",
+      "location": 4,
+      "valid": "VALID"
     },
     {
       "key": 2,
@@ -61,7 +65,9 @@
       ],
       "visited_number": 7,
       "like_number": 10,
-      "position": "MEMBER"
+      "position": "MEMBER",
+      "location": 8,
+      "valid": "VALID"
     },
     {
       "key": 3,
@@ -82,7 +88,9 @@
       ],
       "visited_number": 12,
       "like_number": 10,
-      "position": "NORMAL"
+      "position": "NORMAL",
+      "location": 2,
+      "valid": "VALID"
     },
     {
       "key": 4,
@@ -103,7 +111,9 @@
       ],
       "visited_number": 20,
       "like_number": 10,
-      "position": "NORMAL"
+      "position": "NORMAL",
+      "location": 1,
+      "valid": "VALID"
     },
     {
       "key": 5,
@@ -124,7 +134,9 @@
       ],
       "visited_number": 8,
       "like_number": 10,
-      "position": "NORMAL"
+      "position": "NORMAL",
+      "location": 10,
+      "valid": "VALID"
     },
     {
       "key": 6,
@@ -145,7 +157,9 @@
       ],
       "visited_number": 7,
       "like_number": 10,
-      "position": "NORMAL"
+      "position": "NORMAL",
+      "location": 7,
+      "valid": "VALID"
     },
     {
       "key": 7,
@@ -166,7 +180,9 @@
       ],
       "visited_number": 12,
       "like_number": 10,
-      "position": "MEMBER"
+      "position": "MEMBER",
+      "location": 0,
+      "valid": "EXPIRED"
     },
     {
       "key": 8,
@@ -187,7 +203,9 @@
       ],
       "visited_number": 20,
       "like_number": 10,
-      "position": "NORMAL"
+      "position": "NORMAL",
+      "location": 0,
+      "valid": "EXPIRED"
     },
     {
       "key": 9,
@@ -208,7 +226,9 @@
       ],
       "visited_number": 8,
       "like_number": 10,
-      "position": "NORMAL"
+      "position": "NORMAL",
+      "location": 2,
+      "valid": "VALID"
     },
     {
       "key": 10,
@@ -229,7 +249,9 @@
       ],
       "visited_number": 7,
       "like_number": 10,
-      "position": "LEADER"
+      "position": "LEADER",
+      "location": 8,
+      "valid": "VALID"
     },
     {
       "key": 11,
@@ -250,7 +272,9 @@
       ],
       "visited_number": 12,
       "like_number": 10,
-      "position": "MEMBER"
+      "position": "MEMBER",
+      "location": 11,
+      "valid": "VALID"
     }
   ]
 }

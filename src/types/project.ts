@@ -20,6 +20,8 @@ export type ProjectType = 'WEB' | 'SERVER' | 'APP' | 'ETC'
 
 export type ProjectPositionType = 'LEADER' | 'MEMBER' | 'NORMAL' 
 
+export type ProjectValidType = 'VALID' | 'EXPIRED'
+
 export type ProjectItemType = {
   key: number
   title: string
@@ -30,9 +32,10 @@ export type ProjectItemType = {
   visitedNumber: number
   likeNumber: number
   position: ProjectPositionType
-  location: string
+  location: number
 	projectStartDate: string
 	projectEndDate: string
+  valid: ProjectValidType
 }
 
 export type ProjectListType = ProjectItemType[]

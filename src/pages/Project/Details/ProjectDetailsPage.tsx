@@ -58,19 +58,31 @@ export const ProjectDetailsPage: FC<ProjectDetailsPageProps> = ({ className }) =
   const { projectKey = 0 } = useParams()
   const projectListSampleData: ProjectListType = camelizeKey(projectListSampleJson.project_list) as ProjectListType
   const [projectItem, setProjectItem] = useState<ProjectItemType>()
-  const renderButton = (position: string) => {
-    if (position === 'LEADER') {
-      return <SideSectionManageProjectButton type={'ghost'}>관리하기</SideSectionManageProjectButton>
-    } else if (position === 'MEMBER') {
-      return <SideSectionQuitProjectButton type={'ghost'}>참여 중</SideSectionQuitProjectButton>
-    } else if (position === 'NORMAL') {
-      return <SideSectionApplyProjectButton type={'primary'}>지원하기</SideSectionApplyProjectButton>
-    } else if (position === 'INVITED') {
+  const renderButton = (ProjectItem: ProjectItemType) => {
+    if (ProjectItem.valid === 'VALID') {
+      if (ProjectItem.position === 'LEADER') {
+        return <SideSectionManageProjectButton type={'ghost'}>관리하기</SideSectionManageProjectButton>
+      } else if (ProjectItem.position === 'MEMBER') {
+        return (
+          <SideSectionQuitProjectButton type={'ghost'} disabled>
+            참여 중
+          </SideSectionQuitProjectButton>
+        )
+      } else if (ProjectItem.position === 'NORMAL') {
+        return <SideSectionApplyProjectButton type={'primary'}>지원하기</SideSectionApplyProjectButton>
+      } else if (ProjectItem.position === 'INVITED') {
+        return (
+          <SideSectionInvitedProjectButtonContainer>
+            <SideSectionApplyProjectButton type={'primary'}>수락하기</SideSectionApplyProjectButton>
+            <SideSectionQuitProjectButton type={'ghost'}>거절하기</SideSectionQuitProjectButton>
+          </SideSectionInvitedProjectButtonContainer>
+        )
+      }
+    } else {
       return (
-        <SideSectionInvitedProjectButtonContainer>
-          <SideSectionApplyProjectButton type={'primary'}>수락하기</SideSectionApplyProjectButton>
-          <SideSectionQuitProjectButton type={'ghost'}>거절하기</SideSectionQuitProjectButton>
-        </SideSectionInvitedProjectButtonContainer>
+        <SideSectionQuitProjectButton type={'ghost'} disabled>
+          만료됨
+        </SideSectionQuitProjectButton>
       )
     }
     return null
@@ -167,7 +179,7 @@ export const ProjectDetailsPage: FC<ProjectDetailsPageProps> = ({ className }) =
               <SideSectionProjectTypeTitleTypo>분야</SideSectionProjectTypeTitleTypo>
               <SideSectionProjectTypeTypo>{projectItem.projectType}</SideSectionProjectTypeTypo>
             </SideSectionProjectTypeContainer>
-            {renderButton(projectItem.position)}
+            {renderButton(projectItem)}
           </SideSectionContainer>
         </Container>
       )}
