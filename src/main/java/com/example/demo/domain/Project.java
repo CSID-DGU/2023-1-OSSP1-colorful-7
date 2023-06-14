@@ -15,7 +15,7 @@ import java.util.List;
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Project_id;
+    private int Project_id;
     private File representative_Img;
     private String project_title;
     private String project_content;

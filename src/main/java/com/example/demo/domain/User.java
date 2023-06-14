@@ -29,4 +29,10 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Apply> applys;
 
-}
+    public <ProjectListType> void setRecommendedProjectList(ProjectListType projectListType) {
+        
+    }
+
+
+    private <ProjectListType> void  convertToProjectListType(List<Project> recommendedProjects) {
+    }

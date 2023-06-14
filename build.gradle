@@ -17,13 +17,23 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation 'javax.persistence:javax.persistence-api:2.2'
-	implementation 'javax.xml.bind:jexb-api:2.3.1'
+//	implementation 'javax.xml.bind:jexb-api:2.3.1'
+	// https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api
+	implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
+//	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.7.7'
+
+
 	implementation 'junit:junit:4.13.1'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'com.mysql:mysql-connector-java'
+//	runtimeOnly 'com.mysql:mysql-connector-java'
+	// https://mvnrepository.com/artifact/mysql/mysql-connector-java
+
+	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.33'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	// https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client
+	implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '3.1.4'
 
 }
 
