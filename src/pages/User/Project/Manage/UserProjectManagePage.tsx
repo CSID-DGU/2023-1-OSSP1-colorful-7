@@ -12,11 +12,12 @@ import {
   ManageTitleLogoImg,
   ManageTitleContainer,
   ManageExplainTypo,
+  ProjectDeleteButton,
+  ManageExplainContainer,
 } from './styled'
 import { SearchMemberSection } from './SearchMemberSection'
 import { ApproveMemberSection } from './ApproveMemberSection'
 import { ChangeProjectSection } from './ChangeProjectSection'
-import { DeleteProjectSection } from './DeleteProjectSection'
 import { ManageMemberSection } from './ManageMemberSection'
 
 type UserProjectManagePageProps = {
@@ -41,14 +42,9 @@ const items: TabsProps['items'] = [
   },
   {
     key: '4',
-    label: `글 수정`,
+    label: `게시글 수정`,
     children: <ChangeProjectSection />,
-  },
-  {
-    key: '5',
-    label: `글 삭제`,
-    children: <DeleteProjectSection />,
-  },
+  }
 ]
 /*
 const onChange = (key: string) => {
@@ -69,7 +65,10 @@ export const UserProjectManagePage: FC<UserProjectManagePageProps> = ({ classNam
             <ManageTitleLogoImg src={projectTitleIconImg} alt={'요즘 뜨는 프로젝트 로고 이미지'} />
             <ManageTitleTypo>프로젝트 제목 넣기</ManageTitleTypo>
           </ManageTitleContainer>
-          <ManageExplainTypo>프로젝트 관리 페이지 입니다.</ManageExplainTypo>
+          <ManageExplainContainer>
+            <ManageExplainTypo>프로젝트 관리 페이지 입니다.</ManageExplainTypo>
+            <ProjectDeleteButton>프로젝트 삭제</ProjectDeleteButton>
+          </ManageExplainContainer>
           <Tabs defaultActiveKey="1" items={items} />
         </ManageContainer>
       </Container>

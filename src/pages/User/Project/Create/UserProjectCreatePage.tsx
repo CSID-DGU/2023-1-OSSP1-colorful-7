@@ -29,9 +29,12 @@ import { Form, Input, Select, DatePicker, Checkbox, Row, Col, Slider } from 'ant
 import { CreateProjectSection } from './CreateProjectSection'
 import type { SliderMarks } from 'antd/es/slider';
 
+type UserProjectCreatePageProps = {
+  className?: string
+}
+
 const { Option } = Select
 
-// 일단 스택을 받기 위해..?
 interface StackType {
   id: number;
   label: string;
@@ -39,14 +42,11 @@ interface StackType {
 }
 
 const stackName: StackType[] = [
-  {id: 0, label: '프론트엔드', key: 'frontend'},
-  {id: 1, label: '백엔드', key: 'backend'},
-  {id: 2, label: '앱 클라이언트', key: 'appclient'},
+  {id: 0, label: '프론트엔드', key: 'WEB_PRONTEND'},
+  {id: 1, label: '백엔드', key: 'SERVER_BACKEND'},
+  {id: 2, label: '앱 클라이언트', key: 'APP_CLIENT'},
+  {id: 3, label: '기타', key: 'ETC'},
 ];
-
-type UserProjectCreatePageProps = {
-  className?: string
-}
 
 const marks: SliderMarks = {
   0: {
@@ -97,6 +97,7 @@ const dateFormat = 'YYYY/MM/DD';
 // 아니 근데 제목 입력 받는 부분 필요해...ㅠ
 // 분야는 중복 선택 가능한가??
 export const UserProjectCreatePage: FC<UserProjectCreatePageProps> = ({ className }) => {
+
   return (
     <Root className={className}>
       <CommonHeader />
@@ -117,7 +118,7 @@ export const UserProjectCreatePage: FC<UserProjectCreatePageProps> = ({ classNam
                 </ProjectMemberInputTitleContainer>
                 {stackName
                   .map((stackItem) => (
-                    <ProjectMemberInputContainer key={stackItem.key}>
+                    <ProjectMemberInputContainer key={stackItem.id}>
                       <Form.Item
                         name="memberStack"
                         style={{ display: 'inline-block', width: 'calc(40% - 8px)', marginBottom: '5px'}}
@@ -188,6 +189,7 @@ export const UserProjectCreatePage: FC<UserProjectCreatePageProps> = ({ classNam
                       <Option value="WEB_FRONTEND">프론트</Option>
                       <Option value="SERVER_BACKEND">백엔드</Option>
                       <Option value="APP_CLIENT">앱 클라이언트</Option>
+                      <Option value="ETC">기타</Option>
                     </Select>
                   </Form.Item>
                 </LeaderPositionContainer>
@@ -203,18 +205,23 @@ export const UserProjectCreatePage: FC<UserProjectCreatePageProps> = ({ classNam
                 <Checkbox.Group>
                   <Row style={{ flexFlow: 'row nowrap' }}>
                     <Col span={10}>
-                      <Checkbox value="A" style={{ lineHeight: '32px' }}>
+                      <Checkbox value="WEB" style={{ lineHeight: '32px' }}>
                         WEB
                       </Checkbox>
                     </Col>
                     <Col span={10}>
-                      <Checkbox value="B" style={{ lineHeight: '32px' }}>
+                      <Checkbox value="SERVER" style={{ lineHeight: '32px' }}>
+                        SERVER
+                      </Checkbox>
+                    </Col>
+                    <Col span={10}>
+                      <Checkbox value="APP" style={{ lineHeight: '32px' }}>
                         APP
                       </Checkbox>
                     </Col>
-                    <Col span={15}>
-                      <Checkbox value="C" style={{ lineHeight: '32px' }}>
-                        SERVER ?
+                    <Col span={10}>
+                      <Checkbox value="ETC" style={{ lineHeight: '32px' }}>
+                        ETC
                       </Checkbox>
                     </Col>
                   </Row>

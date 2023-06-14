@@ -1,4 +1,4 @@
-import { Typography } from 'antd'
+import { Button, Typography } from 'antd'
 import { CONTAINER_WIDTH, HEADER_HEIGHT } from 'constants/system/layout'
 import styled from 'styled-components'
 
@@ -42,9 +42,16 @@ export const ManageTitleTypo = styled(Typography)`
 
 export const ManageExplainTypo = styled(Typography)`
   width: 100%;
-  padding-bottom: 10px;
-  border-bottom: 1px #c9c9c9 solid;
   font-size: 12px;
   font-weight: 400;
   color: #808080;
+`
+export const ManageExplainContainer = styled(Typography)`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 10px;
+  border-bottom: 1px #c9c9c9 solid;
+`
+export const ProjectDeleteButton = styled(Button)`
 `
