@@ -1,6 +1,7 @@
 export type DevelopmentStackType = 'WEB_FRONTEND' | 'SERVER_BACKEND' | 'APP_CLIENT' | 'ETC'
 
 export type DevelopmentStackItemType = {
+  stackId : number
 	developmentStack : DevelopmentStackType
 	grade : number
 }
