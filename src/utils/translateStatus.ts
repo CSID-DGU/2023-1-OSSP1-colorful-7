@@ -1,4 +1,4 @@
-import { ApplyProjectStatusType, ManageProjectPositionType } from 'types/project'
+import { ApplyProjectStatusType, ProjectPositionType } from 'types/project'
 
 export const translateApplyProjectStatus = (status: ApplyProjectStatusType) => {
   if (status === 'PENDING') {
@@ -24,7 +24,7 @@ export const getApplyProjectStatusColor = (status: ApplyProjectStatusType) => {
   }
 }
 
-export const translateManageProjectPosition = (position: ManageProjectPositionType) => {
+export const translateProjectPosition = (position: ProjectPositionType) => {
   if (position === 'LEADER') {
     return '팀장'
   }
@@ -33,7 +33,7 @@ export const translateManageProjectPosition = (position: ManageProjectPositionTy
   }
 }
 
-export const getManageProjectPositionColor = (position: ManageProjectPositionType) => {
+export const getProjectPositionColor = (position: ProjectPositionType) => {
   if (position === 'LEADER') {
     return '#FDD15A'
   }

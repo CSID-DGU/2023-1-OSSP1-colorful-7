@@ -28,7 +28,7 @@ export type ProjectItemType = {
   requireMemberList: ProjectRequireMemberListType
   visitedNumber: number
   likeNumber: number
-  position: string
+  position: ProjectPositionType
   location: string
 	projectStartDate: string
 	projectEndDate: string
@@ -44,28 +44,29 @@ export type ApplyProjectItemType = {
 
 export type ApplyProjectListType = ApplyProjectItemType[]
 
-type ApplyMemberItemType = {
+//밑 두 type이 사용되지 않음 경고가 뜸..
+/* type ApplyMemberItemType = {
   userKey: number
   nickname: string
   developmentStackList : DevelopmentStackListType
-}
+} */
 
-type ApplyMemberListType = ApplyMemberItemType[]
+//type ApplyMemberListType = ApplyMemberItemType[]
 
 // 필요 없으니 지우고 바꾸자 =====
-export type ManageProjectPositionType = 'LEADER' | 'MEMBER'
+/* export type ManageProjectPositionType = 'LEADER' | 'MEMBER'
 
 type ManageProjectItemType = {
   position: ManageProjectPositionType
 } & ProjectItemType
 
-export type ManageProjectListType = ManageProjectItemType[]
+export type ManageProjectListType = ManageProjectItemType[] */
 
-type ExpireProjectItemType = {
+/* type ExpireProjectItemType = {
   expireMemberList: ApplyMemberListType
 } & ProjectItemType
 
-export type ExpireProjectListType = ExpireProjectItemType[]
+export type ExpireProjectListType = ExpireProjectItemType[] */
 
 // ====================
 

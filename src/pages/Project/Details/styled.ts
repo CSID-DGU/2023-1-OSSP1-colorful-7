@@ -210,7 +210,7 @@ export const SideSectionApplyProjectButton = styled(Button)`
 export const SideSectionQuitProjectButton = styled(Button)`
   width: 100%;
   color: white;
-  background: #ff6347;
+  background: #BDBDBD;
   margin-top: 20px;
 `
 

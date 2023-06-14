@@ -62,7 +62,7 @@ export const ProjectDetailsPage: FC<ProjectDetailsPageProps> = ({ className }) =
     if (position === 'LEADER') {
       return <SideSectionManageProjectButton type={'ghost'}>관리하기</SideSectionManageProjectButton>
     } else if (position === 'MEMBER') {
-      return <SideSectionQuitProjectButton type={'ghost'}>나가기</SideSectionQuitProjectButton>
+      return <SideSectionQuitProjectButton type={'ghost'}>참여 중</SideSectionQuitProjectButton>
     } else if (position === 'NORMAL') {
       return <SideSectionApplyProjectButton type={'primary'}>지원하기</SideSectionApplyProjectButton>
     } else if (position === 'INVITED') {

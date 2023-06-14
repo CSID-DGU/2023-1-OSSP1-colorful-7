@@ -18,7 +18,20 @@ type OptionType = {
   label: string;
 };
 
-const options: OptionType[] = [
+const projectTypeOptions: OptionType[] = [
+  { value: "web", label: "WEB" },
+  { value: "app", label: "APP" },
+  { value: "etc", label: "ETC" },
+];
+
+const stackOptions: OptionType[] = [
+  { value: "web_frontend", label: "웹 프론트엔드" },
+  { value: "server_backend", label: "서버 백엔드" },
+  { value: "app_client", label: "앱 클라이언트" },
+  { value: "etc", label: "기타" },
+];
+
+const loationOptions: OptionType[] = [
   { value: "web", label: "WEB" },
   { value: "app", label: "APP" },
   { value: "etc", label: "ETC" },
@@ -26,12 +39,12 @@ const options: OptionType[] = [
 
 export const ProjectListPage: FC<ProjectListPageProps> = ({ className }) => {
   const [search, setSearch] = useState('')
-  const [select, setSelect] = useState('')
+  const [projectTypeSelect, setSelect] = useState('')
 
   const filteredProjectListData = projectListData.filter(
     (projectItem) =>
       projectItem.title.toLowerCase().includes(search.toLowerCase()) &&
-      projectItem.projectType.toLowerCase().includes(select.toLowerCase())
+      projectItem.projectType.toLowerCase().includes(projectTypeSelect.toLowerCase())
   )
 
   const renderProjectList = () => {
@@ -49,9 +62,9 @@ export const ProjectListPage: FC<ProjectListPageProps> = ({ className }) => {
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.currentTarget.value)
   }
-  
+
   const handleSelectChange = (option: any) => {
-    setSelect(option);
+    setSelect(option)
   }
 
   return (
@@ -60,38 +73,20 @@ export const ProjectListPage: FC<ProjectListPageProps> = ({ className }) => {
       <Container>
         <SelectContainer>
           <TitleTypo>분야 검색</TitleTypo>
-          <SelectBox
-            onChange={(option) => handleSelectChange(option)}
-            defaultValue="web"
-            options={[
-              { value: 'web', label: 'WEB' },
-              { value: 'app', label: 'APP' },
-              { value: 'etc', label: 'ETC' },
-            ]}
-          />
-        </SelectContainer>
-        <SelectContainer>
-          <TitleTypo>분야 검색</TitleTypo>
-          <SelectBox
-            onChange={(option) => handleSelectChange(option)}
-            defaultValue="web"
-            options={options}
-          />
+          <SelectBox onChange={(option) => handleSelectChange(option)} defaultValue="web" options={projectTypeOptions} />
         </SelectContainer>
         <SelectContainer>
           <TitleTypo>포지션 검색</TitleTypo>
-          <SelectBox
-            onChange={(option) => handleSelectChange(option)}
-            defaultValue="web"
-            options={[
-              { value: 'web', label: 'WEB' },
-              { value: 'app', label: 'APP' },
-              { value: 'etc', label: 'ETC' },
-            ]}
-          />
+          <SelectBox onChange={(option) => handleSelectChange(option)} defaultValue="web_frontend" options={stackOptions} />
+        </SelectContainer>
+        <SelectContainer>
+          <TitleTypo>지역 검색</TitleTypo>
+          <SelectBox onChange={(option) => handleSelectChange(option)} defaultValue="web" options={loationOptions} />
         </SelectContainer>
       </Container>
-      <SearchContainer>
+      <Container>
+        <SearchContainer>
+          <TitleTypo>제목 검색</TitleTypo>
           <SearchBox
             type="search"
             id="psearch"
@@ -101,6 +96,7 @@ export const ProjectListPage: FC<ProjectListPageProps> = ({ className }) => {
             onChange={handleSearchChange}
           />
         </SearchContainer>
+      </Container>
       {renderProjectList()}
     </Root>
   )

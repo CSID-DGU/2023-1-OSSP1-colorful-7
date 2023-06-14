@@ -28,7 +28,7 @@ export const Container = styled.div`
   margin-top: 20px;
 `
 export const SelectContainer = styled.div`
-  width: ${CONTAINER_WIDTH}px;
+  width: 370px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -36,10 +36,8 @@ export const SelectContainer = styled.div`
 `
 
 export const SearchContainer = styled.div`
-  width: ${CONTAINER_WIDTH}px;
+  width: 370px;
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 20px;

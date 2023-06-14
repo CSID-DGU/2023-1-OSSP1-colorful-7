@@ -1,9 +1,9 @@
 import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ManageProjectPositionType, ProjectItemType } from 'types/project'
+import { ProjectPositionType, ProjectItemType } from 'types/project'
 import { generateRandomProjectCardLogoImg } from 'utils/generateRandomProjectCardLogoImg'
 import { getDevelopmentStackColor, translateDevelopmentStack } from 'utils/translateDevelopmentStack'
-import { getManageProjectPositionColor, translateManageProjectPosition } from 'utils/translateStatus'
+import { getProjectPositionColor, translateProjectPosition } from 'utils/translateStatus'
 import {
   CardMeta,
   DevelopmentStackTag,
@@ -17,7 +17,7 @@ import {
 type ManageProjectCardProps = {
   className?: string
   projectItem: ProjectItemType
-  position?: ManageProjectPositionType
+  position?: ProjectPositionType
 }
 
 export const ManageProjectCard: FC<ManageProjectCardProps> = ({ className, projectItem, position }) => {
@@ -39,8 +39,8 @@ export const ManageProjectCard: FC<ManageProjectCardProps> = ({ className, proje
             alt={'프로젝트 대표 이미지'}
           />
           {position && (
-            <RepresentativeImgBadge color={getManageProjectPositionColor(position)}>
-              {translateManageProjectPosition(position)}
+            <RepresentativeImgBadge color={getProjectPositionColor(position)}>
+              {translateProjectPosition(position)}
             </RepresentativeImgBadge>
           )}
         </RepresentativeImgContainer>
