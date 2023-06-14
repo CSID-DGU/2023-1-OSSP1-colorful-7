@@ -20,6 +20,7 @@ public class User {
     private String password;
     private File profile;
     private String introduce;
+
     @OneToMany(mappedBy = "user")
     private List<Invitation> invitations;
     @OneToMany(mappedBy = "user")

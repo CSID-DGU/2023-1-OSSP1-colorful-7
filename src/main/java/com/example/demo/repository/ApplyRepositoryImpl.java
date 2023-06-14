@@ -1,6 +1,7 @@
 package com.example.demo.repository;
 
 import com.example.demo.domain.Apply;
+import com.example.demo.domain.Invitation;
 import com.example.demo.domain.Project;
 import com.example.demo.domain.User;
 import org.springframework.data.domain.Example;
@@ -11,6 +12,7 @@ import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -27,11 +29,38 @@ public class ApplyRepositoryImpl implements ApplyRepository{
         Apply apply = new Apply();
         apply.setProject(project);
         apply.setUser(user);
-        apply.setState("지원");
+        apply.setState("PENDING");
         em.persist(apply);
     }
 
-
+    @Override
+    public Apply findById(Long apply_id){
+        String sql = "select apply from Apply apply where apply_id = :apply_id";
+        TypedQuery<Apply> query = em.createQuery(sql, Apply.class);
+        query.setParameter("apply_id", apply_id);
+        List<Apply> list = query.getResultList();
+        for (Apply entity : list) {
+            return entity;
+        }
+        return null;
+    }
+    @Override
+    public Long findIdByProject_id(String project_id){
+        String sql = "select apply from Apply apply where project_id = :project_id";
+        TypedQuery<Apply> query = em.createQuery(sql, Apply.class);
+        query.setParameter("project_id", project_id);
+        List<Apply> list = query.getResultList();
+        for (Apply entity : list) {
+            return entity.getApply_id();
+        }
+        return null;
+    }
+    @Override
+    public void updateState(Long apply_id){
+        Apply apply = findById(apply_id);
+        apply.setState("BELONG");
+        em.persist(apply);
+    }
 
     @Override
     public List<Apply> findAll() {
