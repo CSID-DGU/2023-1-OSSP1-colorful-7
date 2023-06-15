@@ -34,3 +34,9 @@ export const ProjectCardContainer = styled.div`
   gap: 10px;
   margin-top: 20px;
 `
+
+export const ZeroProjectTypo = styled(Typography)`
+  margin-top: 15%;
+  font-size: 18px;
+  color: gray;
+`

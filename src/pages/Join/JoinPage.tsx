@@ -30,7 +30,7 @@ export const JoinPage: FC<JoinPageProps> = ({ className }) => {
   const [questionnaireScore, setQuestionnaireScore] = useState<number>()
 
   const onChangeDevelopmentStack = (value: string | any) => {
-    setDevelopmentStack(value as DevelopmentStackType) // map으로 수정해야할듯!
+    setDevelopmentStack(value as DevelopmentStackType) 
   }
 
   const developmentStackOptionList = defaultDevelopmentStack.map((developmentStackItem) => ({

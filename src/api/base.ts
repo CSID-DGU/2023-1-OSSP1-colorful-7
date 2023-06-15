@@ -42,6 +42,7 @@ axiosInstance.interceptors.response.use(
 
 axiosInstance.defaults.paramsSerializer = (params: any) => qs.stringify(params, { arrayFormat: 'repeat' })
 
+// GET - params에 담음
 export const axiosGET = <RequestData, ResponseData>(
   url: string,
   params?: RequestData,
@@ -54,7 +55,12 @@ export const axiosGET = <RequestData, ResponseData>(
     .then((response) => response.data)
 }
 
-export const axiosPOST = <RequestData, ResponseData>(url: string, data?: RequestData, options?: AxiosRequestConfig) => {
+// POST - data에 담음
+export const axiosPOST = <RequestData, ResponseData>(
+  url: string, 
+  data?: RequestData, 
+  options?: AxiosRequestConfig
+) => {
   return axiosInstance
     .post<ResponseData, AxiosResponse<ResponseData>, { csrfmiddlewaretoken: string }>(
       url,
@@ -71,6 +77,7 @@ export const axiosPOST = <RequestData, ResponseData>(url: string, data?: Request
     })
 }
 
+// Form 태그로 파일, 이미지 전송할 때 사용
 export const axiosFormPOST = <RequestData, ResponseData>(
   url: string,
   data?: RequestData,
@@ -104,5 +111,18 @@ export const axiosPATCH = <RequestData, ResponseData>(
         ...options,
       }
     )
+    .then((response) => response.data)
+}
+
+// DELETE - params에 담음
+export const axiosDELETE = <RequestData, ResponseData>(
+  url: string,
+  params?: RequestData,
+  options?: AxiosRequestConfig
+) => {
+  const paramsValue = JSON.stringify(params).replaceAll("/", "")
+
+  return axiosInstance
+    .get<ResponseData, AxiosResponse<ResponseData>, RequestData>(url, { params: paramsValue, ...options })
     .then((response) => response.data)
 }

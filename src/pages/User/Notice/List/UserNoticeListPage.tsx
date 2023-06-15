@@ -4,7 +4,7 @@ import projectListSampleJson from 'constants/json/project_list_sample.json'
 import { FC } from 'react'
 import { ProjectListType } from 'types/project'
 import { camelizeKey } from 'utils/camelizeKey'
-import { Container, ProjectCardContainer, ProjectTitleTypo, Root } from './styled'
+import { Container, ProjectCardContainer, ProjectTitleTypo, Root, ZeroProjectTypo } from './styled'
 
 type UserNoticeListPageProps = {
   className?: string
@@ -18,11 +18,16 @@ export const UserNoticeListPage: FC<UserNoticeListPageProps> = ({ className }) =
       <Container>
         <ProjectTitleTypo>초대받은 프로젝트</ProjectTitleTypo>
         <ProjectCardContainer>
-          {projectListData
+          {projectListData.length > 0 
+            ? ( 
+            projectListData
             .sort((a, b) => a.key - b.key)
             .map((projectItem) => (
-              <ProjectCard projectItem={projectItem} key={`project_card_${projectItem.key}`} />
-            ))}
+              <ProjectCard projectItem={projectItem} isInvited={true} key={`project_card_${projectItem.key}`} />
+            ))) : (
+              <ZeroProjectTypo>초대받은 프로젝트가 존재하지 않습니다.</ZeroProjectTypo>
+            )
+          }
         </ProjectCardContainer>
       </Container>
     </Root>

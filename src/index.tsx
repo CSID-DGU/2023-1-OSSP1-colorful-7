@@ -6,6 +6,7 @@ import { LoginPage } from 'pages/Login'
 import { MainPage } from 'pages/Main'
 import { ProjectDetailsPage } from 'pages/Project/Details'
 import { ProjectListPage } from 'pages/Project/List'
+import { UserNoticeDetailsPage } from 'pages/User/Notice/Details'
 import { UserNoticeListPage } from 'pages/User/Notice/List'
 import { UserProfilePage } from 'pages/User/Profile'
 // import { UserProjectPage } from 'pages/User/Project'
@@ -37,6 +38,7 @@ root.render(
           <Route path="/user/project/manage" element={<UserProjectManagePage />} />
           <Route path="/project/list" element={<ProjectListPage />} />
           <Route path="/project/:projectKey" element={<ProjectDetailsPage />} />
+          <Route path="/project/invite/:projectKey" element={<UserNoticeDetailsPage />} />
           <Route path="/" element={<MainPage />} />
         </Routes>
       </BrowserRouter>

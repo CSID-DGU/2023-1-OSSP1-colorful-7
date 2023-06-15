@@ -17,14 +17,19 @@ import {
 type ProjectCardProps = {
   className?: string
   projectItem: ProjectItemType
+  isInvited?: boolean
   status?: ApplyProjectStatusType
 }
 
-export const ProjectCard: FC<ProjectCardProps> = ({ className, projectItem, status }) => {
+export const ProjectCard: FC<ProjectCardProps> = ({ className, projectItem, isInvited, status }) => {
   const navigate = useNavigate()
 
   const onClickRoot = () => {
-    navigate(`/project/${projectItem.key}`)
+    if(isInvited) {
+      navigate(`/project/invite/${projectItem.key}`)
+    } else {
+      navigate(`/project/${projectItem.key}`)
+    }
   }
 
   return (
