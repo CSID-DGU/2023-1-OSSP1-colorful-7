@@ -31,6 +31,7 @@ public class UserRepositoryImpl implements UserRepository{
     }
 
     @Override
+    //유저의 정보 조회
     public User findByid(String id) {
         String sql = "select user from User user where id = :id";
         TypedQuery<User> query = em.createQuery(sql, User.class);
