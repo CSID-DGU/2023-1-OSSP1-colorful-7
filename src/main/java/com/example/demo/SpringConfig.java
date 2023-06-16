@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import com.example.demo.repository.*;
+import com.example.demo.response.ResponseService;
 import com.example.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -65,11 +66,25 @@ public class SpringConfig {
         return new MemberRepositoryImpl(em);
     }
 
-    @Bean
-    public UserService userService(){
-        return new UserService(userRepository());
+    @Autowired
+    public ResponseRepository responseRepository(){
+        return new ResponseRepositoryImpl(em);
     }
 
+    @Autowired
+    public ProjectStackRepository projectStackRepository(){
+        return new ProjectStackRepositoryImpl(em);
+    }
+
+/*    @Bean
+    public UserService userService(){
+        return new UserService(userRepository());
+    }*/
+
+    @Bean
+    public UserService userService(UserRepository userRepository, DevelopmentStackRepository developmentStackRepository, QuestionnaireRepository questionnaireRepository) {
+        return new UserService(userRepository, developmentStackRepository, questionnaireRepository);
+    }
     @Bean
     public DevelopmentStackService developmentStackService(){
         return new DevelopmentStackService(developmentStackRepository());
@@ -97,6 +112,16 @@ public class SpringConfig {
     @Bean
     public MemberService memberService(){
         return new MemberService(memberRepository());
+    }
+
+    @Bean
+    public ResponseService responseService(){
+        return new ResponseService(responseRepository());
+    }
+
+    @Bean
+    public ProjectStackService projectStackService(){
+        return new ProjectStackService(projectStackRepository());
     }
 
 

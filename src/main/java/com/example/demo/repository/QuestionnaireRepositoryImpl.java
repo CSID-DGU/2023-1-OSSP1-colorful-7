@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Optional;
@@ -27,15 +28,18 @@ public class QuestionnaireRepositoryImpl implements QuestionnaireRepository{
         em.persist(questionnaire);
     }
     @Override
-    public Questionnaire findQuestionnaire(String developmentStack){
-        String sql = "select q from Questionnaire q where q.development_stack = :developmentStack";
+    public Questionnaire findQuestionnaire(String developmentStack) {
+        String sql = "select q from Questionnaire q where q.development_stack = :development_stack";
         TypedQuery<Questionnaire> query = em.createQuery(sql, Questionnaire.class);
-        query.setParameter("developmentStack", developmentStack);
+        query.setParameter("development_stack", developmentStack);
+
         List<Questionnaire> list = query.getResultList();
-        for (Questionnaire entity : list) {
-            return entity;
+        if (!list.isEmpty()) {
+            return list.get(0);
         }
         return null;
+
+
     }
 
     @Override

@@ -31,11 +31,11 @@ public class UserServiceTest {
     @Test
     public void join(){
         User user = new User();
-        user.setNickname("ST_nickname3");
-        user.setId("ST_id3");
-        user.setPassword("ST_pw3");
+        user.setNickname("ST_nickname4");
+        user.setId("ST_id4");
+        user.setPassword("ST_pw4");
         //user.setProfile("test file");
-        user.setIntroduce("ST_introduce3");
+        user.setIntroduce("ST_introduce4");
 
         DevelopmentStack developmentStack = new DevelopmentStack();
         developmentStack.setDevelopment_stack("웹 프론트엔드");
@@ -57,7 +57,7 @@ public class UserServiceTest {
 
     @Test
     public void findUser(){
-        User user = userService.findUserInfo("ST_Id1");
+        User user = userService.findUserInfo("ST_Id2");
         if(user==null) System.out.println("회원정보없음");
         else {
             System.out.println(user.getUser_id());

@@ -9,6 +9,7 @@ import com.example.demo.repository.DevelopmentStackRepositoryImpl;
 import com.example.demo.repository.QuestionnaireRepository;
 import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,11 +21,15 @@ import java.util.List;
 @Service
 public class UserService {
     UserRepository user_rp;
-    DevelopmentStackRepositoryImpl develop_rp;
+    DevelopmentStackRepository develop_rp;
     QuestionnaireService question_service;
     QuestionnaireRepository questionnaire_rp;
-    public UserService(UserRepository userRepository){
-        user_rp = userRepository;
+    public UserService(@Qualifier("userRepository")UserRepository user_rp,
+                       @Qualifier("developmentStackRepository")DevelopmentStackRepository develop_rp,
+                       @Qualifier("questionnaireRepository")QuestionnaireRepository questionnaire_rp){
+        this.user_rp = user_rp;
+        this.develop_rp = develop_rp;
+        this.questionnaire_rp = questionnaire_rp;
     }
 
 
@@ -63,17 +68,6 @@ public class UserService {
         return questionnaire_rp.findQuestionnaire(developmentsStack);
     }
 
-    //유저에게 추천되거나 좋아하는 프로젝트 10개씩 가져오기
-    //"추천되거나"에 대한 테이블이 나오지 않아서 구현 중단
-    /*public List<Project> printProject(String projectType, int page){
-        return user_rp.printProject(projectType, page);
-    }*/
-
-    //세션 생성 후 저장
-    public void SessionCreate(HttpServletRequest request, String user_id){
-        HttpSession session = request.getSession();
-        session.setAttribute("id",user_id);
-    }
 
     //세션 아이디 가져오기
     public String findSessionId(HttpServletRequest request){

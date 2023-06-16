@@ -1,18 +1,17 @@
 package com.example.demo.controller;
 
-import com.example.demo.domain.Apply;
-import com.example.demo.domain.Project;
-import com.example.demo.domain.User;
-import com.example.demo.service.ApplyService;
-import com.example.demo.service.ProjectLikeService;
-import com.example.demo.service.ProjectService;
-import com.example.demo.service.UserService;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.demo.domain.*;
+import com.example.demo.response.CommonResponse;
+import com.example.demo.response.ResponseService;
+import com.example.demo.response.SingleResponse;
+import com.example.demo.service.*;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @RestController
 public class ProjectController {
@@ -21,7 +20,24 @@ public class ProjectController {
     private UserService userService;
     private ApplyService applyService;
 
-    public ProjectController(ProjectService projectService) {this.projectService = projectService;}
+    private ProjectStackService projectStackService;
+
+    private ResponseService responseService;
+
+    public ProjectController(ProjectService projectService,
+                             ProjectLikeService projectLikeService,
+                             UserService userService,
+                             ApplyService applyService,
+                             ProjectStackService projectStackService,
+                             ResponseService responseService)
+    {
+        this.projectService = projectService;
+        this.projectStackService = projectStackService;
+        this.userService = userService;
+        this.applyService = applyService;
+        this.projectStackService = projectStackService;
+        this.responseService = responseService;
+    }
 
     @PostMapping("/project/like")
     public String projectLike(HttpServletRequest request, Long projectId){
@@ -30,8 +46,21 @@ public class ProjectController {
     }
 
     @PostMapping("/project/create")
-    public Project projectCreate(Project project){
-        return projectService.insert(project);
+    public SingleResponse<Project> projectCreate(@RequestBody Project project){
+        CommonResponse commonResponse = new CommonResponse();
+        List<ProjectStack> projectStackList = project.getProject_stacks();
+        for(ProjectStack stack : projectStackList){
+            projectStackService.insert(stack);
+        }
+        Project saved_project = projectService.insert(project);
+        if(saved_project!=null){
+            commonResponse.setStatus("SUCCESS");
+            commonResponse.setMessage(null);
+        }else{
+            commonResponse.setStatus("FAILED");
+            commonResponse.setMessage("프로젝트 생성 실패");
+        }
+        return responseService.getSingleResponse(commonResponse,project);
     }
 
     @PostMapping("/project/delete")
@@ -40,8 +69,17 @@ public class ProjectController {
     }
 
     @GetMapping("/project/details")
-    public Project findProject(Long project_id){
-        return projectService.findByProjectId(project_id);
+    public<T> SingleResponse<Project> findProject(@RequestBody Long project_id)throws JsonProcessingException {
+        Project project = projectService.findByProjectId(project_id);
+        CommonResponse commonResponse = new CommonResponse();
+        if(project!=null){
+            commonResponse.setStatus("SUCCESS");
+            commonResponse.setMessage(null);
+        }else{
+            commonResponse.setStatus("FAILED");
+            commonResponse.setMessage("프로젝트 상세내용 불러오기 실패");
+        }
+        return responseService.getSingleResponse(commonResponse,project);
     }
 
     @PostMapping("/project/apply")

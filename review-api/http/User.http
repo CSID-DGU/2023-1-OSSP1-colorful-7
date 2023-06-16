@@ -1,0 +1,40 @@
+### 회원가입 API 테스트 ok
+POST http://localhost:8080/user/join
+Content-Type: application/json
+
+{
+  "user":{"nickname":"hh", "id":"id5678", "password":"pw5678","introduce":"안녕하세요222"},
+  "developmentStack":{"user":null, "development_stack":"front-end", "grade":1, "version":1}
+}
+
+
+### 로그인 ok (세션 저장됨!!)
+POST http://localhost:8080/user/login
+Accept: application/json
+Content-Type: application/json
+
+{
+    "id": "id1234",
+    "pw": "pw1234"
+}
+
+
+### 로그아웃 (되는듯.. 감동)
+POST http://localhost:8080/user/logout
+Accept: application/json
+Content-Type: application/json
+
+
+### 질문지 가져오기 ok
+GET http://localhost:8080/user/join/questionnaire
+Accept: application/json
+Content-Type: application/json
+
+{"developmentStack":"웹 프론트엔드"}
+
+### 회원정보 가져오기 (세션...으로 가져와짐 ㅠㅠ!!)
+GET http://localhost:8080/user/info
+Accept: application/json
+Content-Type: application/json
+
+

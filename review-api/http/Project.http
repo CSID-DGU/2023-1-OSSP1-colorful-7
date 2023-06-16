@@ -1,0 +1,31 @@
+###프로젝트 생성 ok
+POST http://localhost:8080/project/create
+Accept: application/json
+Content-Type: application/json
+
+{
+  "project_title": "prj1",
+  "project_content": "content1",
+  "list_count": 3,
+  "visited_number": 7,
+  "project_type": "웹",
+  "project_start_date": "2023-06-16",
+  "project_end_date": "2023-09-16",
+  "location": 1,
+  "is_available": "VALID",
+  "project_stacks": [{
+    "project": null,
+    "development_stack": "웹 프론트엔드",
+    "require_member": 2,
+    "require_grade": 2
+  }]
+}
+
+### 프로젝트 상세보기 (미완성)
+GET http://localhost:8080/project/details
+Accept: application/json
+Content-Type: application/json
+
+{
+  "project_id": 1
+}

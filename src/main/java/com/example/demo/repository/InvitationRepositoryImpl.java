@@ -45,7 +45,7 @@ public class InvitationRepositoryImpl implements InvitationRepository{
     @Override
     public void updateState(Long invitation_id){
         Invitation invitation = findById(invitation_id);
-        invitation.setState("수락");
+        invitation.setState("APPROVE");
         em.persist(invitation);
     }
 

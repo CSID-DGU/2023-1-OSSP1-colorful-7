@@ -16,7 +16,6 @@ public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Project_id;
-    private File representative_Img;
     private String project_title;
     private String project_content;
     private int like_count;
@@ -24,8 +23,10 @@ public class Project {
     private Timestamp created_at;
     private Timestamp updated_at;
     private String project_type;
-
-    // 이 테이블 db 다시 짜야됨. 필요 인원 테이블이 추가로 필요한지.
+    private String project_start_date;
+    private String project_end_date;
+    private int location;
+    private String is_available;
     @OneToMany(mappedBy = "project")
     private List<Member> members;
     @OneToMany(mappedBy = "project")
