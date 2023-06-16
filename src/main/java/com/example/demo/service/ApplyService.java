@@ -19,4 +19,12 @@ public class ApplyService {
     public void insert(Project project, User user){
         apply_rp.insert(project,user);
     }
+
+    public Long findIdByProject_id(String project_id){
+        return apply_rp.findIdByProject_id(project_id);
+    }
+    public void updateState(String project_id){
+        Long apply_id = apply_rp.findIdByProject_id(project_id);
+        apply_rp.updateState(apply_id);
+    }
 }
