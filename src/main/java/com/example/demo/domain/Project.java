@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.io.File;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -15,7 +14,7 @@ import java.util.List;
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Project_id;
+    private Integer Project_id;
     private String project_title;
     private String project_content;
     private int like_count;
