@@ -6,6 +6,7 @@ import React, { FC, useState } from 'react';
 import { ProjectListType, ProjectType } from 'types/project';
 import { camelizeKey } from 'utils/camelizeKey';
 import { ProjectCardContainer, Root, Container, SelectContainer, SearchBox, SearchContainer, SelectBox, TitleTypo } from './styled';
+import { locationOptions } from 'constants/project/locationOptions';
 
 type ProjectListPageProps = {
   className?: string;
@@ -18,11 +19,6 @@ type OptionType = {
   label: string;
 };
 
-type OptionNumberType = {
-  value: number;
-  label: string;
-}
-
 const projectTypeOptions: OptionType[] = [
   { value: "web", label: "WEB" },
   { value: "app", label: "APP" },
@@ -34,25 +30,6 @@ const stackOptions: OptionType[] = [
   { value: "server_backend", label: "서버 백엔드" },
   { value: "app_client", label: "앱 클라이언트" },
   { value: "etc", label: "기타" },
-];
-
-const locationOptions: OptionNumberType[] = [
-  { value: 0, label: "강원도" },
-  { value: 1, label: "경기도" },
-  { value: 2, label: "경상남도" },
-  { value: 3, label: "경상북도" },
-  { value: 4, label: "광주광역시" },
-  { value: 5, label: "대구광역시" },
-  { value: 6, label: "대전광역시" },
-  { value: 7, label: "부산광역시" },
-  { value: 8, label: "서울특별시" },
-  { value: 9, label: "울산광역시" },
-  { value: 10, label: "인천광역시" },
-  { value: 11, label: "전라남도" },
-  { value: 12, label: "전라북도" },
-  { value: 13, label: "제주도" },
-  { value: 14, label: "충청남도" },
-  { value: 15, label: "충청북도" }
 ];
 
 export const ProjectListPage: FC<ProjectListPageProps> = ({ className }) => {

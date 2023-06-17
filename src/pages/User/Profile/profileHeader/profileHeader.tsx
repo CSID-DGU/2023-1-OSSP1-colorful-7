@@ -13,7 +13,6 @@ import {
   DevelopmentStackTagContainer,
   DevelopmentStackTag,
   UserIntroductionTypo,
-  ModifyButton,
   UserContainer
  } from './styled'
 
@@ -27,7 +26,6 @@ export const ProfileHeader: FC<ProfileHeaderProps> = ({ className }) => {
     <Root className={className}>
       <Container>
         <UserContainer>
-          <ModifyButton>수정</ModifyButton>
           <UserIcon src={Avatar} alt={'유저 아바타 이미지'} />
         </UserContainer>
         <UserInfo>

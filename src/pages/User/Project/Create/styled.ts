@@ -1,4 +1,4 @@
-import { Popover, Typography } from 'antd'
+import { Button, Popover, Typography } from 'antd'
 import { CONTAINER_WIDTH, HEADER_HEIGHT } from 'constants/system/layout'
 import styled from 'styled-components'
 import { QuestionCircleOutlined } from '@ant-design/icons';
@@ -119,8 +119,14 @@ export const InputContainer = styled.div`
 `
 
 export const SearchContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
   width: 100%;
 `
-
+export const LocationContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+export const ProjectCreateButton = styled(Button)``
 export const ProjectMemberInputContainer = styled.div``
 export const ProjectDateContainer = styled.div``

@@ -8,9 +8,10 @@ import { Container, ProjectCardContainer, Root, TitleContainer, TitleLogoImg, Ti
 
 type PopularProjectListSectionProps = {
   className?: string
+  popularProjectList: ProjectListType
 }
 
-export const PopularProjectListSection: FC<PopularProjectListSectionProps> = ({ className }) => {
+export const PopularProjectListSection: FC<PopularProjectListSectionProps> = ({ className, popularProjectList }) => {
   const projectList = camelizeKey(projectListSampleJson.project_list) as ProjectListType
   return (
     <Root className={className}>

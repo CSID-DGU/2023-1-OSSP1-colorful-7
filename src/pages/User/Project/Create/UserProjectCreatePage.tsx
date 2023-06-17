@@ -23,11 +23,14 @@ import {
   ProjectMemberExplainText,
   ProjectMemberInputContainer,
   ProjectDateContainer,
+  ProjectCreateButton,
+  LocationContainer,
 } from './styled'
 // antd 적용하기
 import { Form, Input, Select, DatePicker, Checkbox, Row, Col, Slider } from 'antd'
 import { CreateProjectSection } from './CreateProjectSection'
 import type { SliderMarks } from 'antd/es/slider';
+import { locationOptions } from 'constants/project/locationOptions'
 
 type UserProjectCreatePageProps = {
   className?: string
@@ -136,46 +139,16 @@ export const UserProjectCreatePage: FC<UserProjectCreatePageProps> = ({ classNam
                         style={{ display: 'inline-block', width: 'calc(30% - 8px)', marginLeft: '5px', marginBottom: 0  }}
                       >
                         <Select placeholder="등급">
-                          <Option value="A">A</Option>
-                          <Option value="B">B</Option>
-                          <Option value="C">C</Option>
-                          <Option value="D">D</Option>
-                          <Option value="E">E</Option>
+                          <Option value='1'>A</Option>
+                          <Option value='2'>B</Option>
+                          <Option value='3'>C</Option>
+                          <Option value='4'>D</Option>
+                          <Option value='5'>E</Option>
                         </Select>
                       </Form.Item>
                   </ProjectMemberInputContainer>
                   ))
                 }
-                {/* <ProjectMemberInputContainer>
-                  <Form.Item
-                    name="memberStack"
-                    style={{ display: 'inline-block', width: 'calc(50% - 8px)', marginBottom: '5px' }}
-                  >
-                    <Select placeholder="스택">
-                      <Option value="WEB_FRONTEND">프론트</Option>
-                      <Option value="SERVER_BACKEND">백엔드</Option>
-                      <Option value="APP_CLIENT">앱 클라이언트</Option>
-                    </Select>
-                  </Form.Item>
-                  <Form.Item
-                    name="memberNumber"
-                    style={{ display: 'inline-block', width: 'calc(20% - 8px)', marginLeft: '5px' }}
-                  >
-                    <Input placeholder="인원" />
-                  </Form.Item>
-                  <Form.Item
-                    name="memberGrade"
-                    style={{ display: 'inline-block', width: 'calc(30% - 8px)', marginLeft: '5px' }}
-                  >
-                    <Select placeholder="등급">
-                      <Option value="A">A</Option>
-                      <Option value="B">B</Option>
-                      <Option value="C">C</Option>
-                      <Option value="D">D</Option>
-                      <Option value="E">E</Option>
-                    </Select>
-                  </Form.Item>
-                </ProjectMemberInputContainer> */}
               </Form.Item>
             </Form>
           </ProjectOptionLeftContainer>
@@ -231,11 +204,15 @@ export const UserProjectCreatePage: FC<UserProjectCreatePageProps> = ({ classNam
           </ProjectOptionRightContainer>
         </ProjectOptionContainer>
         <SearchContainer>
-          <InputTitle>지역</InputTitle>
-          <Select size="large" placeholder="지역 선택" style={{ width: 200 }}>
-            <Option value="서울특별시">서울특별시</Option>
-            <Option value="경기도">경기도</Option>
-          </Select>
+          <LocationContainer>
+            <InputTitle>지역</InputTitle>
+            <Select defaultValue={0} options={locationOptions} size="large" placeholder="지역 선택" style={{ width: 200 }}/>
+          </LocationContainer>
+          <LocationContainer>
+            <InputTitleRequired>제목</InputTitleRequired>
+            <Input />
+          </LocationContainer>
+          <ProjectCreateButton type="primary">프로젝트 생성하기</ProjectCreateButton>
         </SearchContainer>
         <CreateProjectSection />
       </Container>

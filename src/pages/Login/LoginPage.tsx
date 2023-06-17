@@ -1,6 +1,6 @@
 import logoImg from 'assets/images/logo.png'
 import { CommonHeader } from 'components/CommonHeader'
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   Container,
@@ -14,19 +14,44 @@ import {
   LogoTypo,
   Root,
 } from './styled'
+import { UserLoginResponseType, userLogin } from 'api/userLogin'
 
 type LoginPageProps = {
   className?: string
 }
 
 export const LoginPage: FC<LoginPageProps> = ({ className }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  const [id, setId] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
   const onClickJoinButton = () => {
     navigate('/join')
   }
 
-  const onTestLogin = () => {
+  const onLoginAPI = () => {
+    if(id.length === 0 || password.length === 0) {
+      return // alert 넣고 싶다..
+    } 
+    const data = {
+      id: id,
+      pw: password
+    }
+    userLogin('/api/login', data)
+    .then((response: UserLoginResponseType) => {
+      if (response.status === 'SUCCESS') {
+        console.log('SUCCESS');
+        navigate('/')
+      } else {
+        console.log('FAIL');
+        console.log('Error message:', response.message);
+      }
+    })
+    .catch((error: any) => {
+      console.error('Error :', error);
+    });
+    //console.log(userLogin('user/login', data))
     // eslint-disable-next-line no-undef
     localStorage.removeItem('test_login')
     // eslint-disable-next-line no-undef
@@ -35,13 +60,13 @@ export const LoginPage: FC<LoginPageProps> = ({ className }) => {
 
   const onKeyPressEnter = (e: any) => {
     if (e.key === 'Enter') {
-      onTestLogin()
+      onLoginAPI()
       navigate('/')
     }
   }
 
   const onClickLogin = () => {
-    onTestLogin()
+    onLoginAPI()
   }
 
   return (
@@ -51,8 +76,8 @@ export const LoginPage: FC<LoginPageProps> = ({ className }) => {
         <LogoImg src={logoImg} alt={'로고 이미지'} />
         <LogoTypo>당신의 능력, 티밍에서 펼쳐보세요!</LogoTypo>
         <InputContainer>
-          <ContentInput placeholder="아이디" />
-          <ContentInput placeholder="비밀번호" type="password" onKeyDown={onKeyPressEnter} />
+          <ContentInput placeholder="아이디" onChange={(e) => setId(e.target.value)}/>
+          <ContentInput placeholder="비밀번호" type="password" onKeyDown={onKeyPressEnter} onChange={(e) => setPassword(e.target.value)}/>
         </InputContainer>
         <LoginButton type="primary" onClick={onClickLogin}>
           로그인
@@ -67,3 +92,4 @@ export const LoginPage: FC<LoginPageProps> = ({ className }) => {
     </Root>
   )
 }
+

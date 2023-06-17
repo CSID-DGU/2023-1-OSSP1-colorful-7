@@ -19,12 +19,21 @@ import {
   QuestionnaireScoreTypo,
   Root,
 } from './styled'
+import { useNavigate } from 'react-router-dom'
 
 type JoinPageProps = {
   className?: string
 }
 
 export const JoinPage: FC<JoinPageProps> = ({ className }) => {
+  const navigate = useNavigate();
+  
+  const [id, setId] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [passwordCheck, setPasswordCheck] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [nickname, setNickname] = useState<string>("");
+  const [introduce, setIntroduce] = useState<string>("");
   const [developmentStack, setDevelopmentStack] = useState<DevelopmentStackType>()
   const { open: questionnaireModalOpen, handleModal: handleQuestionnaireModal } = useModal({})
   const [questionnaireScore, setQuestionnaireScore] = useState<number>()
@@ -49,6 +58,25 @@ export const JoinPage: FC<JoinPageProps> = ({ className }) => {
     setQuestionnaireScore(score)
   }
 
+  const onClickJoin = () => {
+    // api 넣기
+    if(id.length > 0 && password.length > 0 && password === passwordCheck && email.length > 0 && nickname.length > 0 && introduce.length > 0 && developmentStack !== undefined && questionnaireScore !== undefined) {
+      const data = {
+        id: id,
+        password: password,
+        nickname: nickname,
+        introduce: introduce,
+        email: email,
+        developmentStack : developmentStack,
+        grade : questionnaireScore,
+      }
+      // userJoin 함수 호출하기
+
+    }
+    // 성공 시
+    navigate('/login');
+  }
+
   return (
     <Root className={className}>
       <CommonHeader />
@@ -56,12 +84,12 @@ export const JoinPage: FC<JoinPageProps> = ({ className }) => {
         <LogoImg src={logoImg} alt={'로고 이미지'} />
         <LogoTypo>당신의 능력, 티밍에서 펼쳐보세요!</LogoTypo>
         <InputContainer>
-          <ContentInput placeholder="아이디" />
-          <ContentInput placeholder="비밀번호" />
-          <ContentInput placeholder="비밀번호 확인" />
-          <ContentInput placeholder="이메일" />
-          <ContentInput placeholder="닉네임" />
-          <ContentTextArea placeholder="자기소개"></ContentTextArea>
+          <ContentInput placeholder="아이디" onChange={(e) => setId(e.target.value)}/>
+          <ContentInput placeholder="비밀번호" onChange={(e) => setPassword(e.target.value)}/>
+          <ContentInput placeholder="비밀번호 확인" onChange={(e) => setPasswordCheck(e.target.value)}/>
+          <ContentInput placeholder="이메일" onChange={(e) => setEmail(e.target.value)}/>
+          <ContentInput placeholder="닉네임" onChange={(e) => setNickname(e.target.value)}/>
+          <ContentTextArea placeholder="자기소개" onChange={(e) => setIntroduce(e.target.value)}></ContentTextArea>
           <ContentSelect
             value={developmentStack}
             onChange={onChangeDevelopmentStack}
@@ -76,7 +104,7 @@ export const JoinPage: FC<JoinPageProps> = ({ className }) => {
           )}
           {questionnaireScore && <QuestionnaireScoreTypo>퀴즈 점수 : {questionnaireScore}점</QuestionnaireScoreTypo>}
         </InputContainer>
-        <JoinButton type={'primary'}>회원가입</JoinButton>
+        <JoinButton type={'primary'} onClick={onClickJoin}>회원가입</JoinButton>
       </Container>
       {developmentStack && (
         <QuestionnaireModal
