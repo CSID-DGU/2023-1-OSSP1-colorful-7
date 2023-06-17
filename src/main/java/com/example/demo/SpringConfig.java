@@ -9,9 +9,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceUnit;
 
 @Configuration
+
 @EnableJpaRepositories("com.example.demo.repository")
 @EnableTransactionManagement
 public class SpringConfig {
@@ -126,3 +130,4 @@ public class SpringConfig {
 
 
 }
+

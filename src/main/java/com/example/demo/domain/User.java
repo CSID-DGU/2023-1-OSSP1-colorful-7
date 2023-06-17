@@ -39,3 +39,12 @@ public class User {
     private List<Apply> applys;
 
 }
+
+    // public <ProjectListType> void setRecommendedProjectList(ProjectListType projectListType) {
+
+    // }
+
+
+    // private <ProjectListType> void  convertToProjectListType(List<Project> recommendedProjects) {
+    //}
+}
