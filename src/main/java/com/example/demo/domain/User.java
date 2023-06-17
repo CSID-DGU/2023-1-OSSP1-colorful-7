@@ -23,7 +23,7 @@ public class User {
     private String nickname;
     private String id;
     private String password;
-    //private File profile;
+    private File profile;
     private String introduce;
     @JsonIgnore
     @OneToMany(mappedBy = "user")
@@ -38,4 +38,10 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Apply> applys;
 
-}
+   // public <ProjectListType> void setRecommendedProjectList(ProjectListType projectListType) {
+        
+   // }
+
+
+   // private <ProjectListType> void  convertToProjectListType(List<Project> recommendedProjects) {
+    //}
