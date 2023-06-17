@@ -8,6 +8,7 @@ import { ProjectItemType, ProjectListType } from 'types/project'
 import { camelizeKey } from 'utils/camelizeKey'
 import { generateRandomProjectCardLogoImg } from 'utils/generateRandomProjectCardLogoImg'
 import { getDevelopmentStackColor, translateDevelopmentStack } from 'utils/translateDevelopmentStack'
+import {HeartOutlined, HeartFilled} from '@ant-design/icons'
 // import { translateProjectPosition } from 'utils/translatePosition'
 import {
   BannerImg,
@@ -47,6 +48,7 @@ import {
   SideSectionRequireMemberItemTypo,
   SideSectionRequireMemberTitleTypo,
   TitleTypo,
+  LikeButton,
 } from './styled'
 
 type ProjectDetailsPageProps = {
@@ -57,6 +59,12 @@ export const ProjectDetailsPage: FC<ProjectDetailsPageProps> = ({ className }) =
   const { projectKey = 0 } = useParams()
   const projectListSampleData: ProjectListType = camelizeKey(projectListSampleJson.project_list) as ProjectListType
   const [projectItem, setProjectItem] = useState<ProjectItemType>()
+
+    const [liked, setLiked] = useState(false);
+    const handleLikeToggle = () => {
+      setLiked((prevLiked) => !prevLiked);
+    }
+  
   const renderButton = (ProjectItem: ProjectItemType) => {
     if (ProjectItem.valid === 'VALID') {
       if (ProjectItem.position === 'LEADER') {
@@ -111,6 +119,9 @@ export const ProjectDetailsPage: FC<ProjectDetailsPageProps> = ({ className }) =
                 <MenuCountVisitedTypo>조회수: {projectItem.visitedNumber}회</MenuCountVisitedTypo>
                 <MenuCountDivider />
                 <MenuCountLikeTypo>좋아요: {projectItem.likeNumber}회</MenuCountLikeTypo>
+                <LikeButton onClick={handleLikeToggle}>
+                  {liked ? <HeartFilled /> : <HeartOutlined />}
+                </LikeButton>
               </MenuCountContainer>
             </MenuContainer>
             <ContentContainer>

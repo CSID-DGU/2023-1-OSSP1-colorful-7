@@ -219,6 +219,10 @@ export const SideSectionInvitedProjectButtonContainer = styled.div`
   width: 100%;
   gap: 10px;
 `
+
+export const LikeButton = styled.div`
+  color:#A9D0F5;
+`
 /*
 export const SideSectionInvitedProjectApplyButton = styled(Button)`
   display: flex;
