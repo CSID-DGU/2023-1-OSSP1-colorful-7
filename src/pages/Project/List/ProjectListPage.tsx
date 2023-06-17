@@ -36,7 +36,7 @@ const stackOptions: OptionType[] = [
   { value: "etc", label: "기타" },
 ];
 
-const loationOptions: OptionNumberType[] = [
+const locationOptions: OptionNumberType[] = [
   { value: 0, label: "강원도" },
   { value: 1, label: "경기도" },
   { value: 2, label: "경상남도" },
@@ -66,8 +66,8 @@ export const ProjectListPage: FC<ProjectListPageProps> = ({ className }) => {
     (projectItem) =>
       projectItem.title.toLowerCase().includes(search.toLowerCase()) &&
       projectItem.projectType.toLowerCase().includes(projectTypeSelect.toLowerCase()) &&
-      projectItem.requireMemberList.some((member) => member.developmentStack.toLowerCase().includes(stackTypeSelect)) /* &&
-      projectItem.location === parseInt(locationTypeSelect) */
+      projectItem.requireMemberList.some((member) => member.developmentStack.toLowerCase().includes(stackTypeSelect)) &&
+      (locationTypeSelect === '' || projectItem.location === parseInt(locationTypeSelect))
   )
 
   const renderProjectList = () => {
@@ -112,7 +112,7 @@ export const ProjectListPage: FC<ProjectListPageProps> = ({ className }) => {
         </SelectContainer>
         <SelectContainer>
           <TitleTypo>지역 검색</TitleTypo>
-          <SelectBox onChange={(option) => handleLocationTypeSelectChange(option)} defaultValue={0} options={loationOptions} />
+          <SelectBox onChange={(option) => handleLocationTypeSelectChange(option)} defaultValue={0} options={locationOptions} />
         </SelectContainer>
       </Container>
       <Container>
