@@ -10,8 +10,8 @@ export type DevelopmentStackListType = DevelopmentStackItemType[]
 
 export type ProjectRequireMemberType = {
   developmentStack: DevelopmentStackType
-  recommendScore: number
-  number: number
+  recommendScore: number | undefined
+  number: number | undefined
 }
 
 export type ProjectRequireMemberListType = ProjectRequireMemberType[]

@@ -118,6 +118,11 @@ export const InputContainer = styled.div`
   flex-flow: row wrap;
 `
 
+export const InputTitleContainer = styled.div`
+  width: 50%;
+  margin-bottom: 20px;
+`
+
 export const SearchContainer = styled.div`
   display: flex;
   justify-content: space-between;

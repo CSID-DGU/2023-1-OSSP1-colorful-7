@@ -38,11 +38,15 @@ export const LoginPage: FC<LoginPageProps> = ({ className }) => {
       id: id,
       pw: password
     }
-    userLogin('/api/login', data)
+    userLogin('/user/login', data)
     .then((response: UserLoginResponseType) => {
       if (response.status === 'SUCCESS') {
         console.log('SUCCESS');
         navigate('/')
+        // eslint-disable-next-line no-undef
+        localStorage.removeItem('test_login')
+        // eslint-disable-next-line no-undef
+        localStorage.setItem('test_login', 'true')
       } else {
         console.log('FAIL');
         console.log('Error message:', response.message);
@@ -52,10 +56,6 @@ export const LoginPage: FC<LoginPageProps> = ({ className }) => {
       console.error('Error :', error);
     });
     //console.log(userLogin('user/login', data))
-    // eslint-disable-next-line no-undef
-    localStorage.removeItem('test_login')
-    // eslint-disable-next-line no-undef
-    localStorage.setItem('test_login', 'true')
   }
 
   const onKeyPressEnter = (e: any) => {

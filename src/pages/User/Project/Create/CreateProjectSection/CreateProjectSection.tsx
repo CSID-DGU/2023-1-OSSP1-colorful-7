@@ -4,13 +4,8 @@ import 'react-quill/dist/quill.snow.css'
 
 type CreateProjectSectionProps = {
   className?: string
+  setProjectContent: any
 }
-
-/* onChange={onChangeContents}로 사용 가능!
-const onChangeContents = (contents: any) => {
-  console.log(contents);
-}
-*/
 
 const modules = {
   toolbar: {
@@ -68,11 +63,15 @@ const modules = {
     ],
   },
 }
-export const CreateProjectSection: FC<CreateProjectSectionProps> = ({ className }) => {
+export const CreateProjectSection: FC<CreateProjectSectionProps> = ({ className, setProjectContent }) => {
+  const onChangeContents = (contents: any) => {
+    setProjectContent(contents);
+  }
+  
   return (
     <Root className={className}>
       <InputTitleRequired>내용</InputTitleRequired>
-      <ReactQuillStyled modules={modules}/>
+      <ReactQuillStyled modules={modules} onChange={onChangeContents}/>
     </Root>
   )
 }

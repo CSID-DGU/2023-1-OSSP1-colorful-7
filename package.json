@@ -53,5 +53,5 @@
   "devDependencies": {
     "@types/node": "^18.14.0"
   },
-  "proxy": "http://localhost:8000"
+  "proxy": "http://192.168.0.51:8080/"
 }

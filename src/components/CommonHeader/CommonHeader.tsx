@@ -18,6 +18,7 @@ import {
   UserContainer,
   UserIcon,
 } from './styled'
+import { UserLogoutResponseType, userLogout } from 'api/userLogout'
 
 type CommonHeaderProps = {
   className?: string
@@ -49,11 +50,21 @@ export const CommonHeader: FC<CommonHeaderProps> = ({ className }) => {
   }
   const onClickLogoutButton = () => {
     // eslint-disable-next-line no-undef
-    localStorage.removeItem('test_login')
-    // eslint-disable-next-line no-undef
-    window.location.reload()
+    userLogout('/user/logout')
+    .then((response: UserLogoutResponseType) => {
+      if (response.status === 'SUCCESS') {
+        console.log('SUCCESS')
+        localStorage.removeItem('test_login')
+        window.location.reload()
+      } else {
+        console.log('FAIL');
+        console.log('Error message:', response.message);
+      }
+    })
+    .catch((error: any) => {
+      console.error('Error :', error);
+    });
   }
-
   const renderUserContainer = () => {
     // eslint-disable-next-line no-undef
     if (localStorage.getItem('test_login') === 'true') {

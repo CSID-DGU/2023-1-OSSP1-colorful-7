@@ -68,10 +68,10 @@ export const JoinPage: FC<JoinPageProps> = ({ className }) => {
         introduce: introduce,
         email: email,
         developmentStack : developmentStack,
-        grade : questionnaireScore,
+        scorePercent : questionnaireScore,
       }
       // userJoin 함수 호출하기
-
+      
     }
     // 성공 시
     navigate('/login');
@@ -102,7 +102,7 @@ export const JoinPage: FC<JoinPageProps> = ({ className }) => {
               퀴즈 풀기
             </QuestionnaireButton>
           )}
-          {questionnaireScore && <QuestionnaireScoreTypo>퀴즈 점수 : {questionnaireScore}점</QuestionnaireScoreTypo>}
+          {questionnaireScore && <QuestionnaireScoreTypo>정답률 : {questionnaireScore}%</QuestionnaireScoreTypo>}
         </InputContainer>
         <JoinButton type={'primary'} onClick={onClickJoin}>회원가입</JoinButton>
       </Container>

@@ -16,7 +16,10 @@ export const gradeQuestionnaire = (
   answerSheetData: QuestionAnswerSheetListType
 ) => {
   let grade = 0
+  let totalGrade = 0
+  let scorePercent = 0
   questionnaireItem.questionList.forEach((questionItem) => {
+    totalGrade += questionItem.score
     if (
       compareNumberArrayAnswerAndStringAnswer(
         answerSheetData.filter((value) => value.questionKey === questionItem.key)[0].answer,
@@ -26,5 +29,6 @@ export const gradeQuestionnaire = (
       grade += +questionItem.score
     }
   })
-  return grade
+  scorePercent = Math.ceil((grade / totalGrade) * 100)
+  return scorePercent
 }
