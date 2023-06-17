@@ -18,7 +18,7 @@ import {
   UserContainer,
   UserIcon,
 } from './styled'
-import { UserLogoutResponseType, userLogout } from 'api/userLogout'
+import { PostUserLogoutResponseType, postuserLogout} from 'api/postUserLogout'
 
 type CommonHeaderProps = {
   className?: string
@@ -50,18 +50,24 @@ export const CommonHeader: FC<CommonHeaderProps> = ({ className }) => {
   }
   const onClickLogoutButton = () => {
     // eslint-disable-next-line no-undef
-    userLogout('/user/logout')
-    .then((response: UserLogoutResponseType) => {
+    postuserLogout('/user/logout')
+    .then((response: PostUserLogoutResponseType) => {
       if (response.status === 'SUCCESS') {
+        // eslint-disable-next-line no-undef
         console.log('SUCCESS')
+        // eslint-disable-next-line no-undef
         localStorage.removeItem('test_login')
+        // eslint-disable-next-line no-undef
         window.location.reload()
       } else {
+        // eslint-disable-next-line no-undef
         console.log('FAIL');
+        // eslint-disable-next-line no-undef
         console.log('Error message:', response.message);
       }
     })
     .catch((error: any) => {
+      // eslint-disable-next-line no-undef
       console.error('Error :', error);
     });
   }

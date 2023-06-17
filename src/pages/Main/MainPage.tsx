@@ -6,6 +6,7 @@ import { RecentProjectListSection } from './RecentProjectListSection'
 import { RecommendProjectListSection } from './RecommendProjectListSection'
 import { Root } from './styled'
 import { ProjectListType } from 'types/project'
+import { GetMainInfoResponseType, getmainInfo } from 'api/getMainInfo'
 
 type MainPageProps = {
   className?: string
@@ -17,8 +18,21 @@ export const MainPage: FC<MainPageProps> = ({ className }) => {
   const [recentProjectList, setRecentProjectList] = useState<ProjectListType>([])
   
   useEffect(() => {
-    // 함수 만들어서 변수에 저장하기
-    
+    getmainInfo('/main/info')
+    .then((response: GetMainInfoResponseType) => {
+      if (response.status === 'SUCCESS') {
+        console.log('SUCCESS');
+        setRecommendedProjectList(recommendedProjectList)
+        setPopularProjectList(popularProjectList)
+        setRecentProjectList(recentProjectList)
+      } else {
+        console.log('FAIL');
+        console.log('Error message:', response.message);
+      }
+    })
+    .catch((error: any) => {
+      console.error('Error :', error);
+    });
   }, [])
 
   return ( 

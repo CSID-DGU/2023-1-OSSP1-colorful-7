@@ -33,7 +33,8 @@ import { CreateProjectSection } from './CreateProjectSection'
 import type { SliderMarks } from 'antd/es/slider';
 import { locationOptions } from 'constants/project/locationOptions'
 import { DevelopmentStackType, ProjectRequireMemberListType, ProjectType } from 'types/project'
-import { ProjectCreateResponseType, projectCreate } from 'api/projectCreate'
+import { PostProjectCreateResponseType, postprojectCreate } from 'api/postProjectCreate'
+import { useNavigate } from 'react-router-dom'
 
 type UserProjectCreatePageProps = {
   className?: string
@@ -101,6 +102,8 @@ const { RangePicker } = DatePicker;
 const dateFormat = 'YYYY/MM/DD';
 
 export const UserProjectCreatePage: FC<UserProjectCreatePageProps> = ({ className }) => {
+  const navigate = useNavigate()
+
   const [title, setTitle] = useState<string>("");
   const [projectType, setProjectType] = useState<ProjectType>();
   const [requireMemberList, setRequireMemberList] = useState<ProjectRequireMemberListType>([
@@ -131,7 +134,6 @@ export const UserProjectCreatePage: FC<UserProjectCreatePageProps> = ({ classNam
   const [projectContent, setProjectContent] = useState<string>("")
 
   const onClickProjectCreate = () => {
-  
     if(title.length > 0 && projectType !== undefined && leaderDevelopmentStack !== undefined && location !== undefined && projectStartDate !== undefined && projectEndDate != undefined && projectContent.length > 0) {
       const filteredrequireMemberList = requireMemberList.filter((member) => member.number !== undefined && member.number > 0 && member.recommendScore !== undefined && member.recommendScore > 0)
       if(filteredrequireMemberList.length === 0) {
@@ -148,17 +150,21 @@ export const UserProjectCreatePage: FC<UserProjectCreatePageProps> = ({ classNam
         projectContent: projectContent
       }
       // api 호출하기
-      projectCreate('/project/create', data)
-      .then((response: ProjectCreateResponseType) => {
+      postprojectCreate('/project/create', data)
+      .then((response: PostProjectCreateResponseType) => {
         if (response.status === 'SUCCESS') {
+          // eslint-disable-next-line no-undef
           console.log('SUCCESS');
           navigate('/')
         } else {
+          // eslint-disable-next-line no-undef
           console.log('FAIL');
+          // eslint-disable-next-line no-undef
           console.log('Error message:', response.message);
         }
       })
       .catch((error: any) => {
+        // eslint-disable-next-line no-undef
         console.error('Error :', error);
       });
       }
@@ -175,6 +181,16 @@ export const UserProjectCreatePage: FC<UserProjectCreatePageProps> = ({ classNam
   const onChangeProjectMemberScore = (value: string, key: string) => {
     setRequireMemberList(requireMemberList.map((member) => member.developmentStack === key ? { ...member, recommendScore: parseInt(value) } : member ));
   }
+
+  const onProjectDateChange = (dates: any, dateStrings: string[]) => {
+    if (dates) {
+      setProjectStartDate(dateStrings[0])
+      setProjectEndDate(dateStrings[1])
+    } else {
+      setProjectStartDate(undefined)
+      setProjectEndDate(undefined)
+    }
+  };
 
   
 
@@ -251,7 +267,7 @@ export const UserProjectCreatePage: FC<UserProjectCreatePageProps> = ({ classNam
                 <ProjectDateContainer>
                   <InputTitleRequired>프로젝트 기간</InputTitleRequired>
                   <InputContainer>
-                    <RangePicker format={dateFormat} />
+                    <RangePicker format={dateFormat} onChange={onProjectDateChange}/>
                   </InputContainer>
                 </ProjectDateContainer>
               </InputContainer>

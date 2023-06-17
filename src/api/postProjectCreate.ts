@@ -2,7 +2,7 @@ import { AxiosRequestConfig } from 'axios'
 import { axiosPOST } from './base'
 import { DevelopmentStackType, ProjectRequireMemberListType, ProjectType } from 'types/project'
 
-export type ProjectCreateRequestType = {
+export type PostProjectCreateRequestType = {
   title: string // 프로젝트 제목
 	projectType: ProjectType
 	requireMemberList: ProjectRequireMemberListType
@@ -13,14 +13,14 @@ export type ProjectCreateRequestType = {
 	projectContent: string // 게시글 내용
 }
 
-export type ProjectCreateResponseType = {
+export type PostProjectCreateResponseType = {
   status: "SUCCESS" | "FAILED"
 	message?: string
   projectKey: number
 }
 
-export const projectCreate = (url: string, data: ProjectCreateRequestType, config?: AxiosRequestConfig) => {
- return axiosPOST<ProjectCreateRequestType, ProjectCreateResponseType>(
+export const postprojectCreate = (url: string, data: PostProjectCreateRequestType, config?: AxiosRequestConfig) => {
+ return axiosPOST<PostProjectCreateRequestType, PostProjectCreateResponseType>(
     url,
     data,
     config

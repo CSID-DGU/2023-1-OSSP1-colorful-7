@@ -1,23 +1,15 @@
-// 테스트!
 import { AxiosRequestConfig } from 'axios'
 import { axiosGET } from './base'
-import { ProjectListType } from 'types/project'
 
-export type GetProjectListRequestType = {
-  type: "RECOMMEND" | "POPULAR" | "RECENT"
-  page: number
-}
+export type GetProjectListRequestType = {}
 
-export type GetProjectListResponseType = {
-  projectList: ProjectListType
-}
+export type GetProjectListResponseType = {}
 
-const getQueryPath = (params: GetProjectListRequestType) => `/project/list`
+const getQueryPath = () => `/project/list`
 
-export const getProjectList = (params: GetProjectListRequestType, config?: AxiosRequestConfig) => {
+export const getProjectList = (config?: AxiosRequestConfig) => {
  return axiosGET<GetProjectListRequestType, GetProjectListResponseType>(
-    getQueryPath(params),
-    params,
+    getQueryPath(),
     config
   )
 }

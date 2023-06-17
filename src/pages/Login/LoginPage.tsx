@@ -14,7 +14,7 @@ import {
   LogoTypo,
   Root,
 } from './styled'
-import { UserLoginResponseType, userLogin } from 'api/userLogin'
+import { PostUserLoginResponseType, postuserLogin} from 'api/postUserLogin'
 
 type LoginPageProps = {
   className?: string
@@ -38,9 +38,10 @@ export const LoginPage: FC<LoginPageProps> = ({ className }) => {
       id: id,
       pw: password
     }
-    userLogin('/user/login', data)
-    .then((response: UserLoginResponseType) => {
+    postuserLogin('/user/login', data)
+    .then((response: PostUserLoginResponseType) => {
       if (response.status === 'SUCCESS') {
+        // eslint-disable-next-line no-undef
         console.log('SUCCESS');
         navigate('/')
         // eslint-disable-next-line no-undef
@@ -48,11 +49,14 @@ export const LoginPage: FC<LoginPageProps> = ({ className }) => {
         // eslint-disable-next-line no-undef
         localStorage.setItem('test_login', 'true')
       } else {
+        // eslint-disable-next-line no-undef
         console.log('FAIL');
+        // eslint-disable-next-line no-undef
         console.log('Error message:', response.message);
       }
     })
     .catch((error: any) => {
+      // eslint-disable-next-line no-undef
       console.error('Error :', error);
     });
     //console.log(userLogin('user/login', data))

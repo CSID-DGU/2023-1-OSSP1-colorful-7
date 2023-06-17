@@ -2,7 +2,7 @@ import { AxiosRequestConfig } from 'axios'
 import { axiosPOST } from './base'
 import { DevelopmentStackType } from 'types/project'
 
-export type UserJoinRequestType = {
+export type PostUserJoinRequestType = {
   id: string
 	password: string
 	nickname: string
@@ -12,13 +12,13 @@ export type UserJoinRequestType = {
 	grade : number
 }
 
-export type UserJoinResponseType = {
+export type PostUserJoinResponseType = {
   status: "SUCCESS" | "FAILED"
 	message?: string
 }
 
-export const userJoin = (url: string, data: UserJoinRequestType, config?: AxiosRequestConfig) => {
- return axiosPOST<UserJoinRequestType, UserJoinResponseType>(
+export const postuserJoin = (url: string, data: PostUserJoinRequestType, config?: AxiosRequestConfig) => {
+ return axiosPOST<PostUserJoinRequestType, PostUserJoinResponseType>(
     url,
     data,
     config
