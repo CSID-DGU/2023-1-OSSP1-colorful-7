@@ -15,4 +15,16 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     public int duplicationCheckId(String id);
     public int duplicationCheckNickname(String nickname);
     public List<Project> findManageProjectList(String user_id);
+
+    public List<User> findUsersByStack(String stack);
+
+    public int findGradeByUserId(User user);
+
+    public String findUserStackById(String id);
+
+    public User findUserById(String id);
+
+    public int findIsAdminById(String id);
+
+
 }

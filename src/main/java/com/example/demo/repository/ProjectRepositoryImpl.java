@@ -1,6 +1,7 @@
 package com.example.demo.repository;
 
 import com.example.demo.domain.Project;
+import com.example.demo.domain.ProjectStack;
 import com.example.demo.domain.User;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -29,7 +30,7 @@ public class ProjectRepositoryImpl implements ProjectRepository{
     }
 
     @Override
-    public Project findByProjectId(Long project_id){
+    public Project findByProjectId(int project_id){
         String sql = "select project from Project project where Project_id = :project_id";
         TypedQuery<Project> query = em.createQuery(sql, Project.class);
         query.setParameter("project_id", project_id);
@@ -41,7 +42,7 @@ public class ProjectRepositoryImpl implements ProjectRepository{
     }
 
     @Override
-    public int delete(Long project_id){
+    public int delete(int project_id){
         Project project = findByProjectId(project_id);
         em.remove(project);
         Project removed_project = findByProjectId(project_id);
@@ -50,8 +51,27 @@ public class ProjectRepositoryImpl implements ProjectRepository{
     }
 
     @Override
+    public List<ProjectStack> findProjectStackByProjectId(int project_id){
+        String sql = "select project_stacks from Project ps where ps.Project_id =: project_id";
+        TypedQuery<ProjectStack> query = em.createQuery(sql, ProjectStack.class);
+        query.setParameter("project_id", project_id);
+        List<ProjectStack> list = query.getResultList();
+        return list;
+    }
+
+    @Override
+    public List<Project> findAllProjectList(){
+        String sql = "select project from Project project";
+        TypedQuery<Project> query = em.createQuery(sql, Project.class);
+        List<Project> list = query.getResultList();
+        return list;
+    }
+
+
+
+    @Override
     public List<Project> findAll() {
-        return null;
+        return findAll();
     }
 
     @Override

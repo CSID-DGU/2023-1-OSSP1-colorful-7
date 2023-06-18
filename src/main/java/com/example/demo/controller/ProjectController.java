@@ -41,7 +41,7 @@ public class ProjectController {
     }
 
     @PostMapping("/project/like")
-    public String projectLike(HttpServletRequest request, Long projectId){
+    public String projectLike(HttpServletRequest request, int projectId){
         projectLikeService.projectLike(request, projectId);
         return null;
     }
@@ -50,10 +50,11 @@ public class ProjectController {
     public SingleResponse<Project> projectCreate(@RequestBody Project project){
         CommonResponse commonResponse = new CommonResponse();
         List<ProjectStack> projectStackList = project.getProject_stacks();
+        Project saved_project = projectService.insert(project);
         for(ProjectStack stack : projectStackList){
+            stack.setProject(saved_project);
             projectStackService.insert(stack);
         }
-        Project saved_project = projectService.insert(project);
         if(saved_project!=null){
             commonResponse.setStatus("SUCCESS");
             commonResponse.setMessage(null);
@@ -65,12 +66,12 @@ public class ProjectController {
     }
 
     @PostMapping("/project/delete")
-    public void projectDelete(Long project_id){
+    public void projectDelete(int project_id){
         projectService.delete(project_id);
     }
 
     @GetMapping("/project/details")
-    public<T> SingleResponse<Project> findProject(@RequestBody Long project_id)throws JsonProcessingException {
+    public<T> SingleResponse<Project> findProject(@RequestParam int project_id)throws JsonProcessingException {
         Project project = projectService.findByProjectId(project_id);
         CommonResponse commonResponse = new CommonResponse();
         if(project!=null){
@@ -84,7 +85,7 @@ public class ProjectController {
     }
 
     @PostMapping("/project/apply")
-    public String apply(HttpServletRequest request, Long project_id){
+    public String apply(HttpServletRequest request, int project_id){
         Project project = new Project();
         project = projectService.findByProjectId(project_id);
         String user_id = userService.findSessionId(request);

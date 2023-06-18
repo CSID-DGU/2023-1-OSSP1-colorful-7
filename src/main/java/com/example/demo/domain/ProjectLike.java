@@ -1,5 +1,6 @@
 package com.example.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,10 +20,12 @@ public class ProjectLike {
     @Column(name="project_like_id")
     private Long project_like_id;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name="user_id")
     private User user;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name="project_id")
     private Project project;

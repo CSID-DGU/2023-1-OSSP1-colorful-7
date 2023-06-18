@@ -7,6 +7,6 @@ import javax.servlet.http.HttpSession;
 
 @Getter
 @Setter
-public class SessionResponse extends CommonResponse{
-    private HttpSession session;
+public class AdminResponse extends CommonResponse{
+    private int isAdmin;
 }

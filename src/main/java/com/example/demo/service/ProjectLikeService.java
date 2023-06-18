@@ -18,7 +18,7 @@ public class ProjectLikeService {
         projectLike_rp = projectLikeRepository;
     }
 
-    public void projectLike(HttpServletRequest request, Long projectId){
+    public void projectLike(HttpServletRequest request, int projectId){
         String user_id = userService.findSessionId(request);
         User user = userService.findUserInfo(user_id);
         Project project = projectService.findByProjectId(projectId);

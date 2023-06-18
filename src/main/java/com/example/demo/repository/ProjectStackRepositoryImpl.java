@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -47,6 +48,7 @@ public class ProjectStackRepositoryImpl implements ProjectStackRepository{
     public List<ProjectStack> findAllById(Iterable<Integer> integers) {
         return null;
     }
+
 
     @Override
     public long count() {

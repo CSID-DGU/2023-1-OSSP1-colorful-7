@@ -1,5 +1,6 @@
 package com.example.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +16,7 @@ public class ProjectStack {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long projectStack_id;
 
+    @JsonBackReference
     @ManyToOne
     private Project project;
     private String development_stack;

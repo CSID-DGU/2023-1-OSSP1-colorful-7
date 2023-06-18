@@ -1,5 +1,6 @@
 package com.example.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,14 +27,19 @@ public class Project {
     private String project_end_date;
     private int location;
     private String is_available;
+    @JsonManagedReference
     @OneToMany(mappedBy = "project")
     private List<Member> members;
+    @JsonManagedReference
     @OneToMany(mappedBy = "project")
     private List<Invitation> invitations;
+    @JsonManagedReference
     @OneToMany(mappedBy = "project")
     private List<ProjectLike> project_likes;
+    @JsonManagedReference
     @OneToMany(mappedBy = "project")
     private List<ProjectStack> project_stacks;
+    @JsonManagedReference
     @OneToMany(mappedBy = "project")
     private List<Apply> applys;
 

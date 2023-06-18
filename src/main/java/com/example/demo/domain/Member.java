@@ -1,6 +1,7 @@
 
 package com.example.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,8 +15,10 @@ public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long member_id;
+    @JsonBackReference
     @ManyToOne
     private Project project;
+    @JsonBackReference
     @OneToOne
     private User user;
     private String position;

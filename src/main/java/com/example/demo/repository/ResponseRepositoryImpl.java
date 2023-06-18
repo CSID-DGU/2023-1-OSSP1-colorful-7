@@ -2,7 +2,7 @@ package com.example.demo.repository;
 
 import com.example.demo.response.CommonResponse;
 import com.example.demo.response.ListResponse;
-import com.example.demo.response.SessionResponse;
+import com.example.demo.response.AdminResponse;
 import com.example.demo.response.SingleResponse;
 import org.springframework.stereotype.Repository;
 
@@ -31,11 +31,11 @@ public class ResponseRepositoryImpl implements ResponseRepository{
         listResponse.setList_data(list_data);
         return listResponse;
     }
-    public SessionResponse getSessionResponse(CommonResponse result, HttpSession session){
-        SessionResponse sessionResponse = new SessionResponse();
-        sessionResponse.setStatus(result.getStatus());
-        sessionResponse.setMessage(result.getMessage());
-        sessionResponse.setSession(session);
-        return sessionResponse;
+    public AdminResponse getAdminResponse(CommonResponse result, int isAdmin){
+        AdminResponse adminResponse = new AdminResponse();
+        adminResponse.setStatus(result.getStatus());
+        adminResponse.setMessage(result.getMessage());
+        adminResponse.setIsAdmin(isAdmin);
+        return adminResponse;
     }
 }

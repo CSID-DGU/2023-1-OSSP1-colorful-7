@@ -4,28 +4,33 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "project_title": "prj1",
-  "project_content": "content1",
-  "list_count": 3,
-  "visited_number": 7,
-  "project_type": "웹",
-  "project_start_date": "2023-06-16",
-  "project_end_date": "2023-09-16",
+  "project_title": "prj4",
+  "project_content": "content4",
+  "list_count": 7,
+  "visited_number": 12,
+  "project_type": "앱",
+  "project_start_date": "2023-06-19",
+  "project_end_date": "2023-09-19",
   "location": 1,
   "is_available": "VALID",
-  "project_stacks": [{
-    "project": null,
-    "development_stack": "웹 프론트엔드",
-    "require_member": 2,
-    "require_grade": 2
-  }]
+  "project_stacks": [
+    {
+      "project": null,
+      "development_stack": "웹 프론트엔드",
+      "require_member": 1,
+      "require_grade": 2
+    },
+    {
+      "project": null,
+      "development_stack": "웹 백엔드",
+      "require_member": 1,
+      "require_grade": 3
+    }
+  ]
 }
 
 ### 프로젝트 상세보기 (미완성)
-GET http://localhost:8080/project/details
+GET http://localhost:8080/project/details?project_id=10
 Accept: application/json
 Content-Type: application/json
 
-{
-  "project_id": 1
-}

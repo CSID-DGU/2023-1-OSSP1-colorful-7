@@ -1,8 +1,6 @@
 package com.example.demo.response;
 
-import com.example.demo.repository.MemberRepository;
 import com.example.demo.repository.ResponseRepository;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
@@ -26,8 +24,8 @@ public class ResponseService {
         return response_rp.getListResponse(result, list_data);
     }
 
-    public SessionResponse getSessionResponse(CommonResponse result, HttpSession session){
-        return response_rp.getSessionResponse(result, session);
+    public AdminResponse getAdminResponse(CommonResponse result, int isAdmin){
+        return response_rp.getAdminResponse(result, isAdmin);
     }
 
 

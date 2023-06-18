@@ -96,11 +96,30 @@ public class UserService {
 //        return list;
 //    }
 
+    public String findUserStackById(String user_id){
+        return user_rp.findUserStackById(user_id);
+    }
+
+    public List<User> findUsersByStack(String stack){
+        return user_rp.findUsersByStack(stack);
+    }
+
+    public int findGradeByUserId(User user){
+        return user_rp.findGradeByUserId(user);
+    }
+
 
     /* //지원한 프로젝트 리스트 가져오기
     public List<Project> findApplyProjectList(String userId) {
         List<Project> applyProjectList = user_rp.findApplyProjectList(user_id);
         return applyProjectList;
         */
+    public User findUserById(String id){
+        return user_rp.findUserById(id);
+    }
+
+    public int findIsAdminById(String id){
+        return user_rp.findIsAdminById(id);
+    }
 }
 

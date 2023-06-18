@@ -90,6 +90,49 @@ public class UserRepositoryImpl implements UserRepository{
         return list;
     }
 
+    public List<User> findUsersByStack(String stack){
+        String sql = "select * from User where user_id in (select user_id from developmentStack where developmentStack =: stack )";
+        TypedQuery<User> query = em.createQuery(sql, User.class);
+        query.setParameter("developmentStack", stack);
+        List<User> list = query.getResultList();
+        return list;
+    }
+
+    @Override
+    public int findGradeByUserId(User user){
+        String sql = "select grade from DevelopmentStack where user =: user_id";
+        TypedQuery<Integer> query = em.createQuery(sql, Integer.class);
+        query.setParameter("user_id", user.getUser_id());
+        int grade = query.getSingleResult();
+        return grade;
+
+    }
+    @Override
+    public String findUserStackById(String user_id){
+        String sql = "select development_stack from DevelopmentStack where user =: user_id";
+        TypedQuery<String> query = em.createQuery(sql, String.class);
+        query.setParameter("user_id", user_id);
+        String stack = query.getSingleResult();
+        return stack;
+    }
+    @Override
+    public User findUserById(String id){
+        String sql = "select user from User user where user_id =: user_id";
+        TypedQuery<User> query = em.createQuery(sql, User.class);
+        query.setParameter("user_id", id);
+        User user = query.getSingleResult();
+        return user;
+    }
+
+    @Override
+    public int findIsAdminById(String id){
+        String sql = "select isAdmin from User where id =: user_id";
+        TypedQuery<Integer> query = em.createQuery(sql, Integer.class);
+        query.setParameter("user_id", id);
+        int isAdmin  = query.getSingleResult();
+        return isAdmin;
+    }
+
     @Override
     public List<User> findAll() {
         return null;
