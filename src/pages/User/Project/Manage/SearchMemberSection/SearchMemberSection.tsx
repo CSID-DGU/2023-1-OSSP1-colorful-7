@@ -1,19 +1,50 @@
 import Avatar from 'assets/images/missing_avatar.png'
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 import userListSampleJson from 'constants/json/user_list_sample.json';
 import { Root, StackTag, UserIcon, UserNameTypo } from './styled'
 import { Button, List, Space } from 'antd'
 import { UserInfoListType } from 'types/project'
 import { camelizeKey } from 'utils/camelizeKey'
+import { GetUserProjectManageRecommendResponseType, getUserProjectManageRecommend } from 'api/getUserProjectManageRecommend';
 
 type SearchMemberSectionProps = {
   className?: string
+  projectKey: string | 0
 }
 
 const userListData = camelizeKey(userListSampleJson.user_list) as UserInfoListType;
 
 // 여기에 들어갈 json 데이터 정의 필요!
-export const SearchMemberSection: FC<SearchMemberSectionProps> = ({ className }) => {
+export const SearchMemberSection: FC<SearchMemberSectionProps> = ({ className, projectKey }) => {
+
+  const [userInfoListData, setUserInfoListData] = useState<UserInfoListType>([])
+  useEffect(() => {
+    let data = {
+      projectKey: 0
+    }
+    if(projectKey !== 0) {
+      data.projectKey = parseInt(projectKey)
+    } 
+    getUserProjectManageRecommend(data)
+    .then((response: GetUserProjectManageRecommendResponseType) => {
+      if (response.status === 'SUCCESS') {
+        // eslint-disable-next-line no-undef
+        console.log('SUCCESS');
+        // projectDetails 받아서 가공하기
+      } else {
+         // eslint-disable-next-line no-undef
+        console.log('FAIL');
+         // eslint-disable-next-line no-undef
+        console.log('Error message:', response.message);
+      }
+    })
+    .catch((error: any) => {
+      // eslint-disable-next-line no-undef
+      console.error('Error :', error);
+    });
+  }, [])
+
+
   const filteredUserListData = userListData.filter(
     (userItem) => 
       userItem.userId++ &&

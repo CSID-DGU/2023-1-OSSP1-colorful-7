@@ -38,6 +38,10 @@ export type ProjectItemType = {
   valid: ProjectValidType
 }
 
+export type ProjectDetailItemType = {
+	projectContent: string // 게시글 추가
+} & ProjectItemType
+
 export type ProjectListType = ProjectItemType[]
 
 export type ApplyProjectStatusType = 'PENDING' | 'BELONG' | 'REJECT'

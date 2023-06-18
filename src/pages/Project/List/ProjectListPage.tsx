@@ -2,11 +2,13 @@
 import { CommonHeader } from 'components/CommonHeader';
 import { ProjectCard } from 'components/ProjectCard';
 import projectListSampleJson from 'constants/json/project_list_sample.json';
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { ProjectListType, ProjectType } from 'types/project';
 import { camelizeKey } from 'utils/camelizeKey';
 import { ProjectCardContainer, Root, Container, SelectContainer, SearchBox, SearchContainer, SelectBox, TitleTypo } from './styled';
 import { locationOptions } from 'constants/project/locationOptions';
+import { getmainInfo } from 'api/getMainInfo';
+import { GetProjectListResponseType, getProjectList } from 'api/getProjectList';
 
 type ProjectListPageProps = {
   className?: string;
@@ -38,6 +40,21 @@ export const ProjectListPage: FC<ProjectListPageProps> = ({ className }) => {
   const [stackTypeSelect, setStackTypeSelect] = useState('')
   const [locationTypeSelect, setLocationTypeSelect] = useState('')
 
+  useEffect(() => {
+    getProjectList()
+    .then((response: GetProjectListResponseType) => {
+      if (response.status === 'SUCCESS') {
+        console.log('SUCCESS');
+        // projectList 받아서 가공하기
+      } else {
+        console.log('FAIL');
+        console.log('Error message:', response.message);
+      }
+    })
+    .catch((error: any) => {
+      console.error('Error :', error);
+    });
+  }, [])
 
   const filteredProjectListData = projectListData.filter(
     (projectItem) =>

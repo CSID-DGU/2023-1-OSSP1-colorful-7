@@ -3,7 +3,7 @@ import missingAvatarImg from 'assets/images/missing_avatar.png'
 import { CommonHeader } from 'components/CommonHeader'
 import projectListSampleJson from 'constants/json/project_list_sample.json'
 import { FC, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { ProjectItemType, ProjectListType } from 'types/project'
 import { camelizeKey } from 'utils/camelizeKey'
 import { generateRandomProjectCardLogoImg } from 'utils/generateRandomProjectCardLogoImg'
@@ -50,25 +50,33 @@ import {
   TitleTypo,
   LikeButton,
 } from './styled'
+import { GetProjectDetailsResponseType, getProjectDetails } from 'api/getProjectDetails'
 
 type ProjectDetailsPageProps = {
   className?: string
 }
 
 export const ProjectDetailsPage: FC<ProjectDetailsPageProps> = ({ className }) => {
+  const navigate = useNavigate()
+  
   const { projectKey = 0 } = useParams()
   const projectListSampleData: ProjectListType = camelizeKey(projectListSampleJson.project_list) as ProjectListType
   const [projectItem, setProjectItem] = useState<ProjectItemType>()
 
-    const [liked, setLiked] = useState(false);
-    const handleLikeToggle = () => {
-      setLiked((prevLiked) => !prevLiked);
-    }
+  const [liked, setLiked] = useState(false);
+
+  const handleLikeToggle = () => {
+    setLiked((prevLiked) => !prevLiked);
+  }
+
+  const onClickProjectManage = () => {
+    navigate(`user/project/manage/${projectKey}`)
+  }
   
   const renderButton = (ProjectItem: ProjectItemType) => {
     if (ProjectItem.valid === 'VALID') {
       if (ProjectItem.position === 'LEADER') {
-        return <SideSectionManageProjectButton type={'ghost'}>관리하기</SideSectionManageProjectButton>
+        return <SideSectionManageProjectButton type={'ghost'} onClick={onClickProjectManage}>관리하기</SideSectionManageProjectButton>
       } else if (ProjectItem.position === 'MEMBER') {
         return (
           <SideSectionQuitProjectButton type={'ghost'} disabled>
@@ -89,6 +97,30 @@ export const ProjectDetailsPage: FC<ProjectDetailsPageProps> = ({ className }) =
   }
 
   useEffect(() => {
+    let data = {
+      projectKey: 0
+    }
+    if(projectKey !== 0) {
+      data.projectKey = parseInt(projectKey)
+    } 
+    getProjectDetails(data)
+    .then((response: GetProjectDetailsResponseType) => {
+      if (response.status === 'SUCCESS') {
+        // eslint-disable-next-line no-undef
+        console.log('SUCCESS');
+        // projectDetails 받아서 가공하기
+      } else {
+         // eslint-disable-next-line no-undef
+        console.log('FAIL');
+         // eslint-disable-next-line no-undef
+        console.log('Error message:', response.message);
+      }
+    })
+    .catch((error: any) => {
+      // eslint-disable-next-line no-undef
+      console.error('Error :', error);
+    });
+    // 이걸 대체하기
     setProjectItem(projectListSampleData[+projectKey])
   }, [])
 

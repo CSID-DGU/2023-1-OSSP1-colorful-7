@@ -1,6 +1,6 @@
 import Avatar from 'assets/images/missing_avatar.png'
 import UserListSampleJson from 'constants/json/user_list_sample.json'
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { UserInfoListType } from 'types/project'
 import { camelizeKey } from 'utils/camelizeKey'
 import { translateDevelopmentStack, getDevelopmentStackColor } from 'utils/translateDevelopmentStack'
@@ -15,13 +15,35 @@ import {
   UserIntroductionTypo,
   UserContainer
  } from './styled'
+import { GetUserInfoResponseType, getUserInfo } from 'api/getUserInfo'
 
 type ProfileHeaderProps = {
   className?: string
 }
 
 export const ProfileHeader: FC<ProfileHeaderProps> = ({ className }) => {
+  useEffect(() => {
+    getUserInfo()
+    .then((response: GetUserInfoResponseType) => {
+      if (response.status === 'SUCCESS') {
+        // eslint-disable-next-line no-undef
+        console.log('SUCCESS');
+        // 값 받아오기
+      } else {
+        // eslint-disable-next-line no-undef
+        console.log('FAIL');
+        // eslint-disable-next-line no-undef
+        console.log('Error message:', response.message);
+      }
+    })
+    .catch((error: any) => {
+      // eslint-disable-next-line no-undef
+      console.error('Error :', error);
+    });
+  }, [])
+  
   const UserListData: UserInfoListType = camelizeKey(UserListSampleJson.user_list) as UserInfoListType
+  
   return (
     <Root className={className}>
       <Container>

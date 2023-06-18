@@ -14,10 +14,9 @@ export type GetMainInfoResponseType = {
 
 const getQueryPath = () => `/main/info`
 
-export const getmainInfo = (params: GetMainInfoRequestType, config?: AxiosRequestConfig) => {
+export const getmainInfo = (config?: AxiosRequestConfig) => {
  return axiosGET<GetMainInfoRequestType, GetMainInfoResponseType>(
     getQueryPath(),
-    params,
     config
   )
 }

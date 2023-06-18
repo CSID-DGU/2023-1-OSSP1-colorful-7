@@ -20,6 +20,7 @@ import {
   Root,
 } from './styled'
 import { useNavigate } from 'react-router-dom'
+import { decamelizeKey } from 'utils/decamelizeKey'
 
 type JoinPageProps = {
   className?: string
@@ -61,7 +62,7 @@ export const JoinPage: FC<JoinPageProps> = ({ className }) => {
   const onClickJoin = () => {
     // api 넣기
     if(id.length > 0 && password.length > 0 && password === passwordCheck && email.length > 0 && nickname.length > 0 && introduce.length > 0 && developmentStack !== undefined && questionnaireScore !== undefined) {
-      const data = {
+      let data = {
         id: id,
         password: password,
         nickname: nickname,
@@ -70,6 +71,7 @@ export const JoinPage: FC<JoinPageProps> = ({ className }) => {
         developmentStack : developmentStack,
         scorePercent : questionnaireScore,
       }
+      data = decamelizeKey(data)
       // userJoin 함수 호출하기
       
     }

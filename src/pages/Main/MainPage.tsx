@@ -18,19 +18,23 @@ export const MainPage: FC<MainPageProps> = ({ className }) => {
   const [recentProjectList, setRecentProjectList] = useState<ProjectListType>([])
   
   useEffect(() => {
-    getmainInfo('/main/info')
+    getmainInfo()
     .then((response: GetMainInfoResponseType) => {
       if (response.status === 'SUCCESS') {
+        // eslint-disable-next-line no-undef
         console.log('SUCCESS');
-        setRecommendedProjectList(recommendedProjectList)
-        setPopularProjectList(popularProjectList)
-        setRecentProjectList(recentProjectList)
+        setRecommendedProjectList(response.recommendedProjectList)
+        setPopularProjectList(response.popularProjectList)
+        setRecentProjectList(response.recentProjectList)
       } else {
+        // eslint-disable-next-line no-undef
         console.log('FAIL');
+        // eslint-disable-next-line no-undef
         console.log('Error message:', response.message);
       }
     })
     .catch((error: any) => {
+      // eslint-disable-next-line no-undef
       console.error('Error :', error);
     });
   }, [])

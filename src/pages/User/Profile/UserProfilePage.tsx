@@ -5,7 +5,7 @@ import applyProjectListSampleJson from 'constants/json/apply_project_list_sample
 //import manageProjectListSampleJson from 'constants/json/manage_project_list_sample.json'
 //import expireProjectListSampleJson from 'constants/json/expire_project_list_sample.json'
 import projectListSampleJson from 'constants/json/project_list_sample.json'
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { ApplyProjectListType, ProjectListType } from 'types/project'
 import { camelizeKey } from 'utils/camelizeKey'
 import {
@@ -25,12 +25,35 @@ import {
   Root,
 } from './styled'
 import { ProfileHeader } from './profileHeader'
+import { GetUserprojectListResponseType, getUserprojectList } from 'api/getUserprojectList'
 
 type UserProfilePageProps = {
   className?: string
 }
 
 export const UserProfilePage: FC<UserProfilePageProps> = ({ className }) => {
+  useEffect(() => {
+    getUserprojectList()
+    .then((response: GetUserprojectListResponseType) => {
+      if (response.status === 'SUCCESS') {
+        // eslint-disable-next-line no-undef
+        console.log('SUCCESS');
+        // 데이터 가져오기
+      } else {
+        // eslint-disable-next-line no-undef
+        console.log('FAIL');
+        // eslint-disable-next-line no-undef
+        console.log('Error message:', response.message);
+      }
+    })
+    .catch((error: any) => {
+      // eslint-disable-next-line no-undef
+      console.error('Error :', error);
+    });
+  }, [])
+
+
+
   const projectListData = camelizeKey(projectListSampleJson.project_list) as ProjectListType
   const applyProjectListData = camelizeKey(applyProjectListSampleJson.project_list) as ApplyProjectListType
   const MyProjectListData = projectListData.filter(
