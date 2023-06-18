@@ -20,4 +20,10 @@ public interface ProjectRepository extends JpaRepository<Project, Integer> {
 
 
 
+   //public List<Project> findBelongingProjects(String user_id);
+
+    public List<Project> findEndProjects(String user_id);
+
+    //public List<Project> findAll();
+
 }

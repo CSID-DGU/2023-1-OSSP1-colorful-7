@@ -46,7 +46,7 @@ public class ApplyRepositoryImpl implements ApplyRepository{
     }
     @Override
     public Long findIdByProject_id(String project_id){
-        String sql = "select apply from Apply apply where project_id = :project_id";
+        String sql = "select apply from Apply apply where project = :project_id";
         TypedQuery<Apply> query = em.createQuery(sql, Apply.class);
         query.setParameter("project_id", project_id);
         List<Apply> list = query.getResultList();
@@ -55,11 +55,35 @@ public class ApplyRepositoryImpl implements ApplyRepository{
         }
         return null;
     }
+
+    @Override
+    public List<Project> findPendingProjects(String user_id){
+        String sql = "select apply.project from Apply apply where apply.user = :user_id and apply.state = :state";
+        TypedQuery<Project> query = em.createQuery(sql, Project.class);
+        query.setParameter("user_id", user_id);
+        query.setParameter("state","PENDING");
+        List<Project> list = query.getResultList();
+        return list;
+    }
+
+
+
     @Override
     public void updateState(Long apply_id){
         Apply apply = findById(apply_id);
         apply.setState("BELONG");
         em.persist(apply);
+    }
+
+    @Override
+    //project
+    public List<User> findApplyUsers(int project_id){
+        String sql = "select apply.user from Apply apply where apply.project = :project_id and apply.state = :state";
+        TypedQuery<User> query = em.createQuery(sql, User.class);
+        query.setParameter("project_id", project_id);
+        query.setParameter("state","PENDING");
+        List<User> list = query.getResultList();
+        return list;
     }
 
     @Override

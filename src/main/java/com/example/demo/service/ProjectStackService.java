@@ -26,6 +26,11 @@ public class ProjectStackService {
        return projectStack_rp.insert(projectStack);
     }
 
+    public List<ProjectStack> findStackByProjectId(int projectId) {
+        List<ProjectStack> projectStack = projectStack_rp.findStackByProjectId(projectId);
+        return projectStack;
+        //다시 구현하기
+    }
 
 
 }

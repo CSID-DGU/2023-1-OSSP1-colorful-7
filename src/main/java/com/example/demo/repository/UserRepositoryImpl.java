@@ -2,6 +2,7 @@ package com.example.demo.repository;
 
 import com.example.demo.domain.Project;
 import com.example.demo.domain.User;
+import com.example.demo.domain.Member;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -51,7 +52,14 @@ public class UserRepositoryImpl implements UserRepository{
         if(removed_user==null) return 1; //해당 id가 없다면 user 삭제 성공
         else return 0; //아니라면 삭제 실패
     }
-
+    @Override
+    public List<Project> findProjectList(String user_id){
+        String sql = "select project from Member member where member.user = :user_id";
+        TypedQuery<Project> query = em.createQuery(sql, Project.class);
+        query.setParameter("user_id", user_id);
+        List<Project> list = query.getResultList();
+        return list;
+    }
 
     @Override
     public int login(String id, String password){
@@ -82,7 +90,7 @@ public class UserRepositoryImpl implements UserRepository{
 
     @Override
     public List<Project> findManageProjectList(String user_id){
-        String sql = "select member.project from Member member where member.user_id = :user_id and member.position = :position";
+        String sql = "select project from Member member where member.user = :user_id and member.position = :position";
         TypedQuery<Project> query = em.createQuery(sql, Project.class);
         query.setParameter("user_id", user_id);
         query.setParameter("position","팀장");
@@ -132,6 +140,20 @@ public class UserRepositoryImpl implements UserRepository{
         int isAdmin  = query.getSingleResult();
         return isAdmin;
     }
+
+    @Override
+    public List<Project> findBelongingProjects(String user_id){
+        String sql = "select member.project from Member member where member.user = :user_id";
+        TypedQuery<Project> query = em.createQuery(sql, Project.class);
+        query.setParameter("user_id", user_id);
+        List<Project> list = query.getResultList();
+        return list;
+    }
+
+
+//    @Override
+//    public List<Project> findProjectList
+
 
     @Override
     public List<User> findAll() {

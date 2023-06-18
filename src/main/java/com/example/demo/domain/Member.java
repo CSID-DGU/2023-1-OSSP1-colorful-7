@@ -19,7 +19,7 @@ public class Member {
     @ManyToOne
     private Project project;
     @JsonBackReference
-    @OneToOne
+    @ManyToOne
     private User user;
     private String position;
 }

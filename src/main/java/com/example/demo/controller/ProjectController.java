@@ -5,10 +5,14 @@ import com.example.demo.domain.ProjectStack;
 import com.example.demo.domain.User;
 import com.example.demo.domain.*;
 import com.example.demo.response.CommonResponse;
+import com.example.demo.response.ListResponse;
 import com.example.demo.response.ResponseService;
 import com.example.demo.response.SingleResponse;
 import com.example.demo.service.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -45,6 +49,19 @@ public class ProjectController {
         projectLikeService.projectLike(request, projectId);
         return null;
     }
+    @GetMapping("/project/list")
+    public<T> ListResponse<Project> findProjectList() {
+        CommonResponse commonResponse = new CommonResponse();
+        List<Project> list = projectService.findAllProjectList();
+        if(list!=null){
+            commonResponse.setStatus("SUCCESS");
+            commonResponse.setMessage(null);
+        }else{
+            commonResponse.setStatus("FAILED");
+            commonResponse.setMessage("리스트 출력 실패");
+        }
+        return responseService.getListResponse(commonResponse, list);
+    }
 
     @PostMapping("/project/create")
     public SingleResponse<Project> projectCreate(@RequestBody Project project){
@@ -55,6 +72,7 @@ public class ProjectController {
             stack.setProject(saved_project);
             projectStackService.insert(stack);
         }
+        //Project saved_project = projectService.insert(project);
         if(saved_project!=null){
             commonResponse.setStatus("SUCCESS");
             commonResponse.setMessage(null);
@@ -83,14 +101,23 @@ public class ProjectController {
         }
         return responseService.getSingleResponse(commonResponse,project);
     }
+    //팀장이 아닌 프로젝트에 지원한다
+    //SK. 팀장이 아닌 프로젝트에 지원한다
+
+    //왜 new project?, 왜 success때 메세지?
 
     @PostMapping("/project/apply")
-    public String apply(HttpServletRequest request, int project_id){
+    public CommonResponse apply(HttpServletRequest request, int project_id){
         Project project = new Project();
         project = projectService.findByProjectId(project_id);
         String user_id = userService.findSessionId(request);
         User user = userService.findUserInfo(user_id);
         applyService.insert(project, user);
-        return null;
+
+        CommonResponse commonResponse = new CommonResponse();
+        commonResponse.setStatus("SUCCESS");
+        commonResponse.setMessage("지원 성공");
+        return commonResponse;
+
     }
 }

@@ -42,6 +42,16 @@ public class InvitationRepositoryImpl implements InvitationRepository{
         }
         return null;
     }
+// user_id 에러
+    @Override
+    public List<Project> findInviteProjectList(String user_id){
+        String sql = "select invitation.project from Invitation invitation where user = :user_id and state=:state";
+        TypedQuery<Project> query = em.createQuery(sql, Project.class);
+        query.setParameter("user_id", user_id);
+        query.setParameter("state","PENDING");
+        List<Project> list = query.getResultList();
+        return list;
+    }
     @Override
     public void updateState(Long invitation_id){
         Invitation invitation = findById(invitation_id);
@@ -51,7 +61,7 @@ public class InvitationRepositoryImpl implements InvitationRepository{
 
     @Override
     public Long findIdByUser_id(String user_id){
-        String sql = "select invitation from Invitation invitation where user_id = :user_id";
+        String sql = "select invitation from Invitation invitation where user = :user_id";
         TypedQuery<Invitation> query = em.createQuery(sql, Invitation.class);
         query.setParameter("user_id", user_id);
         List<Invitation> list = query.getResultList();

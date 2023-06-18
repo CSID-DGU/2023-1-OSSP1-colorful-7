@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -20,4 +22,6 @@ public class DevelopmentStack {
     private String development_stack;
     private int grade;
     private int version;
+    private int score_percent;
+
 }

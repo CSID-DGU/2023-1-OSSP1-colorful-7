@@ -27,16 +27,27 @@ public class DevelopmentStackRepositoryImpl implements DevelopmentStackRepositor
     public void insert(DevelopmentStack developmentStack){
         em.persist(developmentStack);
     }
+
     @Override
     public DevelopmentStack findDevelopmentStack(Long user_id){
-        String sql = "select * from DevelopmentStack where user_id = :user_id";
+        String sql = "select developmentStack from DevelopmentStack developmentStack where user = :user_id";
         TypedQuery<DevelopmentStack> query = em.createQuery(sql, DevelopmentStack.class);
-        query.setParameter("questionnaire_id", user_id);
+        query.setParameter("user_id", user_id);
         List<DevelopmentStack> list = query.getResultList();
+
         for (DevelopmentStack entity : list) {
             return entity;
         }
         return null;
+    }
+
+    @Override
+    //해당 기술스택을 가진 유저들을 가져오는 리스트
+    public List<DevelopmentStack> findUsersByStacks(List<String> requiredStacks){
+        String sql = "select developmentStack.user from DevelopmentStack developmentStack where development_stack = :requiredStacks ";
+        //구현 더 해야함.
+        return null;
+
     }
 
     @Override

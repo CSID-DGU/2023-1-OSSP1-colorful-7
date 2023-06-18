@@ -6,6 +6,7 @@ import com.example.demo.domain.ProjectStack;
 import com.example.demo.domain.User;
 import com.example.demo.repository.ProjectRepository;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.repository.ApplyRepository;
 import com.example.demo.response.CommonResponse;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,7 @@ import java.util.Random;
 @Service
 public class ProjectService {
     ProjectRepository project_rp;
+    ApplyRepository apply_rp;
     UserService userService;
 
     public ProjectService(ProjectRepository projectRepository) {
@@ -48,15 +50,14 @@ public class ProjectService {
         Optional<Project> projectOptional = project_rp.findById(project.getProject_id());
         if (projectOptional.isPresent()) {
             Project project1 = projectOptional.get();
-
             // update only present fields
             if (project.getProject_content() != null) project1.setProject_content(project.getProject_content());
             if (project.getProject_title() != null) project1.setProject_title(project.getProject_title());
             if (project.getProject_type() != null) project1.setProject_type(project.getProject_type());
             project_rp.save(project1);
-
         }
     }
+
     public List<Project> findAll() {
         return project_rp.findAll();
     }
@@ -110,9 +111,17 @@ public class ProjectService {
         commonResponse.setStatus("SUCCESS");
         commonResponse.setMessage(null);
         return recommended_project_list;
+    }
+    public List<Project> findEndProjects(String user_id) {
+        List<Project> list = project_rp.findEndProjects(user_id);
+        return list;
+    }
 
+
+    public List<Project> findAllProjectList() {
+        List<Project> list = project_rp.findAllProjectList();
+        return list;
     }
 }
-
 
 

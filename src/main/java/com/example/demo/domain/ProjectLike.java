@@ -14,20 +14,18 @@ import javax.persistence.*;
 //@toString
 public class ProjectLike {
 
-    @Id //PK지정
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //auto increment
     //private Long project_like_id;
-    @Column(name="project_like_id")
+    @Column
     private Long project_like_id;
 
     @JsonBackReference
     @ManyToOne
-    @JoinColumn(name="user_id")
     private User user;
 
     @JsonBackReference
     @ManyToOne
-    @JoinColumn(name="project_id")
     private Project project;
 
 }

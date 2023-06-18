@@ -27,4 +27,10 @@ public class InvitationService {
         Long invitation_id = invitation_rp.findIdByUser_id(user_id);
         invitation_rp.updateState(invitation_id);
     }
+
+    public List<Project> findInviteProjectList(String userId) {
+        List<Project> list = invitation_rp.findInviteProjectList(userId);
+        return list;
+
+    }
 }

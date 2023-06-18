@@ -12,10 +12,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProjectStackRepository extends JpaRepository<ProjectStack, Integer> {
-
     //public ProjectStack findByProjectStackId(Long projectStackId);
     public ProjectStack insert(ProjectStack projectStack);
 
+    public List<ProjectStack> findStackByProjectId(int projectId);
 }
 
 

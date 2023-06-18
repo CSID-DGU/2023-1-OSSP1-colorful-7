@@ -2,7 +2,6 @@ package com.example.demo.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,6 +24,7 @@ public class User {
     private String nickname;
     private String id;
     private String password;
+    private File profile;
     private String introduce;
     private String email;
     private int scorePercent;
@@ -42,12 +42,11 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Apply> applys;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    private List<Member> members;
 }
 
-    // public <ProjectListType> void setRecommendedProjectList(ProjectListType projectListType) {
 
-    // }
-
-
-    // private <ProjectListType> void  convertToProjectListType(List<Project> recommendedProjects) {
+   // private <ProjectListType> void  convertToProjectListType(List<Project> recommendedProjects) {
     //}

@@ -86,8 +86,8 @@ public class SpringConfig {
     }*/
 
     @Bean
-    public UserService userService(UserRepository userRepository, DevelopmentStackRepository developmentStackRepository, QuestionnaireRepository questionnaireRepository) {
-        return new UserService(userRepository, developmentStackRepository, questionnaireRepository);
+    public UserService userService(UserRepository userRepository, DevelopmentStackRepository developmentStackRepository, QuestionnaireRepository questionnaireRepository, ApplyRepository applyRepository) {
+        return new UserService(userRepository, developmentStackRepository, questionnaireRepository, applyRepository);
     }
     @Bean
     public DevelopmentStackService developmentStackService(){

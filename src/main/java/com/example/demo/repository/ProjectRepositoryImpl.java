@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import com.example.demo.domain.Member;
 import com.example.demo.domain.Project;
 import com.example.demo.domain.ProjectStack;
 import com.example.demo.domain.User;
@@ -31,7 +32,7 @@ public class ProjectRepositoryImpl implements ProjectRepository{
 
     @Override
     public Project findByProjectId(int project_id){
-        String sql = "select project from Project project where Project_id = :project_id";
+        String sql = "select project from Project project where project = :project_id";
         TypedQuery<Project> query = em.createQuery(sql, Project.class);
         query.setParameter("project_id", project_id);
         List<Project> list = query.getResultList();
@@ -50,12 +51,23 @@ public class ProjectRepositoryImpl implements ProjectRepository{
         else return 0; //아니라면 삭제 실패
     }
 
+    //아래 두개 쿼리문 이렇게짜는게 맞는지, user_id는 왜 인식을 못하는지
+//    @Override
+//    public List<Project> findBelongingProjects(String user_id){
+//        String sql = "select member.project from Member member where member.user = :user_id";
+//        TypedQuery<Project> query = em.createQuery(sql, Project.class);
+//        query.setParameter("user_id", user_id);
+//        List<Project> list = query.getResultList();
+//        return list;
+//    }
+
     @Override
-    public List<ProjectStack> findProjectStackByProjectId(int project_id){
-        String sql = "select project_stacks from Project ps where ps.Project_id =: project_id";
-        TypedQuery<ProjectStack> query = em.createQuery(sql, ProjectStack.class);
-        query.setParameter("project_id", project_id);
-        List<ProjectStack> list = query.getResultList();
+    public List<Project> findEndProjects(String user_id){
+        String sql = "select project from Project project where project.user_id = :user_id and project.is_available = :is_available";
+        TypedQuery<Project> query = em.createQuery(sql, Project.class);
+        query.setParameter("user_id", user_id);
+        query.setParameter("is_available", "EXPIRED");
+        List<Project> list = query.getResultList();
         return list;
     }
 
@@ -66,8 +78,14 @@ public class ProjectRepositoryImpl implements ProjectRepository{
         List<Project> list = query.getResultList();
         return list;
     }
-
-
+    @Override
+    public List<ProjectStack> findProjectStackByProjectId(int project_id){
+        String sql = "select project_stacks from Project ps where ps.Project_id =: project_id";
+        TypedQuery<ProjectStack> query = em.createQuery(sql, ProjectStack.class);
+        query.setParameter("project_id", project_id);
+        List<ProjectStack> list = query.getResultList();
+        return list;
+    }
 
     @Override
     public List<Project> findAll() {

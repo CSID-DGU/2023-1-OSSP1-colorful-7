@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Transactional
 @Service
@@ -14,6 +15,8 @@ public class ProjectLikeService {
     ProjectLikeRepository projectLike_rp;
     UserService userService;
     ProjectService projectService;
+    ProjectLikeService projectLikeService;
+
     public ProjectLikeService(ProjectLikeRepository projectLikeRepository){
         projectLike_rp = projectLikeRepository;
     }
@@ -26,4 +29,8 @@ public class ProjectLikeService {
     }
 
 
+    public List<Project> findLikedProjects(String user_id) {
+        List<Project> project = projectLikeService.findLikedProjects(user_id);
+        return null;
+    }
 }

@@ -30,6 +30,15 @@ public class ProjectStackRepositoryImpl implements ProjectStackRepository{
     }
 
     @Override
+    public List<ProjectStack> findStackByProjectId(int project_id){
+        String sql = "select projectStack.development_stack from ProjectStack projectStack where project = :project_id";
+        TypedQuery<ProjectStack> query = em.createQuery(sql, ProjectStack.class);
+        query.setParameter("project_id", project_id);
+        List<ProjectStack> list = query.getResultList();
+        return list;
+    }
+
+    @Override
     public List<ProjectStack> findAll() {
         return null;
     }
@@ -48,7 +57,6 @@ public class ProjectStackRepositoryImpl implements ProjectStackRepository{
     public List<ProjectStack> findAllById(Iterable<Integer> integers) {
         return null;
     }
-
 
     @Override
     public long count() {

@@ -6,10 +6,14 @@ import com.example.demo.service.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.net.http.HttpRequest;
 import java.util.*;
 
 @RestController
@@ -22,11 +26,16 @@ public class UserController {
     private InvitationService invitationService;
     private QuestionnaireService questionnaireService;
     private MemberService memberService;
+    private ProjectStackService projectStackService;
+    @Autowired
+    private ApplyService applyService;
+
 //    public UserController(UserService userService){
 //        this.userService = userService;
 //    }
+    private ProjectLikeService projectLikeService;
 
-    public UserController(ResponseService responseService, UserService userService, DevelopmentStackService developmentStackService, ProjectService projectService, InvitationService invitationService, MemberService memberService, QuestionnaireService questionnaireService) {
+    public UserController(ResponseService responseService,ApplyService applyService, UserService userService, DevelopmentStackService developmentStackService, ProjectService projectService, InvitationService invitationService, MemberService memberService, QuestionnaireService questionnaireService) {
         this.responseService = responseService;
         this.userService = userService;
         this.developmentStackService = developmentStackService;
@@ -34,6 +43,8 @@ public class UserController {
         this.invitationService = invitationService;
         this.memberService = memberService;
         this.questionnaireService = questionnaireService;
+        this.applyService = applyService;
+        //this.projectStackService = projectService;
     }
 
     @PostMapping("/user/join")
@@ -72,8 +83,7 @@ public class UserController {
             commonResponse.setMessage(null);
             session.setAttribute("id", id);
             System.out.println(session.getAttribute("id"));
-            //id로 isAdmin가져오기 메소드 구현해올게
-            //왔어.
+            //id로 isAdmin가져오기 메소드 구현
             isAdmin = userService.findIsAdminById(id);
         }
         else {
@@ -181,6 +191,8 @@ public class UserController {
 
     @GetMapping("/user/project/manage/list")
     public<T> ListResponse<Project> manageProjectList(HttpServletRequest request){
+        //지금 여기!! 세션을 가져올 것인지 토큰을 가져올 것인지 결정해야함!! 찾아보고 올게.
+        //세션으로 일단 가.
         String user_id = userService.findSessionId(request);
         CommonResponse commonResponse = new CommonResponse();
         List<Project> list = userService.findManageProjectList(user_id);
@@ -194,7 +206,79 @@ public class UserController {
         return responseService.getListResponse(commonResponse, list);
     }
 
-    @GetMapping("/user/project/manage/invite")
+    //여러개의 리스트를 어떻게 한꺼번에 리턴하지? -> 일단 리스트로 하나씩 테스트
+    @GetMapping("/user/project/list")
+    public<T> ListResponse<Project> findProjectList(HttpServletRequest request) {
+        String user_id = userService.findSessionId(request);
+        CommonResponse commonResponse = new CommonResponse();
+        //List<Project> belongingProjects = userService.findBelongingProjects(user_id);
+        List<Project> pendingProjects = applyService.findPendingProjects(user_id);
+        //List<Project> likedProjects = projectLikeService.findLikedProjects(user_id);
+        //List<Project> endProjects = projectService.findEndProjects(user_id);
+
+        //List<Project> projectLists = new List<>();
+        //projectLists.add(beloningProjects);
+        //projectLists.add(pendingProjects);
+        //projectLists.add(likedProjects);
+        //projectLists.add(endProjects);
+
+        if (!pendingProjects.isEmpty()) {
+            commonResponse.setStatus("SUCCESS");
+            commonResponse.setMessage(null);
+        } else {
+            commonResponse.setStatus("FAILED");
+            commonResponse.setMessage("리스트 출력 실패");
+        }
+
+        return responseService.getListResponse(commonResponse, pendingProjects);
+    }
+    /*
+    public ListResponse<List<Project>> findProjectList(HttpServletRequest request) {
+        String user_id = userService.findSessionId(request);
+        CommonResponse commonResponse = new CommonResponse();
+        List<Project> beloningProjects = userService.findBelongingProjects(user_id);
+        List<Project> pendingProjects = projectService.findPendingProjects(user_id);
+        List<Project> likedProjects = projectLikeService.findLikedProjects(user_id);
+        List<Project> endProjects = projectService.findEndProjects(user_id);
+
+        List<List<Project>> projectLists = new ArrayList<>();
+        projectLists.add(beloningProjects);
+        projectLists.add(pendingProjects);
+        projectLists.add(likedProjects);
+        projectLists.add(endProjects);
+
+        if (!projectLists.isEmpty()) {
+            commonResponse.setStatus("SUCCESS");
+            commonResponse.setMessage(null);
+        } else {
+            commonResponse.setStatus("FAILED");
+            commonResponse.setMessage("리스트 출력 실패");
+        }
+
+        return responseService.getListResponse(commonResponse, projectLists);
+    }
+    */
+
+/*
+    @GetMapping("user/project/apply/list")
+/* user project list로 병합됨
+   @GetMapping("user/project/apply/list")
+    public List<Project> applyProjectList(HttpServletRequest request) {
+        String user_id = userService.findSessionId(request);
+        return userService.findApplyProjectList(user_id);
+   }*/
+
+    /*user project list로 병합됨
+    @GetMapping("/user/project/manage/list")
+    public List<Project> manageProjectList(HttpServletRequest request) {
+        String user_id = userService.findSessionId(request);
+        return userService.findManageProjectList(user_id);
+    }
+
+*/
+    //SK
+    //팀장인 유저가 추천받은 멤버 중에 원하는 유저를 토글(초대/초대취소) 합니다.
+    @PostMapping("/user/project/manage/invite")
     public CommonResponse invite(int project_id, Long user_id){
         Project project = projectService.findByProjectId(project_id);
         User user = userService.getById(user_id.intValue());
@@ -205,11 +289,15 @@ public class UserController {
         return commonResponse;
     }
 
+    //프론트에서 보내주는 상태에 따라 달라지게 수정해야함!
+    //초대받은 유저가 해당 프로젝트를 참여/거절합니다.
     @GetMapping("/user/project/accept")
     public CommonResponse accept(HttpServletRequest request, int project_id, String status){
         String user_id = userService.findSessionId(request);
         User user = userService.findUserInfo(user_id);
         Project project = projectService.findByProjectId(project_id);
+        List<ProjectStack> projectStacks = projectStackService.findStackByProjectId(project_id);
+
         CommonResponse commonResponse = new CommonResponse();
         //멤버테이블에 저장
         if(status.equals("APPROVE")){
@@ -228,4 +316,193 @@ public class UserController {
         }
        return commonResponse;
     }
+
+    @PostMapping("/user/project/manage/hire")
+    public CommonResponse hire(HttpServletRequest request, @RequestBody Map<Integer, String> hireData){
+//
+//        int project_id = Integer.parseInt(hireData.get("project_id"));
+//        String status = hireData.get("status");
+//        int hire_result = userService.login(project_id, status);
+//        /*
+//        System.out.println(hire_result);
+//        CommonResponse commonResponse = new CommonResponse();
+//        HttpSession session = request.getSession();
+//        if(hire_result==1) {
+//            commonResponse.setStatus("SUCCESS");
+//            commonResponse.setMessage(null);
+//            session.setAttribute("project_id", project_id);
+//            System.out.println(session.getAttribute("project_id"));
+//        }
+//        else {
+//            commonResponse.setStatus("FAILED");
+//            commonResponse.setMessage("hire 실패");
+//        }
+//        return responseService.getSessionResponse(commonResponse, session);*/
+//        //Project project = projectService.findByProjectId(project_id);
+//        String user_id = userService.findSessionId(request);
+//        User user = userService.findUserInfo(user_id);
+//        int project_id = Integer.parseInt(hireData.get("project_id"));
+//        String status = hireData.get("status");
+//
+//        CommonResponse commonResponse = new CommonResponse();
+//        //멤버테이블에 저장
+//        if(status.equals("APPROVE")){
+//            Member member = new Member();
+//            member.setUser(user);
+//            member.setProject(project);
+//            member.setPosition("MEMBER");
+//            memberService.insert(member);
+//            //지원테이블의 상태를 "peding" 에서 "BELONG" 으로 변경
+//            applyService.updateState(user_id);
+//            commonResponse.setStatus("SUCCESS");
+//            commonResponse.setMessage("프로젝트 지원 수락됨");
+//        }else{
+//            commonResponse.setStatus("SUCCESS");
+//            commonResponse.setMessage("프로젝트 지원 거절됨");
+//        }
+        return null;
+    }
+
+
+
+    //프로젝트 관리페이지에서 팀장에게 유저를 추천해줌
+    //프로젝트 id받고 점수, 기술 스택이 무엇인지 파악
+    //유저 테이블가서 해당 기술스택이 있는 유저 찾음
+    //그중 점수가 가장 가까운 유저 추천
+
+    /*
+    @GetMapping("/user/project/manage/recommend")
+    public String recommendUser(Long project_id) {
+        // 프로젝트 정보 가져오기
+        //
+        Project project = projectService.findByProjectId(project_id);
+        List<ProjectStack> projectStacks = projectStackService.findStackByProjectId(project_id);
+
+        // 프로젝트 스택 정보 저장
+        List<String> requiredStacks = new ArrayList<>();
+        Map<String, Integer> requiredGrades = new HashMap<>();
+        Map<String, Integer> requiredMembers = new HashMap<>();
+
+        for (ProjectStack projectStack : projectStacks) {
+            requiredStacks.add(projectStack.getDevelopment_stack());
+            requiredGrades.put(projectStack.getDevelopment_stack(), projectStack.getRequire_grade());
+            requiredMembers.put(projectStack.getDevelopment_stack(), projectStack.getRequire_grade());
+        }
+
+        // 프로젝트 스택과 일치하는 유저(개발스택으로 조회. 유저당 개발스택이
+        // ) 조회
+        List<DevelopmentStack> matchingUsers = developmentStackService.findUsersByStacks(requiredStacks);
+
+        // 일치하는 유저를 요구인원의 두 배 이상 추출
+        List<DevelopmentStack> recommendedUsers = new ArrayList<>();
+
+        for (DevelopmentStack user : matchingUsers) {
+            String stack = user.getDevelopment_stack();
+            int grade = user.getGrade();
+            int member = requiredMembers.get(stack);
+
+            if (grade == requiredGrades.get(stack) && member <= requiredMembers.get(stack)) {
+                recommendedUsers.add(user);
+                /*
+                if (recommendedUsers.size() >= (member * 2)) {
+                    break; // 요구인원의 두 배 이상인 유저들만 추출하므로, 추천인원을 초과한 경우 종료
+                }
+            }
+        }
+
+        // 추천된 유저를 정답률과 등급을 기준으로 정렬
+        Collections.sort(recommendedUsers, new Comparator<DevelopmentStack>() {
+            @Override
+            public int compare(DevelopmentStack user1, DevelopmentStack user2) {
+                // 등급 비교
+                int grade1 = requiredGrades.get(user1.getGrade());
+                int grade2 = requiredGrades.get(user2.getGrade());
+                int gradeComparison = Integer.compare(grade2, grade1); // 등급이 높은 순으로 정렬
+
+                if (gradeComparison == 0) {
+                    // 등급이 같은 경우 정답률 비교
+                    double accuracy1 = user1.getScore_percent();
+                    double accuracy2 = user2.getScore_percent();
+                    return Double.compare(accuracy2, accuracy1); // 정답률이 높은 순으로 정렬
+                } else {
+                    return gradeComparison;
+                }
+            }
+        });
+
+        // 추천된 유저 정보를 반환하거나 활용할 수 있는 형식으로 가공
+        if (!recommendedUsers.isEmpty()) {
+            StringBuilder recommendation = new StringBuilder();
+            recommendation.append("Recommended users: ");
+            for (DevelopmentStack user : recommendedUsers) {
+                recommendation.append(user.getName()).append(", ");
+            }
+            recommendation.delete(recommendation.length() - 2, recommendation.length()); // 마지막 쉼표와 공백 제거
+            return recommendation.toString();
+        } else {
+            return "No recommended user found.";
+        }
+    }
+    */
+    //프로젝트 관리페이지에서 팀장에게 지원한 유저 목록을 보여줌
+    @GetMapping("/user/project/manage/apply")
+    public<T> ListResponse<User> applyUserList(HttpServletRequest request,int project_id) {
+        Project project = projectService.findByProjectId(project_id);
+//      String user_id = userService.findSessionId(request);
+//      User user = userService.findUserInfo(user_id);
+        CommonResponse commonResponse = new CommonResponse();
+        List<User> list = applyService.findApplyUsers(project_id);
+        //findApplyUsers구현하기
+        if(list!=null){
+            commonResponse.setStatus("SUCCESS");
+            commonResponse.setMessage(null);
+        }else{
+            commonResponse.setStatus("FAILED");
+            commonResponse.setMessage("리스트 출력 실패");
+        }
+        return responseService.getListResponse(commonResponse, list);
+
+    }
+
+    /*
+    @GetMapping("/user/project/manage/list")
+    public<T> ListResponse<Project> manageProjectList(HttpServletRequest request){
+        //지금 여기!! 세션을 가져올 것인지 토큰을 가져올 것인지 결정해야함!! 찾아보고 올게.
+        //세션으로 일단 가.
+        String user_id = userService.findSessionId(request);
+        CommonResponse commonResponse = new CommonResponse();
+        List<Project> list = userService.findManageProjectList(user_id);
+        if(list!=null){
+            commonResponse.setStatus("SUCCESS");
+            commonResponse.setMessage(null);
+        }else{
+            commonResponse.setStatus("FAILED");
+            commonResponse.setMessage("리스트 출력 실패");
+        }
+        return responseService.getListResponse(commonResponse, list);
+    }
+*/
+
+    //유저의 알림페이지에서 보여줄 초대받은 프로젝트 리스트 정보들을 가져옵니다.
+    @GetMapping("user/project/invite/list")
+    public<T> ListResponse<Project> inviteProjectList(HttpServletRequest request){
+        String user_id = userService.findSessionId(request);
+        CommonResponse commonResponse = new CommonResponse();
+        List<Project> list = invitationService.findInviteProjectList(user_id);
+
+        if(list!=null){
+            commonResponse.setStatus("SUCCESS");
+            commonResponse.setMessage(null);
+        }else{
+            commonResponse.setStatus("FAILED");
+            commonResponse.setMessage("리스트 출력 실패");
+        }
+        return responseService.getListResponse(commonResponse, list);
+    }
+
+
+
+
+
+
 }
