@@ -48,10 +48,14 @@ export const axiosGET = <RequestData, ResponseData>(
   params?: RequestData,
   options?: AxiosRequestConfig
 ) => {
-  const paramsValue = JSON.stringify(params).replaceAll("/", "")
-
+  // let paramsValue = undefined
+  // if(params !== undefined) {
+  //   paramsValue = JSON.stringify(params).replaceAll("/", "")
+  // }
+  // const paramsValue = JSON.stringify(params).replaceAll("/", "")
+  //console.log("params", params)
   return axiosInstance
-    .get<ResponseData, AxiosResponse<ResponseData>, RequestData>(url, { params: paramsValue, ...options })
+    .get<ResponseData, AxiosResponse<ResponseData>, RequestData>(url, { ...options })
     .then((response) => response.data)
 }
 

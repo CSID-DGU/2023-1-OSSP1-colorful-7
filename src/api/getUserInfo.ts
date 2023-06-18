@@ -10,11 +10,12 @@ export type GetUserInfoResponseType = {
   userInfo: UserInfoType
 }
 
-const getQueryPath = () => `/user/info`
+const getQueryPath = `/user/info`
 
-export const getUserInfo = (config?: AxiosRequestConfig) => {
+export const getUserInfo = (params?: GetUserInfoRequestType, config?: AxiosRequestConfig) => {
  return axiosGET<GetUserInfoRequestType, GetUserInfoResponseType>(
-    getQueryPath(),
+    getQueryPath,
+    params,
     config
   )
 }

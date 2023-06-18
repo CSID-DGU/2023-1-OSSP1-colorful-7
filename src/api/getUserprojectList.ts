@@ -13,11 +13,12 @@ export type GetUserprojectListResponseType = {
 	endProjectList: ProjectListType // 마감된 프로젝트
 }
 
-const getQueryPath = () => `/user/project/list`
+const getQueryPath = `/user/project/list`
 
-export const getUserprojectList = (config?: AxiosRequestConfig) => {
+export const getUserprojectList = (params?: GetUserprojectListRequestType,config?: AxiosRequestConfig) => {
  return axiosGET<GetUserprojectListRequestType, GetUserprojectListResponseType>(
-    getQueryPath(),
+    getQueryPath,
+    params,
     config
   )
 }

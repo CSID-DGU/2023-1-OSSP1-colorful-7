@@ -38,6 +38,7 @@ export const MainPage: FC<MainPageProps> = ({ className }) => {
       console.error('Error :', error);
     });
   }, [])
+  
 
   return ( 
     <Root className={className}>

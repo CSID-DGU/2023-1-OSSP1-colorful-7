@@ -50,7 +50,7 @@ import {
   TitleTypo,
   LikeButton,
 } from './styled'
-import { GetProjectDetailsResponseType, getProjectDetails } from 'api/getProjectDetails'
+import { GetProjectDetailsRequestType, GetProjectDetailsResponseType, getProjectDetails } from 'api/getProjectDetails'
 
 type ProjectDetailsPageProps = {
   className?: string
@@ -70,7 +70,7 @@ export const ProjectDetailsPage: FC<ProjectDetailsPageProps> = ({ className }) =
   }
 
   const onClickProjectManage = () => {
-    navigate(`user/project/manage/${projectKey}`)
+    navigate(`/user/project/manage/${projectKey}`)
   }
   
   const renderButton = (ProjectItem: ProjectItemType) => {
@@ -97,12 +97,12 @@ export const ProjectDetailsPage: FC<ProjectDetailsPageProps> = ({ className }) =
   }
 
   useEffect(() => {
-    let data = {
+    let data: GetProjectDetailsRequestType = {
       projectKey: 0
     }
     if(projectKey !== 0) {
-      data.projectKey = parseInt(projectKey)
-    } 
+       data.projectKey = parseInt(projectKey)
+    }
     getProjectDetails(data)
     .then((response: GetProjectDetailsResponseType) => {
       if (response.status === 'SUCCESS') {

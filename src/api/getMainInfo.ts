@@ -12,11 +12,13 @@ export type GetMainInfoResponseType = {
 	recentProjectList: ProjectListType
 }
 
-const getQueryPath = () => `/main/info`
+const getQueryPath = `/main/info`
 
-export const getmainInfo = (config?: AxiosRequestConfig) => {
+export const getmainInfo = (params?: GetMainInfoRequestType, config?: AxiosRequestConfig) => {
  return axiosGET<GetMainInfoRequestType, GetMainInfoResponseType>(
-    getQueryPath(),
+    getQueryPath,
+    params,
     config
   )
 }
+

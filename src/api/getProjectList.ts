@@ -10,11 +10,12 @@ export type GetProjectListResponseType = {
   projectList: ProjectListType
 }
 
-const getQueryPath = () => `/project/list`
+const getQueryPath = `/project/list`
 
-export const getProjectList = (config?: AxiosRequestConfig) => {
+export const getProjectList = (params?: GetProjectListRequestType, config?: AxiosRequestConfig) => {
  return axiosGET<GetProjectListRequestType, GetProjectListResponseType>(
-    getQueryPath(),
+    getQueryPath,
+    params,
     config
   )
 }

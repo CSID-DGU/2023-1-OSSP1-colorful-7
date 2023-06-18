@@ -71,7 +71,7 @@ export const JoinPage: FC<JoinPageProps> = ({ className }) => {
         developmentStack : developmentStack,
         scorePercent : questionnaireScore,
       }
-      data = decamelizeKey(data)
+      // data = decamelizeKey(data)
       // userJoin 함수 호출하기
       
     }
