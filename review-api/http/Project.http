@@ -1,7 +1,8 @@
-###프로젝트 생성
+###프로젝트 생성 ok
 POST http://localhost:8000/project/create
 Accept: application/json
-Content-Type:'application/json; charset=utf-8'
+Content-Type: application/json
+
 {
   "project_title": "prj4",
   "project_content": "content4",
@@ -28,16 +29,17 @@ Content-Type:'application/json; charset=utf-8'
   ]
 }
 
-### 프로젝트 리스트
-GET http://192.168.0.143:8000/project/list
+### 프로젝트 리스트 테스트 완료.
+GET http://localhost:8000/project/list
+Accept: application/json
+Content-Type: application/json
+
+### 프로젝트 상세보기 (미완성)
+GET http://localhost:8000/project/details?project_id=10
 Accept: application/json
 Content-Type: application/json
 
 
-### 프로젝트 상세보기
-GET http://localhost:8000/project/details
-Accept: application/json
-Content-Type: application/json
 
 ### 지원하기
 POST http://localhost:8000/project/apply
@@ -48,5 +50,4 @@ Content-Type: application/json
   "id":"id5678",
   "project_id": 17
 }
-
 

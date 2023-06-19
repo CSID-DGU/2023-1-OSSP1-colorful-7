@@ -10,7 +10,7 @@ public interface ApplyRepository extends JpaRepository<Apply, Integer> {
 
     public void updateState(Long apply_id);
 
-    public Long findIdByProject_id(String project_id);
+    public Long findIdByProject_id(int project_id);
 
     public Apply findById(Long apply_id);
 

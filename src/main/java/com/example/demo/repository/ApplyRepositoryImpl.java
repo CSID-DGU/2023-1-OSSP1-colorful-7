@@ -45,7 +45,7 @@ public class ApplyRepositoryImpl implements ApplyRepository{
         return null;
     }
     @Override
-    public Long findIdByProject_id(String project_id){
+    public Long findIdByProject_id(int project_id){
         String sql = "select apply from Apply apply where project = :project_id";
         TypedQuery<Apply> query = em.createQuery(sql, Apply.class);
         query.setParameter("project_id", project_id);

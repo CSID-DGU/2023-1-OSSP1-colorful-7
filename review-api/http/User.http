@@ -1,7 +1,8 @@
-### 회원가입 API
-POST http://192.168.0.137:8000/user/join
+### 회원가입
+POST http://localhost:8000/user/join
 Accept: application/json
 Content-Type: application/json
+
 {
   "nickname":"hh",
   "id":"id5678",
@@ -15,8 +16,8 @@ Content-Type: application/json
 }
 
 
-### 로그인 ok
-POST http://192.168.0.137:8000/user/login
+### 로그인
+POST http://localhost:8000/user/login
 Accept: application/json
 Content-Type: application/json
 
@@ -27,13 +28,13 @@ Content-Type: application/json
 
 
 ### 로그아웃
-POST http://192.168.0.137:8000/user/logout
+POST http://localhost:8000/user/logout
 Accept: application/json
 Content-Type: application/json
 
 
 ### 질문지 가져오기
-GET http://192.168.0.137:8000/user/join/questionnaire
+GET http://localhost:8000/user/join/questionnaire
 Accept: application/json
 Content-Type: application/json
 
@@ -44,9 +45,16 @@ GET http://localhost:8000/user/info
 Accept: application/json
 Content-Type: application/json
 
+### 유저의 프로젝트 리스트 출력
+GET http://localhost:8000/user/project/list
+Accept: application/json
+Content-Type: application/json
 
+{
+  "id":"id5678"
+}
 
-### 팀장에게 지원한 유저들을 보여줌
+### 팀장에게 지원한 유저들을 보여주는 리스트
 GET http://localhost:8000/user/project/manage/apply
 Accept: application/json
 Content-Type: application/json
@@ -56,16 +64,7 @@ Content-Type: application/json
   "project_id": 17
 }
 
-### 유저의 프로젝트 리스트 가져오기
-GET http://localhost:8000/user/project/list
-Accept: application/json
-Content-Type: application/json
-
-{
-  "id":"id5678"
-}
-
-### managelist
+### 팀장의 리스트 출력
 GET http://localhost:8000/user/project/manage/list
 Accept: application/json
 Content-Type: application/json
@@ -74,7 +73,7 @@ Content-Type: application/json
   "id":"id5678"
 }
 
-### hire
+### apply한 유저 hire
 POST http://localhost:8000/user/project/manage/hire
 Accept: application/json
 Content-Type: application/json
@@ -83,4 +82,34 @@ Content-Type: application/json
   "id":"id5678",
   "project_id": 17,
   "status" : "APPROVE"
+}
+
+### 팀장이 유저를 초대
+POST http://localhost:8000/user/project/manage/invite
+Accept: application/json
+Content-Type: application/json
+
+{
+  "id":"id5678",
+  "project_id": 17
+}
+
+### 초대 수락
+POST http://localhost:8000/user/project/accept
+Accept: application/json
+Content-Type: application/json
+
+{
+"id":"id5678",
+"project_id": 17
+}
+
+### 유저의 초대 리스트
+GET http://localhost:user/project/invite/list
+Accept: application/json
+Content-Type: application/json
+
+{
+  "id":"id5678"
+
 }

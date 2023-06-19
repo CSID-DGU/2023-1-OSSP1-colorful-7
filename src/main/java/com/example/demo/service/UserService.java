@@ -98,26 +98,12 @@ public class UserService {
         return user_rp.getReferenceById(user_id);
     }
 
-//    public List<User> findByStacks(Set<String> strings) {
-//        List<User> list = develop_rp.findDevelopmentStack();
-//        return list;
-//    }
-
-//    public List<User> findUsersByStacks(List<String> requiredStacks) {
-//        List<User> list = develop_rp.findDevelopmentStack(requiredStacks);
-//        return list;
-//    }
 
     public List<Project> findProjectList(String user_id) {
         List<Project> list = user_rp.findProjectList(user_id);
         return list;
     }
 
-
-//    public List<Project> findProjectList(String user_id) {
-//        List<Project> list = user_rp.findProjectList(user_id);
-//        return list;
-//    }
 
     public String findUserStackById(String user_id){
         return user_rp.findUserStackById(user_id);
@@ -132,11 +118,6 @@ public class UserService {
     }
 
 
-    /* //지원한 프로젝트 리스트 가져오기
-    public List<Project> findApplyProjectList(String userId) {
-        List<Project> applyProjectList = user_rp.findApplyProjectList(user_id);
-        return applyProjectList;
-        */
     public User findUserById(String id){
         return user_rp.findUserById(id);
     }

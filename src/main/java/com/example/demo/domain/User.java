@@ -42,7 +42,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Apply> applys;
 
-    @JsonIgnore
+    @JsonManagedReference
     @OneToMany(mappedBy = "user")
     private List<Member> members;
 }
