@@ -13,7 +13,7 @@ PATCH http://localhost:8000/admin/questionnaire/update
 Accept: application/json
 Content-Type: application/json
 {
-    "questionnaire_id": 3
+    "questionnaire_id": "id3"
 }
 
 
@@ -22,7 +22,7 @@ PATCH http://localhost:8000/admin/questionnaire/modify
 Accept: application/json
 Content-Type: application/json
 {
-    "questionnaire_id": 3
+    "questionnaire_id": "id3"
 }
 
 ### 프로젝트 내용
