@@ -3,16 +3,12 @@ package com.example.demo.controller;
 import com.example.demo.domain.Project;
 import com.example.demo.domain.ProjectStack;
 import com.example.demo.domain.User;
-import com.example.demo.domain.*;
 import com.example.demo.response.CommonResponse;
 import com.example.demo.response.ListResponse;
 import com.example.demo.response.ResponseService;
 import com.example.demo.response.SingleResponse;
 import com.example.demo.service.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,6 +39,10 @@ public class ProjectController {
         this.projectStackService = projectStackService;
         this.responseService = responseService;
     }
+
+
+
+
 
     @PostMapping("/project/like")
     public String projectLike(HttpServletRequest request, int projectId){

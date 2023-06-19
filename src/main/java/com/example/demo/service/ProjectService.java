@@ -4,19 +4,15 @@ import com.example.demo.domain.DevelopmentStack;
 import com.example.demo.domain.Project;
 import com.example.demo.domain.ProjectStack;
 import com.example.demo.domain.User;
-import com.example.demo.repository.ProjectRepository;
-import com.example.demo.repository.UserRepository;
 import com.example.demo.repository.ApplyRepository;
+import com.example.demo.repository.ProjectRepository;
 import com.example.demo.response.CommonResponse;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 
 @Transactional
 @Service
@@ -57,10 +53,38 @@ public class ProjectService {
             project_rp.save(project1);
         }
     }
-
     public List<Project> findAll() {
         return project_rp.findAll();
     }
+
+    public List<Project> getPopularProjects() {
+        List<Project> popularProject = project_rp.findPopularProject();
+        return popularProject;
+
+    }
+
+    public List<Project> getRecentProjects() {
+        List<Project> allProjects = project_rp.findAll(); // 모든 프로젝트 가져오기
+
+        // 최근에 만들어진 프로젝트를 가져오기 위해 생성일자를 기준으로 내림차순 정렬
+        allProjects.sort(Comparator.comparing(Project::getCreatedAt).reversed());
+
+        // 최근 4개의 프로젝트만 선택하여 반환
+        int maxCount = Math.min(4, allProjects.size()); // 최대 4개의 요소만 선택
+        return allProjects.subList(0, maxCount);
+    }
+
+
+    //public List<Project> findAllProjectList() {
+    //}
+
+    // public List<Project> findAllProjectList() {
+     //   List<Project> list = project_rp.findAllProjectList();
+       // return list;
+    //}
+
+
+
 
     //유저에게 프로젝트를 추천하는 메소드
     public List<Project> getRecommendProject(HttpServletRequest request){

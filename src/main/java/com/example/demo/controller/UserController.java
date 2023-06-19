@@ -6,15 +6,18 @@ import com.example.demo.service.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.net.http.HttpRequest;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 @RestController
 public class UserController {
@@ -30,12 +33,12 @@ public class UserController {
     @Autowired
     private ApplyService applyService;
 
-//    public UserController(UserService userService){
+    //    public UserController(UserService userService){
 //        this.userService = userService;
 //    }
     private ProjectLikeService projectLikeService;
 
-    public UserController(ResponseService responseService,ApplyService applyService, UserService userService, DevelopmentStackService developmentStackService, ProjectService projectService, InvitationService invitationService, MemberService memberService, QuestionnaireService questionnaireService) {
+    public UserController(ResponseService responseService, ApplyService applyService, UserService userService, DevelopmentStackService developmentStackService, ProjectService projectService, InvitationService invitationService, MemberService memberService, QuestionnaireService questionnaireService) {
         this.responseService = responseService;
         this.userService = userService;
         this.developmentStackService = developmentStackService;
@@ -48,18 +51,18 @@ public class UserController {
     }
 
     @PostMapping("/user/join")
-    public SingleResponse<User> insert(@RequestBody User user){
+    public SingleResponse<User> insert(@ModelAttribute User user) {
         List<DevelopmentStack> developmentStacks = user.getDevelopmentStacks();
         User saved_user = userService.join(user);
-        for(DevelopmentStack stack : developmentStacks){
+        for (DevelopmentStack stack : developmentStacks) {
             stack.setUser(saved_user);
             developmentStackService.insert(stack);
         }
         CommonResponse commonResponse = new CommonResponse();
-        if(saved_user!=null){
+        if (saved_user != null) {
             commonResponse.setStatus("SUCCESS");
             commonResponse.setMessage(null);
-        } else{
+        } else {
             commonResponse.setStatus("FAILED");
             commonResponse.setMessage("회원가입에 실패했습니다.");
         }
@@ -68,7 +71,7 @@ public class UserController {
     }
 
     @PostMapping("/user/login") //ok
-    public AdminResponse login(HttpServletRequest request, @RequestBody Map<String, String> loginData){
+    public AdminResponse login(HttpServletRequest request, @ModelAttribute Map<String, String> loginData) {
         String id = loginData.get("id");
         String pw = loginData.get("password");
         System.out.println(id);
@@ -78,15 +81,14 @@ public class UserController {
         CommonResponse commonResponse = new CommonResponse();
         HttpSession session = request.getSession();
         int isAdmin = -1;
-        if(login_result==1) {
+        if (login_result == 1) {
             commonResponse.setStatus("SUCCESS");
             commonResponse.setMessage(null);
             session.setAttribute("id", id);
             System.out.println(session.getAttribute("id"));
             //id로 isAdmin가져오기 메소드 구현
             isAdmin = userService.findIsAdminById(id);
-        }
-        else {
+        } else {
             commonResponse.setStatus("FAILED");
             commonResponse.setMessage("로그인 실패");
         }
@@ -94,15 +96,15 @@ public class UserController {
     }
 
     @PostMapping("/user/logout")
-    public CommonResponse logout(HttpServletRequest request){
+    public CommonResponse logout(HttpServletRequest request) {
         HttpSession session = request.getSession();
         Object user = session.getAttribute("id");
         CommonResponse commonResponse = new CommonResponse();
-        if(user!=null) {
+        if (user != null) {
             session.invalidate();
             commonResponse.setStatus("SUCCESS");
             commonResponse.setMessage(null);
-        }else{
+        } else {
             commonResponse.setStatus("FAILED");
             commonResponse.setMessage("세션이 이미 비어있음");
         }
@@ -110,16 +112,16 @@ public class UserController {
     }
 
     @GetMapping("/user/join/questionnaire") //ok
-    public<T> SingleResponse<Questionnaire> question(@RequestBody String developmentStack)throws JsonProcessingException{
+    public <T> SingleResponse<Questionnaire> question(@ModelAttribute String developmentStack) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(developmentStack);
         String value = jsonNode.get("developmentStack").asText();
         Questionnaire questionnaire = userService.findQuestionnaire(value);
         CommonResponse commonResponse = new CommonResponse();
-        if(value!=null){
+        if (value != null) {
             commonResponse.setStatus("SUCCESS");
             commonResponse.setMessage(null);
-        }else{
+        } else {
             commonResponse.setStatus("FAILED");
             commonResponse.setMessage("질문지 가져오기 실패");
         }
@@ -127,14 +129,14 @@ public class UserController {
     }
 
     @GetMapping("/user/info")
-    public<T> SingleResponse<User> findUserInfo(HttpServletRequest request) {
+    public <T> SingleResponse<User> findUserInfo(HttpServletRequest request) {
         String user_id = userService.findSessionId(request);
         User user = userService.findUserInfo(user_id);
         CommonResponse commonResponse = new CommonResponse();
-        if(user!=null){
+        if (user != null) {
             commonResponse.setStatus("SUCCESS");
             commonResponse.setMessage(null);
-        }else{
+        } else {
             commonResponse.setStatus("FAILED");
             commonResponse.setMessage("회원 정보 가져오기 실패");
         }
@@ -142,15 +144,15 @@ public class UserController {
     }
 
     @GetMapping("/user/project/manage/recommend")
-    public<T> ListResponse<User> recommendUser(int project_id){
+    public <T> ListResponse<User> recommendUser(int project_id) {
         int require_member_num = 0;
         List<User> temp_list = null;
         List<ProjectStack> projectStacks = projectService.findProjectStackByProjectId(project_id);
-        for(ProjectStack stack : projectStacks){
+        for (ProjectStack stack : projectStacks) {
             require_member_num += stack.getRequire_member();
             List<User> list = userService.findUsersByStack(stack.getDevelopment_stack()); //일단 스택에 맞는 유저들만 뽑아옴
-            for(User user : list){
-                if(userService.findGradeByUserId(user)==stack.getRequire_grade()){
+            for (User user : list) {
+                if (userService.findGradeByUserId(user) == stack.getRequire_grade()) {
                     temp_list.add(user);
                 }
             }
@@ -158,13 +160,13 @@ public class UserController {
 
         List<User> temp_list2 = null;
 
-        if(temp_list.size()<=require_member_num){
-            for(int i=0;i<temp_list.size();i++){
+        if (temp_list.size() <= require_member_num) {
+            for (int i = 0; i < temp_list.size(); i++) {
                 temp_list2.add(temp_list.get(i));
             }
         }
 
-        while(temp_list.size()>require_member_num*2){
+        while (temp_list.size() > require_member_num * 2) {
             List<Integer> numbers = new ArrayList<>();
             for (int i = 1; i <= temp_list.size(); i++) {
                 numbers.add(i);
@@ -176,7 +178,7 @@ public class UserController {
                 int index = random.nextInt(numbers.size());
                 randomNumbers.add(numbers.remove(index));
             }
-            for(Integer num : randomNumbers){
+            for (Integer num : randomNumbers) {
                 temp_list2.add(temp_list.get(num));
             }
         }
@@ -184,22 +186,22 @@ public class UserController {
         commonResponse.setStatus("SUCCESS");
         commonResponse.setMessage(null);
 
-        List<Map<List<User>,String>> recommended_user_list = null;
+        List<Map<List<User>, String>> recommended_user_list = null;
 
-        return responseService.getListResponse(commonResponse,temp_list2);
+        return responseService.getListResponse(commonResponse, temp_list2);
     }
 
     @GetMapping("/user/project/manage/list")
-    public<T> ListResponse<Project> manageProjectList(HttpServletRequest request){
+    public <T> ListResponse<Project> manageProjectList(HttpServletRequest request) {
         //지금 여기!! 세션을 가져올 것인지 토큰을 가져올 것인지 결정해야함!! 찾아보고 올게.
         //세션으로 일단 가.
         String user_id = userService.findSessionId(request);
         CommonResponse commonResponse = new CommonResponse();
         List<Project> list = userService.findManageProjectList(user_id);
-        if(list!=null){
+        if (list != null) {
             commonResponse.setStatus("SUCCESS");
             commonResponse.setMessage(null);
-        }else{
+        } else {
             commonResponse.setStatus("FAILED");
             commonResponse.setMessage("리스트 출력 실패");
         }
@@ -208,7 +210,7 @@ public class UserController {
 
     //여러개의 리스트를 어떻게 한꺼번에 리턴하지? -> 일단 리스트로 하나씩 테스트
     @GetMapping("/user/project/list")
-    public<T> ListResponse<Project> findProjectList(HttpServletRequest request) {
+    public <T> ListResponse<Project> findProjectList(HttpServletRequest request) {
         String user_id = userService.findSessionId(request);
         CommonResponse commonResponse = new CommonResponse();
         //List<Project> belongingProjects = userService.findBelongingProjects(user_id);
@@ -279,7 +281,7 @@ public class UserController {
     //SK
     //팀장인 유저가 추천받은 멤버 중에 원하는 유저를 토글(초대/초대취소) 합니다.
     @PostMapping("/user/project/manage/invite")
-    public CommonResponse invite(int project_id, Long user_id){
+    public CommonResponse invite(int project_id, Long user_id) {
         Project project = projectService.findByProjectId(project_id);
         User user = userService.getById(user_id.intValue());
         invitationService.insert(project, user);
@@ -292,7 +294,7 @@ public class UserController {
     //프론트에서 보내주는 상태에 따라 달라지게 수정해야함!
     //초대받은 유저가 해당 프로젝트를 참여/거절합니다.
     @GetMapping("/user/project/accept")
-    public CommonResponse accept(HttpServletRequest request, int project_id, String status){
+    public CommonResponse accept(HttpServletRequest request, int project_id, String status) {
         String user_id = userService.findSessionId(request);
         User user = userService.findUserInfo(user_id);
         Project project = projectService.findByProjectId(project_id);
@@ -300,7 +302,7 @@ public class UserController {
 
         CommonResponse commonResponse = new CommonResponse();
         //멤버테이블에 저장
-        if(status.equals("APPROVE")){
+        if (status.equals("APPROVE")) {
             Member member = new Member();
             member.setUser(user);
             member.setProject(project);
@@ -310,15 +312,15 @@ public class UserController {
             invitationService.updateState(user_id);
             commonResponse.setStatus("SUCCESS");
             commonResponse.setMessage("프로젝트 초대 수락됨");
-        }else{
+        } else {
             commonResponse.setStatus("SUCCESS");
             commonResponse.setMessage("프로젝트 초대 거절됨");
         }
-       return commonResponse;
+        return commonResponse;
     }
 
     @PostMapping("/user/project/manage/hire")
-    public CommonResponse hire(HttpServletRequest request, @RequestBody Map<Integer, String> hireData){
+    public CommonResponse hire(HttpServletRequest request, @ModelAttribute Map<Integer, String> hireData) {
 //
 //        int project_id = Integer.parseInt(hireData.get("project_id"));
 //        String status = hireData.get("status");
@@ -362,7 +364,6 @@ public class UserController {
 //        }
         return null;
     }
-
 
 
     //프로젝트 관리페이지에서 팀장에게 유저를 추천해줌
@@ -446,17 +447,17 @@ public class UserController {
     */
     //프로젝트 관리페이지에서 팀장에게 지원한 유저 목록을 보여줌
     @GetMapping("/user/project/manage/apply")
-    public<T> ListResponse<User> applyUserList(HttpServletRequest request,int project_id) {
+    public <T> ListResponse<User> applyUserList(HttpServletRequest request, int project_id) {
         Project project = projectService.findByProjectId(project_id);
 //      String user_id = userService.findSessionId(request);
 //      User user = userService.findUserInfo(user_id);
         CommonResponse commonResponse = new CommonResponse();
         List<User> list = applyService.findApplyUsers(project_id);
         //findApplyUsers구현하기
-        if(list!=null){
+        if (list != null) {
             commonResponse.setStatus("SUCCESS");
             commonResponse.setMessage(null);
-        }else{
+        } else {
             commonResponse.setStatus("FAILED");
             commonResponse.setMessage("리스트 출력 실패");
         }
@@ -485,24 +486,25 @@ public class UserController {
 
     //유저의 알림페이지에서 보여줄 초대받은 프로젝트 리스트 정보들을 가져옵니다.
     @GetMapping("user/project/invite/list")
-    public<T> ListResponse<Project> inviteProjectList(HttpServletRequest request){
+    public <T> ListResponse<Project> inviteProjectList(HttpServletRequest request) {
         String user_id = userService.findSessionId(request);
         CommonResponse commonResponse = new CommonResponse();
         List<Project> list = invitationService.findInviteProjectList(user_id);
 
-        if(list!=null){
+        if (list != null) {
             commonResponse.setStatus("SUCCESS");
             commonResponse.setMessage(null);
-        }else{
+        } else {
             commonResponse.setStatus("FAILED");
             commonResponse.setMessage("리스트 출력 실패");
         }
         return responseService.getListResponse(commonResponse, list);
     }
-
-
-
-
-
-
 }
+
+
+
+
+
+
+

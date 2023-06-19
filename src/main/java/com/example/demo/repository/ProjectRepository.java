@@ -2,7 +2,6 @@ package com.example.demo.repository;
 
 import com.example.demo.domain.Project;
 import com.example.demo.domain.ProjectStack;
-import com.example.demo.domain.Questionnaire;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -19,6 +18,16 @@ public interface ProjectRepository extends JpaRepository<Project, Integer> {
 
 
 
+    //public List<Project> getPopularProjects();
+    //public List<Project> findAllProjectList();
+
+    public int getLike_count(int project_id);
+
+    public int getVisited_number(int project_id);
+
+    public List<Project> findPopularProject();
+
+
 
    //public List<Project> findBelongingProjects(String user_id);
 
@@ -27,3 +36,4 @@ public interface ProjectRepository extends JpaRepository<Project, Integer> {
     //public List<Project> findAll();
 
 }
+

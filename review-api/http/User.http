@@ -1,8 +1,7 @@
-### 회원가입 API 테스트 ok
-POST http://192.168.0.143:8000/user/join
+### 회원가입 API
+POST http://192.168.0.137:8000/user/join
 Accept: application/json
 Content-Type: application/json
-
 {
   "nickname":"hh",
   "id":"id5678",
@@ -16,8 +15,8 @@ Content-Type: application/json
 }
 
 
-### 로그인 ok (세션 저장됨!!)
-POST http://localhost:8080/user/login
+### 로그인 ok
+POST http://192.168.0.137:8000/user/login
 Accept: application/json
 Content-Type: application/json
 
@@ -27,27 +26,27 @@ Content-Type: application/json
 }
 
 
-### 로그아웃 (되는듯.. 감동)
-POST http://localhost:8080/user/logout
+### 로그아웃
+POST http://192.168.0.137:8000/user/logout
 Accept: application/json
 Content-Type: application/json
 
 
-### 질문지 가져오기 ok
-GET http://localhost:8080/user/join/questionnaire
+### 질문지 가져오기
+GET http://192.168.0.137:8000/user/join/questionnaire
 Accept: application/json
 Content-Type: application/json
 
 {"developmentStack":"웹 프론트엔드"}
 
-### 회원정보 가져오기 (세션...으로 가져와짐 ㅠㅠ!!)
-GET http://localhost:8080/user/info
+### 회원정보 가져오기
+GET http://localhost:8000/user/info
 Accept: application/json
 Content-Type: application/json
 
 
 
-### 팀장에게 지원한 유저들을 보여줌 - 성공
+### 팀장에게 지원한 유저들을 보여줌
 GET http://localhost:8000/user/project/manage/apply
 Accept: application/json
 Content-Type: application/json
@@ -57,7 +56,7 @@ Content-Type: application/json
   "project_id": 17
 }
 
-### 유저의 프로젝트 리스트 가져오기 -  리스트 출력 실패로 뜸
+### 유저의 프로젝트 리스트 가져오기
 GET http://localhost:8000/user/project/list
 Accept: application/json
 Content-Type: application/json

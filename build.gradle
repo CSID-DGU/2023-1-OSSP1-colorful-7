@@ -28,6 +28,12 @@ dependencies {
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'com.fasterxml.jackson.core:jackson-databind'
+	// a dependency on Jackson Databind
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.8.9'
+
+	// and a dependency on vert.x
+	implementation 'io.vertx:vertx-core:3.5.3'
 
 }
 
@@ -38,4 +44,7 @@ tasks.named('test') {
 /*bootWar {
 	archiveBaseName = 'WEBTEMP'
 	archiveFileName = 'WEBTEMP.war'
+}*/
+/*tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
 }*/
