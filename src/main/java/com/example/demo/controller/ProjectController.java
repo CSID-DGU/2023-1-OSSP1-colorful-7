@@ -72,7 +72,7 @@ public class ProjectController {
             stack.setProject(saved_project);
             projectStackService.insert(stack);
         }
-        //Project saved_project = projectService.insert(project);
+
         if(saved_project!=null){
             commonResponse.setStatus("SUCCESS");
             commonResponse.setMessage(null);
@@ -101,10 +101,6 @@ public class ProjectController {
         }
         return responseService.getSingleResponse(commonResponse,project);
     }
-    //팀장이 아닌 프로젝트에 지원한다
-    //SK. 팀장이 아닌 프로젝트에 지원한다
-
-    //왜 new project?, 왜 success때 메세지?
 
     @PostMapping("/project/apply")
     public CommonResponse apply(HttpServletRequest request, int project_id){

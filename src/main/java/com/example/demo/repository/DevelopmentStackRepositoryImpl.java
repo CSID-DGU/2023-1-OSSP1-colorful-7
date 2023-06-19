@@ -1,8 +1,6 @@
 package com.example.demo.repository;
 
 import com.example.demo.domain.DevelopmentStack;
-import com.example.demo.domain.Questionnaire;
-import com.example.demo.domain.User;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -42,10 +40,8 @@ public class DevelopmentStackRepositoryImpl implements DevelopmentStackRepositor
     }
 
     @Override
-    //해당 기술스택을 가진 유저들을 가져오는 리스트
     public List<DevelopmentStack> findUsersByStacks(List<String> requiredStacks){
         String sql = "select developmentStack.user from DevelopmentStack developmentStack where development_stack = :requiredStacks ";
-        //구현 더 해야함.
         return null;
 
     }

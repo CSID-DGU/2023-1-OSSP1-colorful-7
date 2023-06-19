@@ -37,7 +37,7 @@ public class UserRepositoryImpl implements UserRepository{
         query.setParameter("id", id);
         List<User> list = query.getResultList();
         for (User entity : list) {
-            return entity; //첫번째 entity 바로 리턴. 어차피 찾는 유저는 하나일테니. (가입할 때 id 중복체크를 하기 때문)
+            return entity;
         }
         return null;
     }
@@ -47,8 +47,8 @@ public class UserRepositoryImpl implements UserRepository{
         User user = findByid(id);
         em.remove(user);
         User removed_user = findByid(id);
-        if(removed_user==null) return 1; //해당 id가 없다면 user 삭제 성공
-        else return 0; //아니라면 삭제 실패
+        if(removed_user==null) return 1;
+        else return 0;
     }
     @Override
     public List<Project> findProjectList(String user_id){
@@ -72,7 +72,7 @@ public class UserRepositoryImpl implements UserRepository{
     @Override
     public int duplicationCheckId(String id){
         User user = findByid(id);
-        if(user!=null) return 1; //null이 아니라면 해당 id가 이미 있는 것
+        if(user!=null) return 1;
         else return 0;
     }
 
@@ -82,7 +82,7 @@ public class UserRepositoryImpl implements UserRepository{
         TypedQuery<User> query = em.createQuery(sql, User.class);
         query.setParameter("nickname", nickname);
         List<User> list = query.getResultList();
-        if(list.size()!=0) return 1; //size가 0이 아니라면 해당 nickname이 이미 있는 것.
+        if(list.size()!=0) return 1;
         else return 0;
     }
 
@@ -147,10 +147,6 @@ public class UserRepositoryImpl implements UserRepository{
         List<Project> list = query.getResultList();
         return list;
     }
-
-
-//    @Override
-//    public List<Project> findProjectList
 
 
     @Override

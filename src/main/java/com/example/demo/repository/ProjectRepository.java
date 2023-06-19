@@ -17,23 +17,14 @@ public interface ProjectRepository extends JpaRepository<Project, Integer> {
     public List<Project> findAllProjectList();
 
 
-
-    //public List<Project> getPopularProjects();
-    //public List<Project> findAllProjectList();
-
     public int getLike_count(int project_id);
 
     public int getVisited_number(int project_id);
 
     public List<Project> findPopularProject();
 
-
-
-   //public List<Project> findBelongingProjects(String user_id);
-
     public List<Project> findEndProjects(String user_id);
 
-    //public List<Project> findAll();
 
 }
 

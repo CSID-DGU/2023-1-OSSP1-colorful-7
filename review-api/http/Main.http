@@ -3,9 +3,6 @@ GET http://localhost:8000/main/info
 Accept: application/json
 Content-Type: application/json
 
-{
-  "id":"id5678",
-  "project_id": 17
-}
+
 
 

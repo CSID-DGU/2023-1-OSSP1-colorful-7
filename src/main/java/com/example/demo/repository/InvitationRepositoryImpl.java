@@ -42,7 +42,6 @@ public class InvitationRepositoryImpl implements InvitationRepository{
         }
         return null;
     }
-// user_id 에러
     @Override
     public List<Project> findInviteProjectList(String user_id){
         String sql = "select invitation.project from Invitation invitation where user = :user_id and state=:state";

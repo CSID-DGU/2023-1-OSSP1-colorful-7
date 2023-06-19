@@ -47,6 +47,3 @@ public class User {
     private List<Member> members;
 }
 
-
-   // private <ProjectListType> void  convertToProjectListType(List<Project> recommendedProjects) {
-    //}

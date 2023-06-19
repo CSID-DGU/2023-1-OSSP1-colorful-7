@@ -30,7 +30,7 @@ public class ProjectRepositoryImpl implements ProjectRepository {
 
     @Override
     public List<Project> findPopularProject() {
-        List<Project> allProjects = project_rp.findAll(); // 모든 프로젝트 가져오기
+        List<Project> allProjects = project_rp.findAll();
         Map<Integer, Integer> popular_map = new HashMap<Integer, Integer>();
 
         for (Project project : allProjects) {
@@ -59,7 +59,7 @@ public class ProjectRepositoryImpl implements ProjectRepository {
         query.setParameter("project_id", project_id);
         List<Project> list = query.getResultList();
         for (Project entity : list) {
-            return entity; //첫번째 entity 바로 리턴.
+            return entity;
         }
         return null;
     }
@@ -69,8 +69,8 @@ public class ProjectRepositoryImpl implements ProjectRepository {
         Project project = findByProjectId(project_id);
         em.remove(project);
         Project removed_project = findByProjectId(project_id);
-        if (removed_project == null) return 1; //해당 id가 없다면 user 삭제 성공
-        else return 0; //아니라면 삭제 실패
+        if (removed_project == null) return 1;
+        else return 0;
     }
 
     @Override
@@ -87,46 +87,19 @@ public class ProjectRepositoryImpl implements ProjectRepository {
     }
 
 
-    //ProjectRepository project_rp;
-    //@Override
-    //public List<Project> getPopularProjects() {
-    // List<Project> allProjects = project_rp.findAll(); // 모든 프로젝트 가져오기
-
-    // 좋아요 점수와 조회수를 합산하여 점수를 계산하고 내림차순으로 정렬
-    //allProjects.sort((p1, p2) -> calculatePopularScore(p2) - calculatePopularScore(p1));
-
-    // 상위 4개의 프로젝트 반환
-    //   return allProjects.stream().limit(4).collect(Collectors.toList());
-    // }
-
-    // 좋아요 점수와 조회수를 합산하여 인기 점수 계산
-
-
     @Override
     public int getVisited_number(int project_id) {
         return 0;
     }
 
-
-    //아래 두개 쿼리문 이렇게짜는게 맞는지, user_id는 왜 인식을 못하는지
-//    @Override
-//    public List<Project> findBelongingProjects(String user_id){
-//        String sql = "select member.project from Member member where member.user = :user_id";
-//        TypedQuery<Project> query = em.createQuery(sql, Project.class);
-//        query.setParameter("user_id", user_id);
-//        List<Project> list = query.getResultList();
-//        return list;
-//    }
-
     @Override
     public List<Project> findEndProjects(String user_id){
-        /*String sql = "select project from Project project where project.user = :user_id and project.is_available = :is_available";
+        String sql = "select project from Project project where project = :user_id and project.is_available = :is_available";
         TypedQuery<Project> query = em.createQuery(sql, Project.class);
         query.setParameter("user_id", user_id);
         query.setParameter("is_available", "EXPIRED");
         List<Project> list = query.getResultList();
-        return list;*/
-        return null;
+        return list;
     }
 
     @Override

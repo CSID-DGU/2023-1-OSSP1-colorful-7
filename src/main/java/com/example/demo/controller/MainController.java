@@ -51,28 +51,4 @@ public class MainController {
 
         return responseService.getSingleResponse(commonResponse, MainInfo);
     }
-
-    //private  ProjectService projectService;
 }
-    /*public MainController(ProjectService projectService) {
-        this.projectService = projectService;
-    }
-
-    @GetMapping("/recommended")
-    public ResponseEntity<List<Project>> getRecommendedProjects() {
-        List<Project> recommendedProjects = projectService.getRecommendedProjects();
-        return ResponseEntity.ok(recommendedProjects);
-    }*/
-
-  /*  @GetMapping("/popular")
-    public ResponseEntity<List<Project>> getPopularProjects() {
-        List<Project> popularProjects = projectService.getPopularProjects();
-        return ResponseEntity.ok(popularProjects);
-    }
-
-    @GetMapping("/recent")
-    public ResponseEntity<List<Project>> getRecentProjects() {
-        List<Project> recentProjects = projectService.getRecentProjects();
-        return ResponseEntity.ok(recentProjects);
-    }
-}*/

@@ -22,7 +22,6 @@ public class ProjectLikeRepositoryImpl implements ProjectLikeRepository {
 
     @Override
     public ProjectLike insert(Project project, User user){
-        //세션에서 사용자 정보 가져와야함. user에서 세션 관련 메소드 만들고 올게!
         ProjectLike projectLike = new ProjectLike();
         projectLike.setProject(project);
         projectLike.setUser(user);

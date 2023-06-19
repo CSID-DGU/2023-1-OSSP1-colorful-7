@@ -64,39 +64,21 @@ public class ProjectService {
     }
 
     public List<Project> getRecentProjects() {
-        List<Project> allProjects = project_rp.findAll(); // 모든 프로젝트 가져오기
-
-        // 최근에 만들어진 프로젝트를 가져오기 위해 생성일자를 기준으로 내림차순 정렬
+        List<Project> allProjects = project_rp.findAll();
         allProjects.sort(Comparator.comparing(Project::getCreatedAt).reversed());
 
-        // 최근 4개의 프로젝트만 선택하여 반환
         int maxCount = Math.min(4, allProjects.size()); // 최대 4개의 요소만 선택
         return allProjects.subList(0, maxCount);
     }
 
-
-    //public List<Project> findAllProjectList() {
-    //}
-
-    // public List<Project> findAllProjectList() {
-     //   List<Project> list = project_rp.findAllProjectList();
-       // return list;
-    //}
-
-
-
-
-    //유저에게 프로젝트를 추천하는 메소드
     public List<Project> getRecommendProject(HttpServletRequest request){
-        List<Project> temp_list = null;
+        List<Project> temp_list = new ArrayList<>();
         HttpSession session = request.getSession();
         String id = (String)session.getAttribute("id");
         User user = userService.findUserById(id);
         DevelopmentStack development_stack = userService.develop_rp.findDevelopmentStack(user.getUser_id());
         String stack = development_stack.getDevelopment_stack();
         int grade = development_stack.getGrade();
-        //유저의 developmentStack을 가져왔다!! 그리구?
-        //전체 프로젝트를 돌면서, 그 프로젝트의 프로젝트 스택을 다시 돌면서 스택과 등급을 비교하여 된다면 프로젝트를 결과 리스트에 저장.
         List<Project> list = project_rp.findAllProjectList();
         for(Project project : list){
             List<ProjectStack> stack_list = project.getProject_stacks();
@@ -107,7 +89,7 @@ public class ProjectService {
             }
         }
 
-        List<Project> recommended_project_list = null;
+        List<Project> recommended_project_list = new ArrayList<>();
 
         if(temp_list.size()<=4){
             for(int i=0;i<temp_list.size();i++){
