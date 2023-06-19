@@ -36,7 +36,7 @@ export const LoginPage: FC<LoginPageProps> = ({ className }) => {
     } 
     const data = {
       id: id,
-      pw: password
+      password: password
     }
     postuserLogin('/user/login', data)
     .then((response: PostUserLoginResponseType) => {
@@ -50,7 +50,9 @@ export const LoginPage: FC<LoginPageProps> = ({ className }) => {
         localStorage.setItem('test_login', 'true')
       } else {
         // eslint-disable-next-line no-undef
-        console.log('FAIL');
+        alert("로그인에 실패했습니다.")
+        setId("")
+        setPassword("")
         // eslint-disable-next-line no-undef
         console.log('Error message:', response.message);
       }
@@ -59,13 +61,11 @@ export const LoginPage: FC<LoginPageProps> = ({ className }) => {
       // eslint-disable-next-line no-undef
       console.error('Error :', error);
     });
-    //console.log(userLogin('user/login', data))
   }
 
   const onKeyPressEnter = (e: any) => {
     if (e.key === 'Enter') {
       onLoginAPI()
-      navigate('/')
     }
   }
 

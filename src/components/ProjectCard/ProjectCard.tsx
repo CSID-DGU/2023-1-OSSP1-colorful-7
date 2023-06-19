@@ -40,7 +40,7 @@ export const ProjectCard: FC<ProjectCardProps> = ({ className, projectItem, isIn
       cover={
         <RepresentativeImgContainer>
           <RepresentativeImg
-            src={projectItem.representativeImg ?? generateRandomProjectCardLogoImg()}
+            src={projectItem.representativeImg ?? generateRandomProjectCardLogoImg(projectItem.key)}
             alt={'프로젝트 대표 이미지'}
           />
           {status && (

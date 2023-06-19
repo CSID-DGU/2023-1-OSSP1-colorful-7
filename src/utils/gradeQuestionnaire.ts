@@ -19,6 +19,7 @@ export const gradeQuestionnaire = (
   let totalGrade = 0
   let scorePercent = 0
   questionnaireItem.questionList.forEach((questionItem) => {
+
     totalGrade += questionItem.score
     if (
       compareNumberArrayAnswerAndStringAnswer(

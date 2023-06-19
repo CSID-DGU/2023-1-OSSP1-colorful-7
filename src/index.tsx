@@ -35,7 +35,7 @@ root.render(
           <Route path="/user/notice/list" element={<UserNoticeListPage />} />
           {/* <Route path="/user/project" element={<UserProjectPage />} /> */}
           <Route path="/user/project/create" element={<UserProjectCreatePage />} />
-          <Route path="/user/project/manage/:projectKey" element={<UserProjectManagePage />} />
+          <Route path="/user/project/manage/:projectKey/:projectTitle" element={<UserProjectManagePage />} />
           <Route path="/project/list" element={<ProjectListPage />} />
           <Route path="/project/:projectKey" element={<ProjectDetailsPage />} />
           <Route path="/project/invite/:projectKey" element={<UserNoticeDetailsPage />} />

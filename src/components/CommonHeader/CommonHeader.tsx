@@ -61,7 +61,7 @@ export const CommonHeader: FC<CommonHeaderProps> = ({ className }) => {
         window.location.reload()
       } else {
         // eslint-disable-next-line no-undef
-        console.log('FAIL');
+        alert("로그아웃에 실패했습니다.")
         // eslint-disable-next-line no-undef
         console.log('Error message:', response.message);
       }

@@ -3,7 +3,7 @@ import missingAvatarImg from 'assets/images/missing_avatar.png'
 import { CommonHeader } from 'components/CommonHeader'
 import projectListSampleJson from 'constants/json/project_list_sample.json'
 import { FC, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { ProjectItemType, ProjectListType } from 'types/project'
 import { camelizeKey } from 'utils/camelizeKey'
 import { generateRandomProjectCardLogoImg } from 'utils/generateRandomProjectCardLogoImg'
@@ -54,6 +54,7 @@ type UserNoticeDetailsPageProps = {
 }
 
 export const UserNoticeDetailsPage: FC<UserNoticeDetailsPageProps> = ({ className }) => {
+  const navigate = useNavigate()
   const { projectKey = 0 } = useParams()
   const projectListSampleData: ProjectListType = camelizeKey(projectListSampleJson.project_list) as ProjectListType
   const [projectItem, setProjectItem] = useState<ProjectItemType>()
@@ -62,6 +63,17 @@ export const UserNoticeDetailsPage: FC<UserNoticeDetailsPageProps> = ({ classNam
     setProjectItem(projectListSampleData[+projectKey])
   }, [])
 
+  const onClickAcceptProject = () => {
+    navigate('/')
+    // eslint-disable-next-line no-undef
+    alert("초대가 수락되었습니다.")
+  }
+
+  const onClickRejectProject = () => {
+    navigate('/')
+    // eslint-disable-next-line no-undef
+    alert("초대가 거절되었습니다.")
+  }
   return (
     <Root className={className}>
       <CommonHeader />
@@ -124,7 +136,7 @@ export const UserNoticeDetailsPage: FC<UserNoticeDetailsPageProps> = ({ classNam
           <SideSectionContainer>
             <SideSectionProfileImgWrapper>
               <SideSectionProfileImg
-                src={projectItem.representativeImg ?? generateRandomProjectCardLogoImg()}
+                src={projectItem.representativeImg ?? generateRandomProjectCardLogoImg(projectItem.key)}
                 alt={'프로젝트 대표 이미지'}
               />
             </SideSectionProfileImgWrapper>
@@ -150,8 +162,8 @@ export const UserNoticeDetailsPage: FC<UserNoticeDetailsPageProps> = ({ classNam
               <SideSectionProjectTypeTypo>{projectItem.projectType}</SideSectionProjectTypeTypo>
             </SideSectionProjectTypeContainer>
             <SideSectionInvitedProjectButtonContainer>
-              <SideSectionApplyProjectButton type={'primary'}>수락하기</SideSectionApplyProjectButton>
-              <SideSectionQuitProjectButton type={'ghost'}>거절하기</SideSectionQuitProjectButton>
+              <SideSectionApplyProjectButton type={'primary'} onClick={onClickAcceptProject}>수락하기</SideSectionApplyProjectButton>
+              <SideSectionQuitProjectButton type={'ghost'} onClick={onClickRejectProject}>거절하기</SideSectionQuitProjectButton>
             </SideSectionInvitedProjectButtonContainer>
           </SideSectionContainer>
         </Container>

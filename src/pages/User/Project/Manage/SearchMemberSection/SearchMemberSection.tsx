@@ -1,9 +1,9 @@
 import Avatar from 'assets/images/missing_avatar.png'
 import { FC, useEffect, useState } from 'react'
-import userListSampleJson from 'constants/json/user_list_sample.json';
+import userListSampleJson from 'constants/json/user_manage_list_sample.json';
 import { Root, StackTag, UserIcon, UserNameTypo } from './styled'
 import { Button, List, Space } from 'antd'
-import { UserInfoListType } from 'types/project'
+import { DevelopmentStackListType } from 'types/project'
 import { camelizeKey } from 'utils/camelizeKey'
 import { GetUserProjectManageRecommendResponseType, getUserProjectManageRecommend } from 'api/getUserProjectManageRecommend';
 
@@ -12,12 +12,22 @@ type SearchMemberSectionProps = {
   projectKey: string | 0
 }
 
-const userListData = camelizeKey(userListSampleJson.user_list) as UserInfoListType;
+type ApplyUserInfoType = {
+  userId: number
+  email: string
+	nickname: string
+	introduce: string
+  profile? : any
+  isChecked : boolean
+	developmentStackList : DevelopmentStackListType
+}
+
+const userListData = camelizeKey(userListSampleJson.user_list) as ApplyUserInfoType[];
 
 // 여기에 들어갈 json 데이터 정의 필요!
 export const SearchMemberSection: FC<SearchMemberSectionProps> = ({ className, projectKey }) => {
 
-  const [userInfoListData, setUserInfoListData] = useState<UserInfoListType>([])
+  // const [userInfoListData, setUserInfoListData] = useState<UserInfoListType>([])
   useEffect(() => {
     let data = {
       projectKey: 0
@@ -44,24 +54,28 @@ export const SearchMemberSection: FC<SearchMemberSectionProps> = ({ className, p
     });
   }, [])
 
-
   const filteredUserListData = userListData.filter(
     (userItem) => 
       userItem.userId++ &&
       userItem.nickname.toLowerCase() &&
       userItem.developmentStackList
   )
+  const [filteredUserList, setFilteredUserList] = useState<ApplyUserInfoType[]>(filteredUserListData)
+  
+  const onChangeUserList = (userId: number) => {
+    setFilteredUserList(filteredUserList.map((item) => item.userId === userId ? {...item, isChecked: !item.isChecked} : item))
+  }
   return (
     <Root className={className}>
       <List
-        dataSource={filteredUserListData}
+        dataSource={filteredUserList}
         bordered
         renderItem={(item) => (
           <List.Item
             key={item.userId}
             actions={[
-              <Button type="primary" key={`a-${item.userId}`}>
-                초대
+              <Button type="primary" key={`a-${item.userId}`} onClick={() => onChangeUserList(item.userId)}>
+                {item.isChecked ? "초대 취소" : "초대"} 
               </Button>,
             ]}
           >

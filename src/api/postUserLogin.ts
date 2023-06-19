@@ -3,7 +3,7 @@ import { axiosPOST } from './base'
 
 export type PostUserLoginRequestType = {
   id: string
-	pw: string
+	password: string
 }
 
 export type PostUserLoginResponseType = {

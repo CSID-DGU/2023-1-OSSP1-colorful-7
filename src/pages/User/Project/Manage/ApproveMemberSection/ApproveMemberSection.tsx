@@ -1,5 +1,5 @@
 import Avatar from 'assets/images/missing_avatar.png'
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import userListSampleJson from 'constants/json/user_list_sample.json';
 import { ButtonWrapper, Root, StackTag, UserIcon, UserNameTypo } from './styled'
 import { Button, List, Space } from 'antd'
@@ -20,30 +20,33 @@ export const ApproveMemberSection: FC<ApproveMemberSectionProps> = ({ className 
       userItem.nickname.toLowerCase() &&
       userItem.developmentStackList
   )
+
+  const [filteredUserList, setFilteredUserList] = useState<UserInfoListType>(filteredUserListData)
+  
+  const onClickApproveButton = (userId: number) => {
+    setFilteredUserList(filteredUserList.filter((item: any) => item.userId !== userId ))
+    // eslint-disable-next-line no-undef
+    alert("승인되었습니다")
+  }
+
+  const onClickRejectButton = (userId: number) => {
+    setFilteredUserList(filteredUserList.filter((item: any) => item.userId !== userId ))
+    // eslint-disable-next-line no-undef
+    alert("거절되었습니다")
+  }
+
   return (
     <Root className={className}>
       <List
-        dataSource={filteredUserListData}
-        // dataSource={[
-        //   {
-        //     id: 1,
-        //     name: 'Lily',
-        //     stack: '프론트엔드',
-        //   },
-        //   {
-        //     id: 2,
-        //     name: 'Lily',
-        //     stack: '백엔드',
-        //   },
-        // ]}
+        dataSource={filteredUserList}
         bordered
         renderItem={(item) => (
           <List.Item
             key={item.userId}
             actions={[
               <ButtonWrapper key={`a-${item.userId}`}>
-                <Button type="primary">승인</Button>
-                <Button>거절</Button>
+                <Button type="primary" onClick={() => onClickApproveButton(item.userId)}>승인</Button>
+                <Button onClick={() => onClickRejectButton(item.userId)}>거절</Button>
               </ButtonWrapper>,
             ]}
           >

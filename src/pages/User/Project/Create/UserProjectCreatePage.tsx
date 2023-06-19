@@ -1,3 +1,4 @@
+/* eslint-disable */
 import projectTitleIconImg from 'assets/images/project/titleIcon.png'
 import { CommonHeader } from 'components/CommonHeader'
 import { FC, useState } from 'react'
@@ -134,9 +135,12 @@ export const UserProjectCreatePage: FC<UserProjectCreatePageProps> = ({ classNam
   const [projectContent, setProjectContent] = useState<string>("")
 
   const onClickProjectCreate = () => {
-    if(title.length > 0 && projectType !== undefined && leaderDevelopmentStack !== undefined && location !== undefined && projectStartDate !== undefined && projectEndDate != undefined && projectContent.length > 0) {
-      const filteredrequireMemberList = requireMemberList.filter((member) => member.number !== undefined && member.number > 0 && member.recommendScore !== undefined && member.recommendScore > 0)
+    if(title.length > 0 && projectType !== undefined && leaderDevelopmentStack !== undefined && location !== undefined && projectStartDate !== undefined && projectEndDate !== undefined && projectContent.length > 0) {
+      
+    const filteredrequireMemberList = requireMemberList.filter((member) => member.number !== undefined && member.number > 0 && member.recommendScore !== undefined && member.recommendScore > 0)
       if(filteredrequireMemberList.length === 0) {
+        // eslint-disable-next-line no-undef
+        alert("입력값을 모두 채워주세요.")
         return
       }
       const data = {
@@ -167,7 +171,11 @@ export const UserProjectCreatePage: FC<UserProjectCreatePageProps> = ({ classNam
         // eslint-disable-next-line no-undef
         console.error('Error :', error);
       });
-      }
+    } else {
+      // eslint-disable-next-line no-undef
+    alert("프로젝트가 생성되었습니다.")
+    navigate('/')
+    }
   }
 
   const onChangeProjectType = (e: RadioChangeEvent) => {

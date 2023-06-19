@@ -69,14 +69,20 @@ export const ProjectDetailsPage: FC<ProjectDetailsPageProps> = ({ className }) =
     setLiked((prevLiked) => !prevLiked);
   }
 
-  const onClickProjectManage = () => {
-    navigate(`/user/project/manage/${projectKey}`)
+  const onClickProjectManage = (projectTitle: string) => {
+    navigate(`/user/project/manage/${projectKey}/${projectTitle}`)
+  }
+
+  const onClickApplyProject = () => {
+    navigate('/')
+    // eslint-disable-next-line no-undef
+    alert("프로젝트에 지원 완료되었습니다.")
   }
   
   const renderButton = (ProjectItem: ProjectItemType) => {
     if (ProjectItem.valid === 'VALID') {
       if (ProjectItem.position === 'LEADER') {
-        return <SideSectionManageProjectButton type={'ghost'} onClick={onClickProjectManage}>관리하기</SideSectionManageProjectButton>
+        return <SideSectionManageProjectButton type={'ghost'} onClick={() => onClickProjectManage(ProjectItem.title)}>관리하기</SideSectionManageProjectButton>
       } else if (ProjectItem.position === 'MEMBER') {
         return (
           <SideSectionQuitProjectButton type={'ghost'} disabled>
@@ -84,7 +90,7 @@ export const ProjectDetailsPage: FC<ProjectDetailsPageProps> = ({ className }) =
           </SideSectionQuitProjectButton>
         )
       } else if (ProjectItem.position === 'NORMAL') {
-        return <SideSectionApplyProjectButton type={'primary'}>지원하기</SideSectionApplyProjectButton>
+        return <SideSectionApplyProjectButton type={'primary'} onClick={onClickApplyProject}>지원하기</SideSectionApplyProjectButton>
       } 
     } else {
       return (
@@ -189,7 +195,7 @@ export const ProjectDetailsPage: FC<ProjectDetailsPageProps> = ({ className }) =
           <SideSectionContainer>
             <SideSectionProfileImgWrapper>
               <SideSectionProfileImg
-                src={projectItem.representativeImg ?? generateRandomProjectCardLogoImg()}
+                src={projectItem.representativeImg ?? generateRandomProjectCardLogoImg(projectItem.key)}
                 alt={'프로젝트 대표 이미지'}
               />
             </SideSectionProfileImgWrapper>
